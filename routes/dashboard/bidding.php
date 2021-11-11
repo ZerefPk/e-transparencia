@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Livewire\Dashboard\HomeDashboard;
-use App\Http\Livewire\ShowBidding;
+use App\Http\Livewire\Dashboard\Bidding\{
+    Index,
+    Create,
+};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('dashboard/bidding')->middleware(['auth'])->group(function () {
+    Route::get('/', Index::class)->name('dashboard.bidding.index');
+
+    Route::get('/create', Create::class)->name('dashboard.bidding.create');
 });
 
-Route::get('/dashboard', HomeDashboard::class)->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
-require __DIR__.'/dashboard/bidding.php';
+
