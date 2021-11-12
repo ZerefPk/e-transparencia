@@ -77,28 +77,27 @@ class Create extends Component
     }
     public function submit()
     {
-        $this->validate();
+        $data = $this->validate();
 
-        $slugConsult = Bidding::where('slug', $dataForm['year'].'-'.$dataForm['number'])->get();
+
+
+        $slugConsult = Bidding::where('slug', $this->year.'-'.$this->number)->get();
 
         if(count($slugConsult) > 0){
-            flash()->overlay('Processo já cadastrado!', 'Informação');
-            return redirect()->route('dashboard.bidding')
-            ->with(['alertClass'=> 'alert-danger']);
+            flash()->overlay('This is my message', 'The Title')->livewire($this);
+
         }
-
-        $save = Bidding::create($dataForm);
-
+        else
+        {
+        $save = Bidding::create($data);
         if ($save) {
             flash()->overlay('Licitação criada com sucesso!', 'Informação');
-            return redirect()->route('dashboard.bidding')
+            return redirect()->route('dashboard.bidding.index')
             ->with(['alertClass'=> 'alert-success']);
         }
         flash()->overlay('Erro ao criar Licitação!', 'Informação');
-        return redirect()->route('dashboard.bidding')
-        ->with(['alertClass'=> 'alert-danger']);
-        // Execution doesn't reach here if validation fails.
 
+        }
 
     }
 }
