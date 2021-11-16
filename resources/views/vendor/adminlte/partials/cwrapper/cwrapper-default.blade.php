@@ -21,7 +21,7 @@
     {{-- Main Content --}}
     <div class="content">
         <div class="{{ config('adminlte.classes_content') ?: $def_container_class }}">
-            <livewire:flash-container />
+
             {{$slot}}
             @yield('content')
         </div>

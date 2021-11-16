@@ -60,8 +60,9 @@
 
               {{ Form::label('object', 'Objeto:') }}
 
-              {{ Form::textarea('object', null, ['class' => 'form-control', 'id' => 'object',
-              'placeholder' => 'Ex. Aquisição de...', 'rows' => '4','wire:model'=>'object']) }}
+            {{ Form::textarea('object', null, ['class' => 'form-control', 'id' => 'object',
+                'placeholder' => 'Ex. Aquisição de...', 'rows' => '4','wire:model'=>'object']) }}
+
               @error('object')
                 <p class="text-danger">{{ $message }}</p>
               @enderror
@@ -95,9 +96,11 @@
             <div class="form-group">
 
               {{ Form::label('budget_information', 'Informação orçamentaria:') }}
+            <div wire:ignore>
+                {{ Form::textarea('budget_information', null, ['class' => 'form-control', 'id' => 'budget_information',
+                'placeholder' => 'Ex. Conta...', 'rows' => '4', 'wire:model'=>'budget_information']) }}
+            </div>
 
-              {{ Form::textarea('budget_information', null, ['class' => 'form-control', 'id' => 'budget_information',
-              'placeholder' => 'Ex. Conta...', 'rows' => '4', 'wire:model'=>'budget_information']) }}
               @error('budget_information')
                 <p class="text-danger">{{ $message }}</p>
               @enderror
@@ -266,9 +269,8 @@
 {{ Form::close() }}
 
 
-
 @section('css')
-<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
 <style>
   .tox-statusbar__branding {
     display: none;
@@ -280,16 +282,7 @@
 @section('js')
 
 <script src="{{ url('js/tinymce/tinymce.min.js') }}"></script>
-<script>
-  tinymce.init({
-    language: 'pt_BR',
-    selector: '#object',
-    plugins: 'wordcount help',
-    menubar: false,
-    toolbar: 'undo redo | cut copy paste selectall |bold italic | alignleft alignjustify | help',
 
-  });
-</script>
 <script>
   tinymce.init({
     selector: '#budget_information',
@@ -303,6 +296,14 @@
     toolbar: 'undo redo | ' +
       'bold italic | alignleft aligncenter ' +
       'alignright alignjustify | bullist numlist outdent indent| table  | help',
+    setup: function (editor) {
+            editor.on('init change', function () {
+                editor.save();
+            });
+            editor.on('change', function (e) {
+            @this.set('budget_information', editor.getContent());
+            });
+        },
 
   });
 </script>

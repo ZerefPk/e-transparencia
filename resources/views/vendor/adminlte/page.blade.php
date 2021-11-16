@@ -3,6 +3,7 @@
 @inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
 
 @section('adminlte_css')
+
     @stack('css')
     @yield('css')
 @stop
@@ -14,7 +15,7 @@
 @section('body')
 
     <div class="wrapper">
-
+        <livewire:notification-flash />
         {{-- Top Navbar --}}
         @if($layoutHelper->isLayoutTopnavEnabled())
             @include('adminlte::partials.navbar.navbar-layout-topnav')

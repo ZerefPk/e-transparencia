@@ -78,26 +78,21 @@ class Create extends Component
     public function submit()
     {
         $data = $this->validate();
-
-
-
         $slugConsult = Bidding::where('slug', $this->year.'-'.$this->number)->get();
 
         if(count($slugConsult) > 0){
-            flash()->overlay('This is my message', 'The Title')->livewire($this);
+            flashNorification("Licitação já cadastrada!");
 
         }
         else
         {
-        $save = Bidding::create($data);
-        if ($save) {
-            flash()->overlay('Licitação criada com sucesso!', 'Informação');
-            return redirect()->route('dashboard.bidding.index')
-            ->with(['alertClass'=> 'alert-success']);
-        }
-        flash()->overlay('Erro ao criar Licitação!', 'Informação');
+            $save = Bidding::create($data);
+            if ($save) {
+                flashNorification("Licitação criada com sucesso!");
+                return redirect()->route('dashboard.bidding.index');
+            }
 
         }
-
+        flashNorification("Erro ao criar Licitação!");
     }
 }
