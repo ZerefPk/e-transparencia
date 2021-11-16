@@ -8,7 +8,7 @@
   <div class="col-sm-6">
     <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item">Licitação</li>
+      <li class="breadcrumb-item"> <a href="{{route('dashboard.bidding.index')}}">Licitação</a></li>
       <li class="breadcrumb-item active">Nova</li>
     </ol>
   </div><!-- /.col -->

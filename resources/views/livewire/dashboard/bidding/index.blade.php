@@ -95,7 +95,7 @@
                                     <span class="badge bg-danger"> <i class="fa fa-eye-slash"></i></span>
                                 @endif
                             </td>
-                            <td  class="text-center"><span class="badge bg-primary"> <a href="">
+                            <td  class="text-center"><span class="badge bg-primary"> <a href="{{route('dashboard.bidding.edit', $bidding->id)}}">
                                         <i class="fa fa-edit"></i>
                                     </a></span></td>
                         </tr>

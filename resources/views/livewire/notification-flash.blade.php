@@ -1,7 +1,5 @@
-@if (session('notificationflashModal'))
-@php
-    $message = session('notificationflashModal');
-@endphp
+@if ($message = Session::get('notificationflashModal'))
+
 <div class="modal fade" id="notificationflashModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -28,8 +26,6 @@
 <script>
 
         $('#notificationflashModal').modal('show');
-
-
 
 </script>
 @endpush

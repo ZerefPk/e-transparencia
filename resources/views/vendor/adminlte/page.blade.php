@@ -15,7 +15,7 @@
 @section('body')
 
     <div class="wrapper">
-        <livewire:notification-flash />
+
         {{-- Top Navbar --}}
         @if($layoutHelper->isLayoutTopnavEnabled())
             @include('adminlte::partials.navbar.navbar-layout-topnav')

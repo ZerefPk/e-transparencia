@@ -13,6 +13,7 @@ class Index extends Component
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+
     public $number = null;
     public $modality = null;
     public $status = null;
@@ -27,7 +28,6 @@ class Index extends Component
 
         if (isset($this->number)) {
             $biddings->where('number', 'like', '%'.$this->number);
-
         }
         if (isset($this->modality)) {
             $category = Category::where('slug',  $this->modality)->first();
@@ -35,13 +35,9 @@ class Index extends Component
             {
                 $biddings->where('modality_id', $category->id);
             }
-
         }
         if (isset($this->status) && $this->status != "") {
-
             $biddings->where('status', $this->status);
-
-
         }
         if (isset($this->year)) {
             $biddings->where('year', $this->year);
@@ -49,21 +45,16 @@ class Index extends Component
 
         $biddings = $biddings->orderBy('year', 'DESC')->orderBy('number', 'ASC');
 
-
-
-
         return $biddings;
-
-
 
     }
     public function resetPage()
     {
-        return redirect()->route('dashboard.bidding.index');
+        $this->reset(['number','modality','year','status']);
+
     }
     public function render()
     {
-
         $categories = Category::where('status', true)->where('type','like','bidding_%' )->get();
         $years = Year::where('status', true)->orderBy('year', 'DESC')->get();
         $search = $this->find();

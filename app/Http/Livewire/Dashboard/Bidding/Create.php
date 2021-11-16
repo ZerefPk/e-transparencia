@@ -81,18 +81,18 @@ class Create extends Component
         $slugConsult = Bidding::where('slug', $this->year.'-'.$this->number)->get();
 
         if(count($slugConsult) > 0){
-            flashNorification("Licitação já cadastrada!");
+            flashNotification("Licitação já cadastrada!");
 
         }
         else
         {
             $save = Bidding::create($data);
             if ($save) {
-                flashNorification("Licitação criada com sucesso!");
+                flashNotification("Licitação criada com sucesso!");
                 return redirect()->route('dashboard.bidding.index');
             }
 
         }
-        flashNorification("Erro ao criar Licitação!");
+        flashNotification("Erro ao criar Licitação!");
     }
 }

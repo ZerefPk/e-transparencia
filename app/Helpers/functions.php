@@ -1,5 +1,5 @@
 <?php
-function flashNorification($message,$title = false)
+function flashNotification($message,$title = false)
 {
     $message = [
         'title' => $title,
