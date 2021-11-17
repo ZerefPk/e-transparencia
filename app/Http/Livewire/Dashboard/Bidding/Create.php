@@ -88,10 +88,14 @@ class Create extends Component
         {
             $save = Bidding::create($data);
             if ($save) {
-                alertSuccess($this,'Licitação cadastrada!');
+                alertSuccess(Edit::class,'Licitação cadastrada!');
+                return redirect()->route('dashboard.bidding.index');
+            }
+            else{
+                alertError($this,'Ocorreu um erro ao cadastar licitação...');
             }
 
         }
-        alertError($this,'Ocorreu um erro ao cadastar licitação...');
+
     }
 }
