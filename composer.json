@@ -14,7 +14,6 @@
         "laravel/tinker": "^2.5",
         "laravelcollective/html": "^6.2",
         "livewire/livewire": "^2.7",
-        "mattlibera/livewire-flash": "^0.5.1",
         "spatie/laravel-sluggable": "^2.6"
     },
     "require-dev": {
@@ -33,7 +32,7 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Helpers/functions.php"
+            "app/Helpers/flash.php"
         ]
     },
     "autoload-dev": {

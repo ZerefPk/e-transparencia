@@ -23,7 +23,6 @@
     @yield('adminlte_css_pre')
     {{-- Base Stylesheets --}}
     @if(!config('adminlte.enabled_laravel_mix'))
-        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 
@@ -74,7 +73,7 @@
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
-    <livewire:flash-container />
+
     {{-- Body Content --}}
     @yield('body')
 

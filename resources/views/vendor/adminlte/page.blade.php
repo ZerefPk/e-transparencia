@@ -3,7 +3,7 @@
 @inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
 
 @section('adminlte_css')
-
+    <link rel="stylesheet" href="{{url('css/toastr.min.css')}}">
     @stack('css')
     @yield('css')
 @stop
@@ -49,6 +49,9 @@
 @stop
 
 @section('adminlte_js')
+    <script src="{{url('js/toastr.min.js')}}"></script>
+    @include('toasts.toasts')
+
     @stack('js')
     @yield('js')
 @stop
