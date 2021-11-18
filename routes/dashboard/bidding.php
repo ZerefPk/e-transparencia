@@ -3,6 +3,7 @@
 use App\Http\Livewire\Dashboard\Bidding\{
     Index,
     Create,
+    Details,
     Edit,
 };
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,8 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('dashboard/bidding')->middleware(['auth'])->group(function () {
     Route::get('/', Index::class)->name('dashboard.bidding.index');
     Route::get('/create', Create::class)->name('dashboard.bidding.create');
-    Route::get('/edit/{id}', Edit::class)->name('dashboard.bidding.edit');
+    Route::get('/{id}/details', Details::class)->name('dashboard.bidding.details');
+    Route::get('/{id}/edit', Edit::class)->name('dashboard.bidding.edit');
 });
 
 
