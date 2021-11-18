@@ -90,7 +90,7 @@
     @else
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
     @endif
-    @yield('adminlte_js')
+
     {{-- Livewire Script --}}
     @if(config('adminlte.livewire'))
         @if(app()->version() >= 7)
@@ -99,7 +99,7 @@
             <livewire:scripts />
         @endif
     @endif
-
+    @yield('adminlte_js')
 
 
 </body>

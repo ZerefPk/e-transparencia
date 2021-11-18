@@ -6,9 +6,11 @@ use App\Models\Bidding\Bidding;
 use App\Models\Category;
 use App\Models\Year;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Edit extends Component
 {
+    use LivewireAlert;
     public Bidding $bidding;
     public $year;
     public $object;
@@ -89,20 +91,21 @@ class Edit extends Component
 
         if($slugConsult && $slugConsult->id != $this->bidding->id){
 
-            //flashNotification("Licitação já cadastrada!");
-            flash('Licitação já cadastrada!')->warning()->livewire($this);
 
+            $this->alert('error', 'Licitação já cadastrada!');
         }
         else{
             $save = $this->bidding->update($data);
             if ($save) {
-                flash('Licitação já cadastrada!')->overlay();
-                #flashNotification("Licitação atualizada com sucesso!");
-                return redirect()->route('dashboard.bidding.index');
+                $this->alert('success', 'Licitação atualizada com sucesso!');
+            }
+            else{
+                $this->alert('Error', 'Ocorreu um erro ao cadastar licitação...');
+
             }
 
         }
-        flashNotification("Erro ao atualizada Licitação!");
+
     }
     public function render()
     {

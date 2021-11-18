@@ -6,10 +6,10 @@ use App\Models\Bidding\Bidding;
 use App\Models\Category;
 use App\Models\Year;
 use Livewire\Component;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class Create extends Component
 {
-
+    use LivewireAlert;
     public $year;
     public $object;
     public $event_date;
@@ -81,18 +81,21 @@ class Create extends Component
         $slugConsult = Bidding::where('slug', $this->year.'-'.$this->number)->get();
 
         if(count($slugConsult) > 0){
-
-            alertError($this,'Licitação já cadastrada!');
+            $this->alert('error', 'Licitação já cadastrada!');
         }
         else
         {
             $save = Bidding::create($data);
             if ($save) {
-                alertSuccess(Edit::class,'Licitação cadastrada!');
+                $this->flash('success', 'Licitação cadastrada!', [
+                    'toast' => false,
+                    'position' => 'center'
+                ]);
                 return redirect()->route('dashboard.bidding.index');
             }
             else{
-                alertError($this,'Ocorreu um erro ao cadastar licitação...');
+                $this->alert('Error', 'Ocorreu um erro ao cadastar licitação...');
+
             }
 
         }

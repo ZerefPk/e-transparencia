@@ -49,9 +49,9 @@
 @stop
 
 @section('adminlte_js')
-    <script src="{{url('js/toastr.min.js')}}"></script>
-    @include('toasts.toasts')
-
+    <script src="{{url('js/sweetalert.js')}}"></script>
+    <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
+    <x-livewire-alert::flash />
     @stack('js')
     @yield('js')
 @stop
