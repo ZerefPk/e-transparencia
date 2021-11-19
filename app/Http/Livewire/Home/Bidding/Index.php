@@ -14,6 +14,12 @@ class Index extends Component
     protected $paginationTheme = 'bootstrap';
     public $yearActive;
 
+    public $q;
+    public $modalidade;
+    public $situacao;
+    public $tipo;
+
+    public $queryString = ['q'];
 
     public function mount($data = null){
 
@@ -21,25 +27,15 @@ class Index extends Component
             $this->yearActive = Year::where('primary', true)->first();
             if (!$this->yearActive)
             {
-
                 abort(404);
-
             }
-
         }
         else{
-
             $this->yearActive = Year::where('year', $data)->first();
-            $categories = Category::where('status', true)->where('type','like','bidding_%' )->get();
-            if ($this->yearActive) {
-                $years = Year::orderBy('year', 'DESC')->where('status', true)->limit(4)->get();
-
-                $this->biddings = Bidding::where('year', $data)->where('status', true)->orderBy('number', 'ASC')->paginate(15);
-
-            }
-            else{
+            if (!$this->yearActive) {
                 abort(404);
             }
+
 
         }
 

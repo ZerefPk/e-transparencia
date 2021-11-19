@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('bidding')->group(function () {
-    Route::get('licitacao/{data?}', Index::class)->name('site.bidding.index');
+Route::prefix('licitacao')->group(function () {
+    Route::get('/{data?}', Index::class)->name('site.bidding.index');
 
 
 });
