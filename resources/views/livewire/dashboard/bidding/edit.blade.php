@@ -252,7 +252,9 @@
           <div class="card-body">
             <div class="row">
               <div class="col-12">
-                <a href="{{ route('dashboard.bidding.index') }}" class="btn btn-secondary">Cancelar</a>
+                <a href="{{ route('dashboard.bidding.details', $bidding->id) }}" class="btn btn-secondary">Cancelar</a>
+                <button type="button" wire:click="delete" class="btn btn-danger">Deletar</button>
+
                 {{ Form::submit('Salvar', ['class' => 'btn btn-success']) }}
 
               </div>
@@ -306,5 +308,24 @@
         },
 
   });
+</script>
+<script>
+    window.addEventListener('delete', event => {
+
+        Swal.fire({
+        title: 'Tem certeza?',
+        text: "Você não poderá reverter isso!",
+        icon: false,
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, delete',
+        cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if(result.isConfirmed){
+                Livewire.emit('destroy');
+            }
+        });
+    });
 </script>
 @stop

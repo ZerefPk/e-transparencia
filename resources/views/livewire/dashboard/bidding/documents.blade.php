@@ -57,8 +57,10 @@
     </div>
 
     {{ Form::close() }}
-    <div wire:loading wire:target='render'>...</div>
-    <div class="table-responsive" >
+    <div wire:loading wire:target='render' class="spinner-border text-success" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div class="table-responsive">
         <table class="table table-bordered">
         <thead>
             <tr>

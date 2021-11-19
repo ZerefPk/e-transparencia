@@ -5,12 +5,15 @@ namespace App\Http\Livewire\Dashboard\Bidding;
 use App\Models\Bidding\Bidding;
 use App\Models\Category;
 use App\Models\Year;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Edit extends Component
 {
     use LivewireAlert;
+    protected $listeners = ['destroy' => 'destroy'];
+
     public Bidding $bidding;
     public $year;
     public $object;
@@ -66,8 +69,6 @@ class Edit extends Component
         'situation_id' => 'required',
         'finality_id' => 'required',
     ];
-
-
     public  $validationAttributes = [
         'number' => '[Número]',
         'object' => '[Objeto]',
@@ -84,6 +85,31 @@ class Edit extends Component
         'situation_id' => '[Situação]',
         'finality_id' => '[Finalidade]',
     ];
+    public function delete(){
+        $this->dispatchBrowserEvent('delete');
+    }
+    public function destroy(){
+        $path = 'bidding/'.$this->bidding->year.'/'.$this->bidding->number;
+
+        $path =( Storage::exists($path)) ? Storage::deleteDirectory($path) : true;
+        if($path){
+            $delete = $this->bidding->delete();
+            if($delete){
+                $this->flash('success', 'Licitação deletada!', [
+                    'toast' => false,
+                    'position' => 'center'
+                ]);
+                redirect()->route('dashboard.bidding.index');
+            }
+            else{
+                $this->alert('error', 'Houve um erro ao deletar');
+            }
+        }
+        else{
+            $this->alert('error', 'Houve um erro ao deletar');
+        }
+    }
+
     public function submit()
     {
         $data = $this->validate();

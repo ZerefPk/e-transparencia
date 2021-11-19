@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Livewire\Dashboard\HomeDashboard;
-use App\Http\Livewire\Home\Index;
+use App\Http\Livewire\Home\Bidding\{
+    Index
+};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Index::class)->name('home.index');
-Route::get('/dashboard', HomeDashboard::class)->middleware(['auth'])->name('dashboard');
-
-require __DIR__.'/auth.php';
-require __DIR__.'/dashboard/bidding.php';
+Route::prefix('bidding')->group(function () {
+    Route::get('licitacao/{data?}', Index::class)->name('site.bidding.index');
 
 
-require __DIR__.'/home/bidding.php';
+});
+
+
+

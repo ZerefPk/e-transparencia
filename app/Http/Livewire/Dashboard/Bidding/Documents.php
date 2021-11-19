@@ -13,11 +13,18 @@ use Livewire\WithFileUploads;
 class Documents extends Component
 {
     use LivewireAlert, WithFileUploads;
+
     protected $listeners = ['destroy' => 'destroy'];
+
+    public Bidding $bidding;
+    public $biddingDocuments;
+    public $documetDestroy;
+
     public $name;
     public $description;
     public $document;
-    public $documetDestroy;
+
+
     protected $rules = [
             'name' => 'required|min:2|max:254',
             'description' => 'nullable|min:2|max:400',
@@ -33,7 +40,7 @@ class Documents extends Component
     public function mount($bidding)
     {
         $this->bidding = $bidding;
-
+        $this->biddingDocuments = BiddingDocument::where('bidding_id',  $bidding->id)->get();
     }
     public function resetAttributes(){
         $this->reset(['name', 'description', 'document']);
@@ -53,7 +60,6 @@ class Documents extends Component
         ]);
 
         if ($document) {
-            //dd($this->document);
             $extension = $this->document->extension();
             $document->extension = '.'.$extension;
             $document->save();
@@ -61,8 +67,8 @@ class Documents extends Component
 
             if ($path) {
                 $this->resetAttributes();
-                $this->biddingDocuments = $this->bidding->documents;
                 $this->alert('success', 'Documento incluido com sucesso');
+                $this->biddingDocuments = BiddingDocument::where('bidding_id', $this->bidding->id)->get();
             }
             else{
                 $this->resetAttributes();
@@ -73,11 +79,9 @@ class Documents extends Component
 
         }
 
-
     }
     public function delete($id)
     {
-
         $document = $this->bidding->documents->find($id);
 
         if($document)
@@ -99,6 +103,7 @@ class Documents extends Component
             if($delete){
                 $this->reset('documetDestroy');
                 $this->alert('success', 'Arquivo removido');
+                $this->biddingDocuments = BiddingDocument::where('bidding_id', $this->bidding->id)->get();
             }
             else{
                 $this->alert('error', 'Houve um erro ao remover o arquivo');
@@ -112,11 +117,10 @@ class Documents extends Component
     public function render()
     {
         $documentsList = Category::where('type','bidding_document')->where('status', true)->pluck('category');
-        $biddingDocuments = BiddingDocument::where('bidding_id', $this->bidding->id)->get();
+
 
         return view('livewire.dashboard.bidding.documents', [
             'documentsList' => $documentsList,
-            'biddingDocuments' => $biddingDocuments,
         ]);
     }
 }
