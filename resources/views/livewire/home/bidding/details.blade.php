@@ -1,7 +1,5 @@
-@extends('layouts.app')
-
 @section('title')
-| LIC {{ $bidding->year }}/{{ $bidding->number }} 
+| LIC {{ $bidding->year }}/{{ $bidding->number }}
 @stop
 @section('meta-description')
 
@@ -99,7 +97,7 @@
 
             </div>
             @endif
-            
+
             <div class="card my-4">
               <div class="card-header">
                 Anexos
@@ -225,13 +223,13 @@
           <div class="tab-pane" id="budget">
             <div class="table-responsive">
               @if (!is_null($bidding->budget_information))
-              {!!$bidding->budget_information!!}  
-              
+              {!!$bidding->budget_information!!}
+
               @else
               <p class="text-muted">Não há registro para o Processo:
                 {{ $bidding->getRealNumber() }}</p>
               @endif
-                
+
             </div>
           </div>
 
@@ -241,5 +239,3 @@
 
   </div>
 
-
-@stop
