@@ -21,5 +21,4 @@ Route::get('/dashboard', HomeDashboard::class)->middleware(['auth'])->name('dash
 require __DIR__.'/auth.php';
 require __DIR__.'/dashboard/bidding.php';
 
-
 require __DIR__.'/home/bidding.php';
