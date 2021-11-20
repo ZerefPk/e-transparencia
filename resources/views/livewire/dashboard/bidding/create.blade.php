@@ -271,17 +271,11 @@
 
 @section('css')
 
-<style>
-  .tox-statusbar__branding {
-    display: none;
-  }
 
-</style>
 @stop
 
 @section('js')
 
-<script src="{{ url('js/tinymce/tinymce.min.js') }}"></script>
 
 <script>
   tinymce.init({

@@ -79,10 +79,13 @@
                     <li class="nav-item border-right"><a
                             class="nav-link"
                             href="#documents" data-toggle="tab">Documentos</a></li>
+                    @if ($bidding->modality->special_field)
                     <li class="nav-item border-right"><a
-                            class="nav-link" href="#event"
-                            data-toggle="tab">Informações do
-                            Certame</a></li>
+                        class="nav-link" href="#additional"
+                        data-toggle="tab">Informações do
+                        Certame</a></li>
+                    @endif
+
                     <li class="nav-item border-right"><a class="nav-link" href="#itens"
                             data-toggle="tab">Itens</a></li>
                     <li class="nav-item border-right"><a class="nav-link" href="#winners"
@@ -129,6 +132,9 @@
 
                     </div>
                     @livewire('dashboard.bidding.documents', ['bidding' => $bidding])
+                    @if ($bidding->modality->special_field)
+                        @livewire('dashboard.bidding.additional', ['bidding' => $bidding])
+                    @endif
 
                 </div>
 

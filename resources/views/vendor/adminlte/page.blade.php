@@ -4,6 +4,12 @@
 
 @section('adminlte_css')
     <link rel="stylesheet" href="{{url('css/toastr.min.css')}}">
+    <style>
+        .tox-statusbar__branding {
+          display: none;
+        }
+
+      </style>
     @stack('css')
     @yield('css')
 @stop
@@ -52,6 +58,7 @@
     <script src="{{url('js/sweetalert.js')}}"></script>
     <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
     <x-livewire-alert::flash />
+    <script src="{{ url('js/tinymce/tinymce.min.js') }}"></script>
     @stack('js')
     @yield('js')
 @stop
