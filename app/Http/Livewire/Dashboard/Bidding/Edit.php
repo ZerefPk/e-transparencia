@@ -113,6 +113,7 @@ class Edit extends Component
     public function submit()
     {
         $data = $this->validate();
+        $data['object'] = strip_tags(html_entity_decode($data['object'], ENT_COMPAT, 'UTF-8'));
         $slugConsult = Bidding::where('slug', $this->year.'-'.$this->number)->first();
 
         if($slugConsult && $slugConsult->id != $this->bidding->id){
