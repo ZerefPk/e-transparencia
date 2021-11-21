@@ -3,7 +3,7 @@
 @stop
 @section('meta-description')
 
-<meta name="description" content="{{strip_tags(html_entity_decode($bidding->object, ENT_COMPAT, 'UTF-8'))}}">
+<meta name="description" content="{{ $bidding->object }}">
 
 @stop
 @section('container')
@@ -47,7 +47,9 @@
           <div class="active tab-pane" id="basicInformation">
             <div class="col">
               <p> <strong> Objeto:</strong></p>
-              {!! $bidding->object !!}
+              <div class="text-break text-justify">
+                {{ $bidding->object }}
+              </div>
             </div>
             <div class="d-flex d-row">
               <div class="col-sm-4">

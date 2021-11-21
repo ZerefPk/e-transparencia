@@ -100,7 +100,9 @@
                                 <p>Objeto:</p>
                             </div>
                             <div class="col-sm-10">
-                                {!! $bidding->object !!}
+                                <div class="text-break text-justify">
+                                    {{$bidding->object }}
+                                </div>
                             </div>
 
                         </div>

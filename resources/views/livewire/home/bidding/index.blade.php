@@ -123,7 +123,7 @@
                                         <strong>{{ $bidding->year . '/' . $bidding->number }}</strong>
                                     </td>
                                     <td class="text-break text-justify">
-                                        {{ strip_tags(html_entity_decode($bidding->object, ENT_COMPAT, 'UTF-8')) }}
+                                        {{ $bidding->object }}
                                     </td>
                                     <td class="text-center align-middle">{{ $bidding->modality->category }}</td>
                                     <td class="text-center align-middle">{{ $bidding->situation->category }}</td>
