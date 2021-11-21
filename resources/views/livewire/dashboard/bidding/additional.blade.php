@@ -3,7 +3,7 @@
     @if ($methodForm == 'create')
         <button type="button" class="btn btn-primary" data-toggle="modal" data-backdrop="static"
             data-target="#form-additional">
-                Adicionar
+            <i class="fa fa-plus"></i> Adicionar
         </button>
     @endif
 

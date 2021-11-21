@@ -86,10 +86,9 @@
                         Certame</a></li>
                     @endif
 
-                    <li class="nav-item border-right"><a class="nav-link" href="#itens"
+                    <li class="nav-item border-right"><a class="nav-link" href="#item"
                             data-toggle="tab">Itens</a></li>
-                    <li class="nav-item border-right"><a class="nav-link" href="#winners"
-                            data-toggle="tab">Ganhadores</a></li>
+
                 </ul>
             </div>
             <div class="card-body">
@@ -135,7 +134,7 @@
                     @if ($bidding->modality->special_field)
                         @livewire('dashboard.bidding.additional', ['bidding' => $bidding])
                     @endif
-
+                    @livewire('dashboard.bidding.item', ['bidding' => $bidding])
                 </div>
 
 
