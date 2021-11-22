@@ -22,31 +22,36 @@ class Index extends Component
     public $situacao;
     public $tipo;
 
-    public $queryString = ['q', 'modalidade', 'situacao','tipo'];
+    public $queryString = [
+        'q' =>  ['except' => ''],
+        'modalidade' =>  ['except' => ''],
+        'situacao' =>  ['except' => ''],
+        'tipo'=>  ['except' => '']
+    ];
     public function search()
     {
         $biddings = Bidding::query();
         $biddings->where('year', $this->yearActive->year)->where('status', true);
 
 
-        if (isset($this->q)) {
+        if (isset($this->q) && $this->q != "") {
             $biddings->where('number', 'like', '%'.$this->q)
             ->orWhere('object', 'like', '%'.$this->q.'%');
             $this->listSearch['q'] = ['field' => 'Busca' , 'value' => $this->q];
         }
-        if (isset($this->modalidade)) {
+        if (isset($this->modalidade) && $this->modalidade != "") {
             $category = Category::where('slug', $this->modalidade)->first();
             $biddings->where('modality_id', $category->id);
 
             $this->listSearch['modalidade'] = ['field' =>'Modalidade', 'value' => $category->category];
         }
-        if (isset($this->tipo)) {
+        if (isset($this->tipo) && $this->tipo != "") {
             $category = Category::where('slug', $this->tipo)->first();
             $biddings->where('type_id', $category->id);
 
             $this->listSearch['tipo'] = ['field' =>'Tipo', 'value' => $category->category];
         }
-        if (isset($this->situacao)) {
+        if (isset($this->situacao) && $this->situacao != "") {
             $category = Category::where('slug', $this->situacao)->first();
             $biddings->where('situation_id', $category->id);
 

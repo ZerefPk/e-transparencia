@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Livewire\Home\Bidding\{
-    Index
+    Statistic,
+    Index,
+    Others
 };
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('licitacao')->group(function () {
     Route::get('/{data?}', Index::class)->name('site.bidding.index');
-
+    Route::get('{year}/estatisticas', Statistic::class)->name('site.bidding.statistic');
+    Route::get('link/outros', Others::class)->name('site.bidding.others');
 
 });
 

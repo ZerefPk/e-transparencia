@@ -4,7 +4,6 @@
 @section('meta-description')
 
     <meta name="description" content="Licitações {{ $yearActive->year }}">
-
 @stop
 
 
@@ -37,9 +36,9 @@
                     </h5>
                 </div>
                 <div class="p-2">
-                    <a href="#"
+                    <a href="{{route('site.bidding.statistic', $yearActive->year)}}"
                         class="text-uppercase btn hover border">
-                        Ver em graficos <i class="fa fa-arrow-alt-circle-right"></i>
+                        Ver estatísticas <i class="fa fa-arrow-alt-circle-right"></i>
                     </a>
 
                 </div>
@@ -59,7 +58,7 @@
                             <div class="form-group">
                              <label>Modalidade:</label>
                              <select class="form-control" style="width: 100%;" name="modalidade" wire:model="modalidade">
-                                 <option selected disabled>Modalidade</option>
+                                 <option selected value="">Todas</option>
                                  @foreach ($categories->where('type', 'bidding_modality') as $modality)
                                      <option value="{{ $modality->slug }}">{{ $modality->category }}</option>
                                  @endforeach
@@ -71,7 +70,7 @@
                             <div class="form-group">
                              <label>Tipo:</label>
                              <select class="form-control" style="width: 100%;" name="tipo" wire:model="tipo">
-                                 <option selected disabled>Tipo</option>
+                                <option selected value="">Todos</option>
                                  @foreach ($categories->where('type', 'bidding_type') as $modality)
                                      <option value="{{ $modality->slug }}">{{ $modality->category }}</option>
                                  @endforeach
@@ -82,7 +81,7 @@
                             <div class="form-group">
                                 <label>Situação:</label>
                                 <select class="form-control" name="situacao" wire:model="situacao">
-                                    <option selected disabled>Situação</option>
+                                    <option selected value="">Todas</option>
                                     @foreach ($categories->where('type', 'bidding_situation') as $situation)
                                         <option value="{{ $situation->slug }}">{{ $situation->category }}</option>
                                     @endforeach

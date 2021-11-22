@@ -39,7 +39,7 @@
         @endforeach
 
         <li class="nav-item m-1">
-          <a href="" class="nav-link border  text-uppercase">Outros</a>
+          <a href="{{route('site.bidding.others')}}" class="nav-link border  text-uppercase">Outros</a>
         </li>
       </ul>
     </div>

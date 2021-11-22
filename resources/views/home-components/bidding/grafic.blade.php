@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-| LIC - Analise Gráfica {{ $yearActive->year }} 
+| LIC - Analise Gráfica {{ $yearActive->year }}
 @stop
 @section('meta-description')
 
@@ -8,7 +8,7 @@
 
 @stop
 
-@section('container')
+
   <div class="container">
     @include('site.bidding.header')
   </div>
@@ -112,7 +112,7 @@
 
         </div>
       </div>
-      
+
       <div class="card my-4">
         <div class="card-header">
           <h5 class="card-title text-center text-uppercase">
@@ -138,9 +138,8 @@
 
     </div>
   @endif
-@stop
 
-@section('js')
+@push('js')
 
   <script src="{{ asset('js/chartjs.js') }}"></script>
 @stop
