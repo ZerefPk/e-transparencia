@@ -28,6 +28,23 @@ class Index extends Component
         'situacao' =>  ['except' => ''],
         'tipo'=>  ['except' => '']
     ];
+    public function updatingQ()
+    {
+        $this->gotoPage(1);
+    }
+    public function updatingModalidade()
+    {
+        $this->gotoPage(1);
+    }
+    public function updatingSituacao()
+    {
+        $this->gotoPage(1);
+    }
+    public function updatingTipo()
+    {
+        $this->gotoPage(1);
+    }
+
     public function search()
     {
         $biddings = Bidding::query();
@@ -35,27 +52,27 @@ class Index extends Component
 
 
         if (isset($this->q) && $this->q != "") {
-            $this->goToPage(1);
+
             $biddings->where('number', 'like', '%'.$this->q)
             ->orWhere('object', 'like', '%'.$this->q.'%');
             $this->listSearch['q'] = ['field' => 'Busca' , 'value' => $this->q];
         }
         if (isset($this->modalidade) && $this->modalidade != "") {
-            $this->goToPage(1);
+
             $category = Category::where('slug', $this->modalidade)->first();
             $biddings->where('modality_id', $category->id);
 
             $this->listSearch['modalidade'] = ['field' =>'Modalidade', 'value' => $category->category];
         }
         if (isset($this->tipo) && $this->tipo != "") {
-            $this->goToPage(1);
+
             $category = Category::where('slug', $this->tipo)->first();
             $biddings->where('type_id', $category->id);
 
             $this->listSearch['tipo'] = ['field' =>'Tipo', 'value' => $category->category];
         }
         if (isset($this->situacao) && $this->situacao != "") {
-            $this->goToPage(1);
+
             $category = Category::where('slug', $this->situacao)->first();
             $biddings->where('situation_id', $category->id);
 

@@ -18,9 +18,25 @@ class Index extends Component
     public $modality = null;
     public $status = null;
     public $year = null;
-
+    public $page = 1;
     public $queryString = ['number','modality','year','status'];
 
+    public function updatingNumber()
+    {
+        $this->gotoPage(1);
+    }
+    public function updatingModality()
+    {
+        $this->gotoPage(1);
+    }
+    public function updatingYear()
+    {
+        $this->gotoPage(1);
+    }
+    public function updatingStatus()
+    {
+        $this->gotoPage(1);
+    }
 
     public function find()
     {
@@ -28,11 +44,11 @@ class Index extends Component
         $biddings = Bidding::query();
 
         if (isset($this->number)) {
-            $this->goToPage(1);
+
             $biddings->where('number', 'like', '%'.$this->number);
         }
         if (isset($this->modality)) {
-            $this->goToPage(1);
+
             $category = Category::where('slug',  $this->modality)->first();
             if($category)
             {
@@ -40,11 +56,11 @@ class Index extends Component
             }
         }
         if (isset($this->status) && $this->status != "") {
-            $this->goToPage(1);
+
             $biddings->where('status', $this->status);
         }
         if (isset($this->year)) {
-            $this->goToPage(1);
+
             $biddings->where('year', $this->year);
         }
 
