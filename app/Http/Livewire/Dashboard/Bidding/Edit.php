@@ -115,6 +115,9 @@ class Edit extends Component
         $data = $this->validate();
         $slugConsult = Bidding::where('slug', $this->year.'-'.$this->number)->first();
 
+        $data['estimated_value'] = (!is_numeric($data['estimated_value']) && $data['estimated_value'] >=0)? null : $data['estimated_value'];
+        $data['contracted_value'] = (is_numeric($data['contracted_value']) && $data['contracted_value'] >=0)? null : $data['contracted_value'];
+
         if($slugConsult && $slugConsult->id != $this->bidding->id){
 
 
@@ -123,7 +126,12 @@ class Edit extends Component
         else{
             $save = $this->bidding->update($data);
             if ($save) {
-                $this->alert('success', 'Licitação atualizada com sucesso!');
+
+                $this->flash('success', 'Licitação atualizada com sucesso!', [
+                    'toast' => false,
+                    'position' => 'center'
+                ]);
+                return redirect()->route('dashboard.bidding.details', $this->bidding->id);
             }
             else{
                 $this->alert('Error', 'Ocorreu um erro ao cadastar licitação...');
