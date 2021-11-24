@@ -114,9 +114,9 @@ class Edit extends Component
     {
         $data = $this->validate();
         $slugConsult = Bidding::where('slug', $this->year.'-'.$this->number)->first();
-
+        //dd($data['contracted_value']);
         $data['estimated_value'] = (!is_numeric($data['estimated_value']) && $data['estimated_value'] >=0)? null : $data['estimated_value'];
-        $data['contracted_value'] = (is_numeric($data['contracted_value']) && $data['contracted_value'] >=0)? null : $data['contracted_value'];
+        $data['contracted_value'] = (!is_numeric($data['contracted_value']) && $data['contracted_value'] >=0)? null : $data['contracted_value'];
 
         if($slugConsult && $slugConsult->id != $this->bidding->id){
 

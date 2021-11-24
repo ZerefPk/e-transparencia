@@ -80,7 +80,7 @@ class Create extends Component
         $data = $this->validate();
         $slugConsult = Bidding::where('slug', $this->year.'-'.$this->number)->get();
         $data['estimated_value'] = (!is_numeric($data['estimated_value']) && $data['estimated_value'] >=0)? null : $data['estimated_value'];
-        $data['contracted_value'] = (is_numeric($data['contracted_value']) && $data['contracted_value'] >=0)? null : $data['contracted_value'];
+        $data['contracted_value'] = (!is_numeric($data['contracted_value']) && $data['contracted_value'] >=0)? null : $data['contracted_value'];
 
         if(count($slugConsult) > 0){
             $this->alert('error', 'Licitação já cadastrada!');
