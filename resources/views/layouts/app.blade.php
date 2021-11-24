@@ -17,7 +17,7 @@
 
     <link rel="shortcut icon" href="{{ asset(config('application.favico')) }}" type="image/x-icon">
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/fontawesome-free/css/all.css') }}">
 
@@ -57,7 +57,7 @@
 
     <script type="text/javascript" src="{{ asset('vendor/jquery/jquery.js') }}"></script>
 
-    <script type="text/javascript" src="{{ asset('js/bootstrap/bootstrap.bundle.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('vendor/cookie-consent/js/cookie-consent.js') }}"></script>
     @if (config('application.analitic'))

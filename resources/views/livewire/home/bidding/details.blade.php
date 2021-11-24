@@ -131,51 +131,6 @@
             </div>
           </div>
           <div class="tab-pane" id="itens">
-            @foreach ($bidding->biddingGroups as $biddingGroup)
-
-              <div class="table-responsive">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr class="text-center">
-                      <th colspan="6">Grupo {{ $biddingGroup->number_group }} - {{ $biddingGroup->group_name }}
-                      </th>
-
-                    </tr>
-                    <tr>
-
-                      <th class="text-center align-middle">Item</th>
-                      <th class="text-center align-middle">Descrição</th>
-                      <th class="text-center align-middle">Unidade</th>
-                      <th class="text-center align-middle">Quantidade</th>
-                      <th class="text-center align-middle">Valor Unitario</th>
-                      <th class="text-center align-middle">Valor Total</th>
-
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach ($biddingGroup->biddindItens as $itemGroup)
-                      <tr>
-
-                        <td class="text-center align-middle">{{ $itemGroup->item }}</td>
-                        <td class="text-center align-middle">{!! $itemGroup->description !!}</td>
-                        <td class="text-center align-middle">{{ $itemGroup->unity }}</td>
-                        <td class="text-center align-middle">{{ $itemGroup->quantity }}</td>
-                        <td class="text-center align-middle">R$
-                          {{ number_format($itemGroup->estimated_total_value / $itemGroup->quantity, 2, ',', '.') }}
-                        </td>
-                        <td class="text-center align-middle">R$
-                          {{ number_format($itemGroup->estimated_total_value, 2, ',', '.') }}</td>
-
-
-
-
-                      </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-              </div>
-
-            @endforeach
             @if (count($bidding->biddingItens) > 0)
               <div class="table-responsive">
                 <table class="table table-bordered">
@@ -212,7 +167,7 @@
                   </tbody>
                 </table>
               </div>
-            @elseif (count($bidding->biddingGroups) <= 0) <p class="text-muted">Não há itens para o Processo:
+            @elseif (count($bidding->biddingItens) <= 0) <p class="text-muted">Não há itens para o Processo:
                 {{ $bidding->getRealNumber() }}</p>
             @endif
           </div>

@@ -15,32 +15,32 @@ class Bidding extends Model
     protected $table = 'biddings';
 
     protected $fillable = [
-        
-        'slug',	
-        'number',	
-        'object',	
-        'event_date',	
-        'event_time',	
-        'localization',	
-        'estimated_value',	
-        'contracted_value',	
-        'budget_information',	
-        'status',	
-        'year',	
-        'modality_id',	
-        'type_id',	
-        'situation_id',	
+
+        'slug',
+        'number',
+        'object',
+        'event_date',
+        'event_time',
+        'localization',
+        'estimated_value',
+        'contracted_value',
+        'budget_information',
+        'status',
+        'year',
+        'modality_id',
+        'type_id',
+        'situation_id',
         'finality_id',
     ];
 
     protected $foreingkey = ['year', 'modality_id',	 'type_id',	'situation_id',	'finality_id'];
-    
+
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom(['year', 'number'])
             ->saveSlugsTo('slug')
-            ->allowDuplicateSlugs(false) 
+            ->allowDuplicateSlugs(false)
             ->usingSeparator('-');
 
     }
@@ -112,10 +112,6 @@ class Bidding extends Model
     {
         return $this
         ->hasMany(BiddingItem::class, 'bidding_id', 'id')->where('bidding_item_group_id', null);
-    }
-    public function biddingGroups()
-    {
-        return $this->hasMany(BiddingItemGroup::class, 'bidding_id', 'id');
     }
     public function additional()
     {

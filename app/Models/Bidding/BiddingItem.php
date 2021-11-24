@@ -15,7 +15,7 @@ class BiddingItem extends Model
         'item',
         'description',
         'catmat',
-        'unity',	
+        'unity',
         'quantity',
         'estimated_total_value',
         'bidding_item_group_id',
@@ -28,8 +28,5 @@ class BiddingItem extends Model
     {
         return $this->belongsTo(Bidding::class, 'bidding_id', 'id');
     }
-    public function biddindGroup()
-    {
-        return $this->belongsTo(BiddingItemGroup::class,'bidding_item_group_id', 'id');
-    }
+
 }

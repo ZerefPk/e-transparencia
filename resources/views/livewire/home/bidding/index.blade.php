@@ -103,6 +103,8 @@
                 </div>
             </div>
         </div>
+
+
         @if ($biddings->count() > 0)
             <div class="my-2">
 

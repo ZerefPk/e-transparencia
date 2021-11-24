@@ -262,7 +262,7 @@ class Statistic extends Component
 
         $valuecontractedCharts = $this->valueByYearModality();
 
-        $evolutionAB = $this->evolutionAB('Dispensa de Licitacao','Inexebilidade de Licitação');
+        $evolutionAB = $this->evolutionAB('Dispensa de Licitacao','Inexibilidade de Licitação');
 
         $quantityByYearFinality = $this->quantityByYearFinality();
 

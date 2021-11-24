@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Bidding\BiddingItem;
+use App\Observers\BiddingItemObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -28,5 +30,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        BiddingItem::observe(BiddingItemObserver::class);
     }
 }
