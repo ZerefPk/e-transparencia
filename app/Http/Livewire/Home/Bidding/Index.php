@@ -48,7 +48,7 @@ class Index extends Component
     public function search()
     {
         $biddings = Bidding::query();
-        $biddings->where('year', $this->yearActive->year)->where('status', true);
+
 
 
         if (isset($this->q) && $this->q != "") {
@@ -78,7 +78,7 @@ class Index extends Component
 
             $this->listSearch['situacao'] = ['field' =>'Situação', 'value' => $category->category];
         }
-
+        $biddings->where('year', $this->yearActive->year)->where('status', true);
         $biddings = $biddings->orderBy('number', 'ASC');
 
         return $biddings;

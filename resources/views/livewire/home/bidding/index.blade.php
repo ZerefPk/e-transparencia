@@ -26,81 +26,84 @@
     </div>
 
 
-    @if ($biddings->count() > 0)
-        <div class="container my-2 ">
-            <div class="d-flex justify-content-between">
-                <div class="p-2">
-                    <h5 class="text-primary text-uppercase">
-                        Visão geral das Licitações de
-                        {{ $yearActive->year }}
-                    </h5>
-                </div>
-                <div class="p-2">
-                    <a href="{{route('site.bidding.statistic', $yearActive->year)}}"
-                        class="text-uppercase btn hover border">
-                        Ver estatísticas <i class="fa fa-arrow-alt-circle-right"></i>
-                    </a>
 
-                </div>
+    <div class="container my-2 ">
+        <div class="d-flex justify-content-between">
+            <div class="p-2">
+                <h5 class="text-primary text-uppercase">
+                    Visão geral das Licitações de
+                    {{ $yearActive->year }}
+                </h5>
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-3">
+            <div class="p-2">
+                <a href="{{ route('site.bidding.statistic', $yearActive->year) }}"
+                    class="text-uppercase btn hover border">
+                    Ver estatísticas <i class="fa fa-arrow-alt-circle-right"></i>
+                </a>
 
-                            <div class="form-group">
-                                <label>Buscar:</label>
-                                <input type="text" class="form-control" style="width: 100%;" placeholder="Processo ou Objeto" name="q" wire:model="q">
-                            </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+
+                        <div class="form-group">
+                            <label>Buscar:</label>
+                            <input type="text" class="form-control" style="width: 100%;"
+                                placeholder="Processo ou Objeto" name="q" wire:model="q">
                         </div>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                             <label>Modalidade:</label>
-                             <select class="form-control" style="width: 100%;" name="modalidade" wire:model="modalidade">
-                                 <option selected value="">Todas</option>
-                                 @foreach ($categories->where('type', 'bidding_modality') as $modality)
-                                     <option value="{{ $modality->slug }}">{{ $modality->category }}</option>
-                                 @endforeach
-                             </select>
-                            </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Modalidade:</label>
+                            <select class="form-control" style="width: 100%;" name="modalidade"
+                                wire:model="modalidade">
+                                <option selected value="">Todas</option>
+                                @foreach ($categories->where('type', 'bidding_modality') as $modality)
+                                    <option value="{{ $modality->slug }}">{{ $modality->category }}</option>
+                                @endforeach
+                            </select>
                         </div>
+                    </div>
 
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                             <label>Tipo:</label>
-                             <select class="form-control" style="width: 100%;" name="tipo" wire:model="tipo">
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label>Tipo:</label>
+                            <select class="form-control" style="width: 100%;" name="tipo" wire:model="tipo">
                                 <option selected value="">Todos</option>
-                                 @foreach ($categories->where('type', 'bidding_type') as $modality)
-                                     <option value="{{ $modality->slug }}">{{ $modality->category }}</option>
-                                 @endforeach
-                             </select>
-                            </div>
+                                @foreach ($categories->where('type', 'bidding_type') as $modality)
+                                    <option value="{{ $modality->slug }}">{{ $modality->category }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                                <label>Situação:</label>
-                                <select class="form-control" name="situacao" wire:model="situacao">
-                                    <option selected value="">Todas</option>
-                                    @foreach ($categories->where('type', 'bidding_situation') as $situation)
-                                        <option value="{{ $situation->slug }}">{{ $situation->category }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label>Situação:</label>
+                            <select class="form-control" name="situacao" wire:model="situacao">
+                                <option selected value="">Todas</option>
+                                @foreach ($categories->where('type', 'bidding_situation') as $situation)
+                                    <option value="{{ $situation->slug }}">{{ $situation->category }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label>Limpar:</label>
+                            <button type="button" class="btn btn-primary" style="width: 100%;" wire:click="resetAttr">
+                                <i class="fa fa-broom"></i>
+                            </button>
                         </div>
-                        <div class="col-sm-2" >
-                            <div class="form-group">
-                                <label>Limpar:</label>
-                                <button type="button" class="btn btn-primary" style="width: 100%;" wire:click="resetAttr">
-                                    <i class="fa fa-broom"></i>
-                                </button>
-                            </div>
 
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        @if ($biddings->count() > 0)
             <div class="my-2">
 
                 <div class="table-responsive">
@@ -146,12 +149,13 @@
             </div>
 
         @else
-            @if(count($listSearch) > 0)
+            @if (count($listSearch) > 0)
                 <div class="container">
                     <div class="card my-5">
                         <div class="card-body">
                             <h5 class="text-uppercase">
-                                Não há registros de licitações no ano de {{ $yearActive->year }} Para a busca realizada:
+                                Não há registros de licitações no ano de {{ $yearActive->year }} Para a busca
+                                realizada:
                             </h5>
                             <ul class="text-uppercase">
                                 @foreach ($listSearch as $search)
@@ -185,5 +189,5 @@
                 </div>
             @endisset
 
-    @endif
+        @endif
 </div>
