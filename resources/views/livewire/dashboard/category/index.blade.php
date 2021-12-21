@@ -1,4 +1,3 @@
-@extends('adminlte::page')
 
 @section('title', 'Dashboard - Categorias')
 
@@ -15,8 +14,6 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
 @stop
-
-
 
 <div class="card card-primary card-outline">
     <div class="card-header">
@@ -37,74 +34,16 @@
                 <thead>
                     <tr>
                         <th style="width: 10px">#</th>
-                        <th>Processo</th>
+                        <th>Categoria</th>
                         <th>Modalidade</th>
                         <th>Status</th>
                         <th>Ação</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td> #</td>
-                        <td>
-                            <div class="row">
-                                <div class="col">
-                                    <select class="form-control" style="width: 100%;" name="modality"
-                                        wire:model="year">
-                                        <option value="" selected>Ano</option>
-                                        @foreach ($years as $year)
-                                            <option value="{{ $year->year }}">{{ $year->year }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <input type="number" class="form-control" placeholder="Processo"
-                                        wire:model="number">
-                                </div>
-                            </div>
-                        </td>
-                        <td>
 
-                            <select class="form-control" style="width: 100%;" name="modality" wire:model="modality">
-                                <option value="" selected>Modalidade</option>
-                                @foreach ($categories->where('type', 'bidding_modality') as $modality)
-                                    <option value="{{ $modality->slug }}">{{ $modality->category }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                            <select name="status" class="form-control" style="width: 100%;" wire:model="status">
-                                <option value="">status</option>
-                                <option value="1">Publicado</option>
-                                <option value="0">Não publicado</option>
-                            </select>
-                        </td>
-                        <td>
-                            <button wire:click="resetPage()" class="btn btn-warning"><i class="fa fa-broom"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    @forelse ($biddings as $bidding)
-                        <tr>
-                            <td class="text-center">{{ $bidding->id }}</td>
-                            <td class="text-center">{{ $bidding->year }}/{{ $bidding->number }}</td>
-                            <td class="text-center">
-                                {{ $bidding->modality->category }}
-                            </td>
-                            <td class="text-center">
-                                @if ($bidding->status)
-                                    <span class="badge bg-success"> <i class="fa fa-eye"></i></span>
-                                @else
-                                    <span class="badge bg-danger"> <i class="fa fa-eye-slash"></i></span>
-                                @endif
-                            </td>
-                            <td class="text-center"><span class="badge bg-primary"> <a
-                                        href="{{ route('dashboard.bidding.details', $bidding->id) }}">
-                                        <i class="fa fa-edit"></i>
-                                    </a></span></td>
-                        </tr>
+                    @forelse ($biddings = ['a'] as $bidding)
+
                     @empty
                         <tr>
                             <td colspan="5" class="text-center text-uppercase">
@@ -119,7 +58,7 @@
     <!-- /.card-body -->
     <div class="card-footer clearfix">
         <ul class="pagination pagination-sm m-0 float-right">
-            {!! $biddings->links() !!}
+
         </ul>
     </div>
 </div>

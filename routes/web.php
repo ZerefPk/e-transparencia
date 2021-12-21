@@ -20,6 +20,9 @@ Route::get('/', Index::class)->name('home.index');
 Route::get('/dashboard', HomeDashboard::class)->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
 require __DIR__.'/dashboard/bidding.php';
+
+require __DIR__.'/dashboard/category.php';
 
 require __DIR__.'/home/bidding.php';
