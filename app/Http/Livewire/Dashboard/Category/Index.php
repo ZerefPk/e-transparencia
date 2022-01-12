@@ -43,6 +43,12 @@ class Index extends Component
     }
     public function render()
     {
-        return view('livewire.dashboard.category.index');
+
+        $paginate = $this->paginate();
+        $types = Category::types();
+        return view('livewire.dashboard.category.index',[
+            'categories' =>  $paginate->paginate(10),
+            'types' => $types,
+        ]);
     }
 }
