@@ -3,12 +3,12 @@
 @section('content_header')
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0">Categorias</h1>
+            <h1 class="m-0">Relatórios</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Categoria</li>
+                <li class="breadcrumb-item active">Relatórios</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
@@ -17,7 +17,7 @@
     <div class="card card-primary card-outline">
         <div class="card-header">
 
-            <h3 class="card-title">Categorias:
+            <h3 class="card-title">Relatórios:
             </h3>
             <div class="card-tools">
                 <button class="btn btn-primary btn-block" wire:click="create"><i class="fa fa-plus"></i>
@@ -30,8 +30,8 @@
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>Categoria</th>
-                            <th>Type</th>
+                            <th>Title</th>
+
                             <th>Status</th>
                             <th>Ação</th>
                         </tr>
@@ -41,25 +41,12 @@
                             <td colspan="2">
                                 <input type="text" class="form-control" wire:model="q" placeholder="Categoria">
                             </td>
-                            <td>
-                                <select class="form-control" style="width: 100%;" name="type" wire:model="type">
-                                    <option selected>Tipo</option>
 
-                                    @foreach ($types as $key => $collection)
-
-                                      <optgroup label="{{ $key }}">
-                                        @foreach ($collection as $keyType => $type)
-                                          <option value="{{ $keyType }}">{{ $type }}</option>
-                                        @endforeach
-                                      </optgroup>
-                                    @endforeach
-                                  </select>
-                            </td>
                             <td>
-                                <select class="form-control" style="width: 100%;" name="status" wire:model="status">
-                                    <option selected>Status</option>
+                                <select class="form-control" style="width: 100%;" name="s" wire:model="s">
+                                    <option value="" selected>Status</option>
                                     <option value="1">Habilitado</option>
-                                    <option value="0") selected @endif> Disabilitado</option>
+                                    <option value="0" > Disabilitado</option>
                                 </select>
                             </td>
                             <td>
@@ -68,28 +55,20 @@
                                 </button>
                             </td>
                         </tr>
-                        @forelse ($categories as $category)
+                        @forelse ($templates as $template)
                             <tr>
                                 <td>
-                                    {{ $category->id }}
+                                    {{ $template->id }}
                                 </td>
                                 <td>
-                                    {{ $category->category }}
+                                    {{ $template->title }}
+                                </td>
+
+                                <td>
+                                    {{ $template->status ? 'Habilitado' : 'Desabilitado' }}
                                 </td>
                                 <td>
-                                    @foreach ($types as $key => $type)
-                                        @foreach ($type as $itemKey => $item)
-                                            @if ($category->type == $itemKey)
-                                                {{ $key . ': ' . $item }}
-                                            @endif
-                                        @endforeach
-                                    @endforeach
-                                </td>
-                                <td>
-                                    {{ $category->status ? 'Habilitado' : 'Desabilitado' }}
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary" wire:click="edit({{ $category->id }})">
+                                    <button class="btn btn-primary" wire:click="">
                                         <i class="fa fa-edit"></i>
                                     </button>
                                 </td>
@@ -108,7 +87,7 @@
         <!-- /.card-body -->
         <div class="card-footer clearfix">
             <ul class="pagination pagination-sm m-0 float-right">
-                {!! $categories->links() !!}
+                {!! $templates->links() !!}
             </ul>
         </div>
     </div>
@@ -158,13 +137,7 @@
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="col-sm-6">
-                            {{ Form::label('type', 'Tipo: ') }}
-                            {{ Form::select('typeInput', $types, null, ['placeholder' => 'selecione', 'class' => 'form-control', 'wire:model' => 'typeInput']) }}
-                            @error('typeInput')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
+
                         <div class="col-sm-6">
                             {{ Form::label('special_fieldInput', 'Campo especial: ') }}
 
