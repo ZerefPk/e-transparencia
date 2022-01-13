@@ -248,6 +248,19 @@ return [
             'route'  => 'dashboard.bidding.index',
             'icon' => 'fas fa-fw fa-balance-scale',
         ],
+        ['header' => 'Configurações do sistema'],
+        [
+            'text'    => 'Tabelas',
+            'icon'    => 'fas fa-fw fa-table',
+            'submenu' => [
+                [
+                    'text' => 'Categorias',
+                    'route'  => 'dashboard.category.index',
+                    'icon'    => 'fas fa-fw fa-tag',
+                    'active' => ['dashboard/category/*']
+                ],
+            ],
+        ],
 
     ],
 

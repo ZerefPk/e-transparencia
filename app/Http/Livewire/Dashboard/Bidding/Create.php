@@ -97,7 +97,7 @@ class Create extends Component
                 return redirect()->route('dashboard.bidding.details', $save->id);
             }
             else{
-                $this->alert('Error', 'Ocorreu um erro ao cadastar licitação...');
+                $this->alert('error', 'Ocorreu um erro ao cadastar licitação...');
 
             }
 

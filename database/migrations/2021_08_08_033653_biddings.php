@@ -30,9 +30,9 @@ class Biddings extends Migration
             $table->unsignedBigInteger('type_id')->nullable();
             $table->unsignedBigInteger('situation_id')->nullable();
             $table->unsignedBigInteger('finality_id')->nullable();
-            
+
             $table->timestamps();
-            
+
             $table->foreign('year')
                 ->references('year')
                 ->on('years')
@@ -41,22 +41,22 @@ class Biddings extends Migration
             $table->foreign('modality_id')
                 ->references('id')
                 ->on('categories')
-                ->onDelete('SET NULL')
+                ->onDelete('RESTRICT')
                 ->onUpdate('CASCADE');
             $table->foreign('type_id')
                 ->references('id')
                 ->on('categories')
-                ->onDelete('SET NULL')
+                ->onDelete('RESTRICT')
                 ->onUpdate('CASCADE');
             $table->foreign('situation_id')
                 ->references('id')
                 ->on('categories')
-                ->onDelete('SET NULL')
+                ->onDelete('RESTRICT')
                 ->onUpdate('CASCADE');
             $table->foreign('finality_id')
                 ->references('id')
                 ->on('categories')
-                ->onDelete('SET NULL')
+                ->onDelete('RESTRICT')
                 ->onUpdate('CASCADE');
         });
     }

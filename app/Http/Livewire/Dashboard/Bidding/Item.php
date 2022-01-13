@@ -135,7 +135,7 @@ class Item extends Component
             $this->alert('success', 'Item removido com sucesso!');
         }
         else{
-            $this->alert('error', 'Houve um erro ao removido o item!');
+            $this->alert('error', 'Houve um erro ao remover o item!');
         }
     }
     public function render()
