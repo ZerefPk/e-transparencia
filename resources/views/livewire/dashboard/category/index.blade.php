@@ -92,9 +92,6 @@
                                     <button class="btn btn-primary" wire:click="edit({{ $category->id }})">
                                         <i class="fa fa-edit"></i>
                                     </button>
-                                    <button class="btn btn-danger" wire:click="delete({{ $category->id }})">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
                                 </td>
                             </tr>
                         @empty
@@ -222,22 +219,6 @@
     window.addEventListener('close-form', event => {
         $('#form-category').modal('hide');
     });
-    window.addEventListener('delete-category', event => {
 
-        Swal.fire({
-        title: 'Tem certeza?',
-        text: "Você não poderá reverter isso!",
-        icon: false,
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, delete',
-        cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if(result.isConfirmed){
-                Livewire.emit('destroyCategory');
-            }
-        });
-    });
 </script>
 @stop

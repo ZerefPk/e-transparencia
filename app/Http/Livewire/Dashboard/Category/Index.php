@@ -175,29 +175,7 @@ class Index extends Component
         }
 
     }
-    public function delete($id)
-    {
-        $this->category = Category::find($id);
-        $this->dispatchBrowserEvent('delete-category');
-    }
-    public function destroy()
-    {
-        $delete = $this->category->delete();
-        $this->reset();
-        if($delete)
-        {
-            $this->alert('success', 'Categoria deletada com sucesso!', [
-                'toast' => false,
-                'position' => 'center'
-            ]);
-        }
-        else{
-            $this->alert('error', 'Houve um erro ao deletar a categoria! Talvez ela esteja vinculada a um ou mais itens.', [
-                'toast' => false,
-                'position' => 'center'
-            ]);
-        }
-    }
+
     public function render()
     {
 
