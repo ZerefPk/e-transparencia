@@ -42,4 +42,8 @@ class ReportTemplate extends Model
     {
        return $this->hasMany(ReportType::class, 'report_template_id', 'id');
     }
+    public function documents()
+    {
+        return $this->hasMany(ReportDocument::class, 'report_template_id', 'id');
+    }
 }

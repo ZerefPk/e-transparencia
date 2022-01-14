@@ -14,10 +14,12 @@ class Index extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $listeners = ['destroyCategory' => 'destroy'];
+    public $queryString = ['type','status','q'];
 
     public $type;
     public $status;
     public $q;
+
     public $method;
 
     public $category;

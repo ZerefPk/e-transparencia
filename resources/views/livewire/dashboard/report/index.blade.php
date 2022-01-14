@@ -1,4 +1,4 @@
-@section('title', 'Dashboard - Categorias')
+@section('title', 'Dashboard - Relatórios')
 
 @section('content_header')
     <div class="row mb-2">
@@ -68,9 +68,12 @@
                                     {{ $template->status ? 'Habilitado' : 'Desabilitado' }}
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" wire:click="">
+                                    <button class="btn btn-primary" wire:click="edit({{$template->id}})">
                                         <i class="fa fa-edit"></i>
                                     </button>
+                                    <a class="btn btn-primary" href="{{route('dashboard.report.management', $template->id)}}">
+                                        <i class="fa fa-table"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @empty
@@ -94,17 +97,17 @@
     <!-- /.card -->
 
     <!-- Modal -->
-    <div class="modal fade" id="form-category" tabindex="-1" role="dialog" aria-labelledby="form-categoryLabel"
+    <div class="modal fade" id="form-report" tabindex="-1" role="dialog" aria-labelledby="form-reportLabel"
         aria-hidden="true" data-backdrop="static"  wire:ignore.self>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <h5 class="modal-title" id="form-categoryLabel">
+                    <h5 class="modal-title" id="form-reportLabel">
                         @if($method)
-                        Editar Categoria
+                        Editar Relatório
                         @else
-                        Nova Categoria
+                        Novo Relatório
                         @endif
 
                     </h5>
@@ -122,47 +125,32 @@
 
                     <div class="row">
                         <div class="col-sm-8">
-                            {{ Form::label('categoryInput', 'Nome da categoria:') }}
+                            {{ Form::label('title', 'Titulo do Relatório:') }}
 
-                            {{ Form::text('categoryInput', null, ['class' => 'form-control', 'placeholder' => 'Pregão Eletrônico', 'wire:model' => 'categoryInput']) }}
-                            @error('categoryInput')
+                            {{ Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Pregão Eletrônico', 'wire:model' => 'title']) }}
+                            @error('title')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-sm-4">
-                            {{ Form::label('statusInput', 'Status: ') }}
+                            {{ Form::label('status', 'Status: ') }}
 
-                            {{                             Form::select('statusInput', ['1' => 'Ativado', '0' => 'Desativado'], null, ['placeholder' => 'selecione', 'class' => 'form-control', 'wire:model' => 'statusInput']) }}
-                            @error('statusInput')
+                            {{ Form::select('status', ['1' => 'Habilitado', '0' => 'Desativado'], null, ['placeholder' => 'selecione',
+                            'class' => 'form-control', 'wire:model' => 'status', 'row' => '8']) }}
+                            @error('status')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <div class="col-sm-6">
-                            {{ Form::label('special_fieldInput', 'Campo especial: ') }}
+                        <div class="col-sm-12">
+                            {{ Form::label('description', 'Campo especial: ') }}
 
-                            {{ Form::select('special_field', ['0' => 'Desabilitado', '1' => 'Habilitado'], null, ['placeholder' => 'selecione', 'class' => 'form-control', 'wire:model' => 'special_fieldInput']) }}
-                            @error('special_fieldInput')
+                            {{ Form::textarea('description', null, ['placeholder' => 'selecione', 'class' => 'form-control', 'wire:model' => 'description']) }}
+                            @error('description')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="col-sm-6">
-                            {{ Form::label('in_graficInput', 'Considerar em gráficos: ') }}
 
-                            {{ Form::select('in_graficInput', ['0' => 'Não', '1' => 'sim'], null, ['placeholder' => 'selecione', 'class' => 'form-control', 'wire:model' => 'in_graficInput']) }}
-                            @error('in_graficInput')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="col-sm-6">
-                            {{ Form::label('colorInput', 'Cor:') }}
-
-                            {{ Form::color('colorInput', null, ['class' => 'form-control', 'wire:model' => 'colorInput']) }}
-
-                            @error('colorInput')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
                     </div>
 
 
@@ -186,11 +174,11 @@
 @section('js')
 <script>
     window.addEventListener('open-form', event => {
-        $('#form-category').modal('show');
+        $('#form-report').modal('show');
 
     });
     window.addEventListener('close-form', event => {
-        $('#form-category').modal('hide');
+        $('#form-report').modal('hide');
     });
 
 </script>

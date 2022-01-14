@@ -7,27 +7,32 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class ReportType extends Model
+class ReportDocument extends Model
 {
     use HasFactory, HasSlug;
 
-    protected $table = 'report_types';
+    protected $table = 'report_documents';
     protected $fillable = [
         'type',
         'slug',
-        'status',
+        'publication_date',
+        'extension',
+        'path',
+        'description',
         'report_template_id',
+        'report_type_id',
+        'year'
+
     ];
 
     protected $primaryKey = 'id';
-    protected $foreignKey = 'report_template_id';
 
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('title')
+            ->generateSlugsFrom(['year','publication_date'])
             ->saveSlugsTo('slug')
-            ->slugsShouldBeNoLongerThan(70);
+            ->slugsShouldBeNoLongerThan(170);
     }
     /**
      * Get the route key for the model.
@@ -39,9 +44,9 @@ class ReportType extends Model
         return 'slug';
     }
 
-    public function repostTemplate()
+    public function type()
     {
-        return $this->belongsTo(ReportTemplate::class, 'report_template_id', 'id');
+       return $this->belongsTo(ReportType::class, 'report_type_id','id');
     }
 
 }
