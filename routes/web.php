@@ -28,4 +28,5 @@ require __DIR__.'/dashboard/category.php';
 require __DIR__.'/dashboard/report.php';
 
 require __DIR__.'/home/bidding.php';
-require __DIR__.'/home/bidding.php';
+
+require __DIR__.'/home/report.php';

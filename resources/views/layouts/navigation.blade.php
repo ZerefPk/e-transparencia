@@ -43,7 +43,19 @@
                         <a class="dropdown-item" href="#">PDTI</a>
                     </div>
                 </li>
-
+                @if ($reports->count() > 0)
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle text-dark" href="#" id="report" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    relatórios
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="report">
+                    @foreach ($reports as $report )
+                      <a class="dropdown-item" href="{{route('site.report.index', $report)}}">{{$report->title}}</a>
+                    @endforeach
+                  </div>
+                </li>
+                @endif
                 <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle text-dark" href="#" id="licitacao" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

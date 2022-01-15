@@ -38,7 +38,7 @@ class ReportTemplate extends Model
         return 'slug';
     }
 
-    public function repostType()
+    public function reportType()
     {
        return $this->hasMany(ReportType::class, 'report_template_id', 'id');
     }
