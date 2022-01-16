@@ -14,7 +14,7 @@ class Index extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public ReportTemplate $report;
-    public $listSearch;
+    public $listSearch = array();
     public $a;
     public $t;
     public $i;
