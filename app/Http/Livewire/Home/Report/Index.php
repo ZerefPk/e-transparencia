@@ -50,6 +50,7 @@ class Index extends Component
     public function resetAttr()
     {
         $this->reset(['a', 't', 'i', 'f']);
+        $this->listSearch = array();
     }
     public function query()
     {
