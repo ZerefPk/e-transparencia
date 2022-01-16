@@ -52,10 +52,10 @@ class Category extends Component
         $this->reset(['type', 'method', 'status']);
         $this->dispatchBrowserEvent('close-form-category');
 
-        $this->alert('success', "Categoria criada com sucesso!");
+        $this->alert('success', "Titulo criado com sucesso!");
        }
        else{
-        $this->alert('error', 'Houve um erro ao criar a categoria...');
+        $this->alert('error', 'Houve um erro ao criar titulo...');
        }
 
     }
@@ -78,10 +78,10 @@ class Category extends Component
         $this->reset(['category','type', 'method', 'status','category']);
         $this->dispatchBrowserEvent('close-form-category');
 
-        $this->alert('success', "Categoria atualizada com sucesso!");
+        $this->alert('success', "Titulo atualizado com sucesso!");
        }
        else{
-        $this->alert('error', 'Houve um erro ao atualizar a categoria...');
+        $this->alert('error', 'Houve um erro ao atualizar o titulo...');
        }
 
     }

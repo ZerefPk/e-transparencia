@@ -4,6 +4,7 @@ namespace App\Models\Report;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -48,5 +49,8 @@ class ReportDocument extends Model
     {
        return $this->belongsTo(ReportType::class, 'report_type_id','id');
     }
-
+    public function getRealPath()
+    {
+        return Storage::url('report/'.$this->path.$this->slug.$this->extension);
+    }
 }

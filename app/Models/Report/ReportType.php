@@ -25,7 +25,7 @@ class ReportType extends Model
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('title')
+            ->generateSlugsFrom('type')
             ->saveSlugsTo('slug')
             ->slugsShouldBeNoLongerThan(70);
     }

@@ -11,6 +11,7 @@
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                @if (env('APP_DEBUG'))
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-dark " href="#" id="navbarDropdownMenuLink" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -43,6 +44,8 @@
                         <a class="dropdown-item" href="#">PDTI</a>
                     </div>
                 </li>
+                @endif
+
                 @if ($reports->count() > 0)
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-dark" href="#" id="report" role="button" data-toggle="dropdown"
@@ -67,12 +70,14 @@
                         <a class="dropdown-item" href="#">Contratos</a>
                     </div>
                 </li>
+                @if (env('APP_DEBUG'))
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="">denuncia</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="">Perguntas Frequentes</a>
                 </li>
+                @endif
             </ul>
         </div>
     </div>
