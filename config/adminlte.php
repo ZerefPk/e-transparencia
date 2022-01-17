@@ -248,12 +248,12 @@ return [
             'route'  => 'dashboard.bidding.index',
             'icon' => 'fas fa-fw fa-balance-scale',
         ],
-        ['header' => 'RELATÓRIOS'],
+        ['header' => 'PUBLICAÇÕES'],
         [
-            'text' => 'Relatórios',
-            'route' => 'dashboard.report.index',
+            'text' => 'Publicações',
+            'route' => 'dashboard.publication.index',
             'icon' => 'fas fa-fw fa-list',
-            'active' => ['dashboard/report/*']
+            'active' => ['dashboard/publication/*']
 
         ],
         ['header' => 'Configurações do sistema'],

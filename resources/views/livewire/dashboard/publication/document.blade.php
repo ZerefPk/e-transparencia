@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($documentsReport as $document)
+                @forelse ($documentsPublication as $document)
                     <tr>
 
                         <td>{{ $document->id }}</td>
@@ -45,13 +45,13 @@
                 @empty
                     <tr>
                         <td colspan="6">
-                            Não há relatórios
+                            Não há publicações
                         </td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
-        {!! $documentsReport->links() !!}
+        {!! $documentsPublication->links() !!}
     </div>
     <!-- Modal -->
     <div class="modal fade" id="form-report" tabindex="-1" role="dialog" aria-labelledby="form-reportLabel"
@@ -76,11 +76,12 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                {{ Form::label('year', 'Ano:') }}
+                                {{ Form::label('year', 'Ano: ') }}
 
-                                {{ Form::select('year', $years, null,['placeholder' => 'selecione','class' => 'form-control', 'wire:model' => 'year']) }}
+                                {{ Form::select('year', $years, null, ['placeholder' =>
+                                'Selecione um ano', 'class' => 'form-control', 'wire:model'=>"year"]) }}
                                 @error('year')
-                                    <p class="text-danger">{{ $message }}</p>
+                                  <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
 

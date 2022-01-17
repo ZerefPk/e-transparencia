@@ -1,14 +1,14 @@
-@section('title', 'Dashboard - Relatórios')
+@section('title', 'Dashboard - Publicações')
 
 @section('content_header')
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0">Relatórios</h1>
+            <h1 class="m-0">Publicações</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Relatórios</li>
+                <li class="breadcrumb-item active">Publicações</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
@@ -17,11 +17,11 @@
     <div class="card card-primary card-outline">
         <div class="card-header">
 
-            <h3 class="card-title">Relatórios:
+            <h3 class="card-title">Publicações:
             </h3>
             <div class="card-tools">
                 <button class="btn btn-primary btn-block" wire:click="create"><i class="fa fa-plus"></i>
-                    Novo</button>
+                    Nova</button>
             </div>
         </div>
         <div class="card-body">
@@ -71,7 +71,7 @@
                                     <button class="btn btn-primary" wire:click="edit({{$template->id}})">
                                         <i class="fa fa-edit"></i>
                                     </button>
-                                    <a class="btn btn-primary" href="{{route('dashboard.report.management', $template->id)}}">
+                                    <a class="btn btn-primary" href="{{route('dashboard.publication.management', $template->id)}}">
                                         <i class="fa fa-table"></i>
                                     </a>
                                 </td>
@@ -97,17 +97,17 @@
     <!-- /.card -->
 
     <!-- Modal -->
-    <div class="modal fade" id="form-report" tabindex="-1" role="dialog" aria-labelledby="form-reportLabel"
+    <div class="modal fade" id="form-publicaition" tabindex="-1" role="dialog" aria-labelledby="form-publicaitionLabel"
         aria-hidden="true" data-backdrop="static"  wire:ignore.self>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <h5 class="modal-title" id="form-reportLabel">
+                    <h5 class="modal-title" id="form-publicaitionLabel">
                         @if($method)
-                        Editar Relatório
+                        Editar Publicação
                         @else
-                        Novo Relatório
+                        Novo Publicação
                         @endif
 
                     </h5>
@@ -125,9 +125,9 @@
 
                     <div class="row">
                         <div class="col-sm-8">
-                            {{ Form::label('title', 'Titulo do Relatório:') }}
+                            {{ Form::label('title', 'Titulo da Publicação:') }}
 
-                            {{ Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Pregão Eletrônico', 'wire:model' => 'title']) }}
+                            {{ Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Ficalização', 'wire:model' => 'title']) }}
                             @error('title')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -143,7 +143,7 @@
                         </div>
 
                         <div class="col-sm-12">
-                            {{ Form::label('description', 'Campo especial: ') }}
+                            {{ Form::label('description', 'Descrição: ') }}
 
                             {{ Form::textarea('description', null, ['placeholder' => 'selecione', 'class' => 'form-control', 'wire:model' => 'description']) }}
                             @error('description')
@@ -174,11 +174,11 @@
 @section('js')
 <script>
     window.addEventListener('open-form', event => {
-        $('#form-report').modal('show');
+        $('#form-publicaition').modal('show');
 
     });
     window.addEventListener('close-form', event => {
-        $('#form-report').modal('hide');
+        $('#form-publicaition').modal('hide');
     });
 
 </script>

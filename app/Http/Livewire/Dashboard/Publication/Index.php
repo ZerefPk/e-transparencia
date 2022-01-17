@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\Dashboard\Report;
+namespace App\Http\Livewire\Dashboard\Publication;
 
-use App\Models\Report\ReportTemplate;
+use App\Models\Publication\PublicationTemplate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,7 +11,7 @@ class Index extends Component
 {
     use WithPagination, LivewireAlert;
 
-    public $report;
+    public $publication;
     public $title;
     public $status;
     public $description;
@@ -43,7 +43,7 @@ class Index extends Component
 
     public function query()
     {
-        $query = ReportTemplate::query();
+        $query = PublicationTemplate::query();
         if(isset($this->q) && $this->q != "");
         {
             $query->where('title', 'like', $this->q.'%');
@@ -66,24 +66,24 @@ class Index extends Component
     {
         $data = $this->validate();
 
-        $validate = ReportTemplate::where('title', $this->title)->get();
+        $validate = PublicationTemplate::where('title', $this->title)->get();
         if(count($validate) > 0)
         {
-            $this->alert('error', 'Relatório já cadastrado!');
+            $this->alert('error', 'Publicação já cadastradA!');
         }
         else{
-            $save = ReportTemplate::create($data);
+            $save = PublicationTemplate::create($data);
             if($save){
                 $this->reset();
                 $this->dispatchBrowserEvent('close-form');
-                $this->alert('success', 'Relatório Cadastrado', [
+                $this->alert('success', 'Publicação Cadastrada', [
                     'toast' => false,
                     'position' =>  'center'
                 ]);
 
             }
             else{
-                $this->alert('error', 'Houve um erro ao cadastrar o Relatório...');
+                $this->alert('error', 'Houve um erro ao cadastrar o Publicação...');
             }
 
         }
@@ -92,10 +92,10 @@ class Index extends Component
     public function edit($id)
     {
         $this->reset(['title', 'status', 'description', 'method']);
-        $this->report = ReportTemplate::findOrFail($id);
-        $this->title = $this->report->title;
-        $this->status = $this->report->status;
-        $this->description = $this->report->description;
+        $this->publication = PublicationTemplate::findOrFail($id);
+        $this->title = $this->publication->title;
+        $this->status = $this->publication->status;
+        $this->description = $this->publication->description;
         $this->method=1;
         $this->dispatchBrowserEvent('open-form');
     }
@@ -103,24 +103,24 @@ class Index extends Component
     {
         $data = $this->validate();
 
-        $validate = ReportTemplate::where('title', $this->title)->where('id','!=', $this->report->id)->get();
+        $validate = PublicationTemplate::where('title', $this->title)->where('id','!=', $this->publication->id)->get();
         if(count($validate) > 0)
         {
             $this->alert('error', 'Relatório já cadastrado!');
         }
         else{
-            $save = $this->report->update($data);
+            $save = $this->publication->update($data);
             if($save){
                 $this->reset();
                 $this->dispatchBrowserEvent('close-form');
-                $this->alert('success', 'Relatório atualizado', [
+                $this->alert('success', 'Publicação atualizado', [
                     'toast' => false,
                     'position' =>  'center'
                 ]);
 
             }
             else{
-                $this->alert('error', 'Houve um erro ao atualizar o Relatório...');
+                $this->alert('error', 'Houve um erro ao atualizar o Publicação...');
             }
 
         }
@@ -129,7 +129,7 @@ class Index extends Component
     public function render()
     {
         $templates = $this->query()->paginate(10);
-        return view('livewire.dashboard.report.index', [
+        return view('livewire.dashboard.publication.index', [
             'templates' => $templates
         ]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Home\Report\{
+use App\Http\Livewire\Home\Publication\{
 
     Index,
 
@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('relatorio')->group(function () {
+Route::prefix('publicacao')->group(function () {
 
-    Route::get('/{report}', Index::class)->name('site.report.index');
+    Route::get('/{publication}', Index::class)->name('site.publication.index');
 
 
 });

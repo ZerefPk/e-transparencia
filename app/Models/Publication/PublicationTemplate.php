@@ -1,31 +1,30 @@
 <?php
 
-namespace App\Models\Report;
+namespace App\Models\Publication;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class ReportType extends Model
+class PublicationTemplate extends Model
 {
     use HasFactory, HasSlug;
 
-    protected $table = 'report_types';
+    protected $table = 'publications_templates';
     protected $fillable = [
-        'type',
+        'title',
         'slug',
         'status',
-        'report_template_id',
+        'description'
     ];
 
     protected $primaryKey = 'id';
-    protected $foreignKey = 'report_template_id';
 
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('type')
+            ->generateSlugsFrom('title')
             ->saveSlugsTo('slug')
             ->slugsShouldBeNoLongerThan(70);
     }
@@ -39,9 +38,12 @@ class ReportType extends Model
         return 'slug';
     }
 
-    public function repostTemplate()
+    public function publicationType()
     {
-        return $this->belongsTo(ReportTemplate::class, 'report_template_id', 'id');
+       return $this->hasMany(PublicationType::class, 'publication_template_id', 'id');
     }
-
+    public function documents()
+    {
+        return $this->hasMany(PublicationDocument::class, 'publication_template_id', 'id');
+    }
 }

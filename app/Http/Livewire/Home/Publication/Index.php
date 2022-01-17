@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Livewire\Home\Report;
+namespace App\Http\Livewire\Home\Publication;
 
-use App\Models\Report\ReportDocument;
-use App\Models\Report\ReportTemplate;
+use App\Models\Publication\PublicationDocument;
+use App\Models\Publication\PublicationTemplate;
 use App\Models\Year;
 use Livewire\Component;
 use Livewire\WithPagination;
-use phpDocumentor\Reflection\Types\This;
+
 
 class Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public ReportTemplate $report;
+    public PublicationTemplate $publication;
     public $listSearch = array();
     public $a;
     public $t;
@@ -26,9 +26,9 @@ class Index extends Component
         'i' =>  ['except' => ''],
         'f'=>  ['except' => '']
     ];
-    public function mount($report)
+    public function mount($publication)
     {
-        $this->report = $report;
+        $this->publication = $publication;
     }
     public function updatingA()
     {
@@ -54,20 +54,20 @@ class Index extends Component
     }
     public function query()
     {
-        $initial = $this->report->documents()->min('publication_date');
-        $final = $this->report->documents()->max('publication_date');
+        $initial = $this->publication->documents()->min('publication_date');
+        $final = $this->publication->documents()->max('publication_date');
 
-        $documents = ReportDocument::query();
-        $documents->where('report_template_id', $this->report->id);
+        $documents = PublicationDocument::query();
+        $documents->where('Publication_template_id', $this->publication->id);
         if(isset($this->a) && $this->a != ""){
             $documents->where('year', $this->a);
             $this->listSearch['year'] = ['field' =>'Ano', 'value' => $this->a];
         }
         if(isset($this->t) && $this->t != ""){
 
-            $type = $this->report->reportType->where('status', 1)->where('slug', $this->t)->first();
+            $type = $this->publication->publicationType->where('status', 1)->where('slug', $this->t)->first();
 
-            $documents->where('report_type_id', $type->id);
+            $documents->where('publication_type_id', $type->id);
             $this->listSearch['title'] = ['field' =>'Titulo', 'value' => $type->type];
 
         }
@@ -90,7 +90,7 @@ class Index extends Component
     {
         $years = Year::where('status', 1)->orderBy('year', 'DESC')->get();
         $documents = $this->query()->paginate(10);
-        return view('livewire.home.report.index',[
+        return view('livewire.home.publication.index',[
             'years' => $years,
             'documents' => $documents,
         ])->layout('layouts.app');

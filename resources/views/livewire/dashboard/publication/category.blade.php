@@ -79,7 +79,7 @@
                         <div class="col-sm-8">
                             {{ Form::label('type', 'Titulo:') }}
 
-                            {{ Form::text('type', null, ['class' => 'form-control', 'placeholder' => 'Categoria', 'wire:model' => 'type']) }}
+                            {{ Form::text('type', null, ['class' => 'form-control', 'placeholder' => 'Titulo', 'wire:model' => 'type']) }}
                             @error('type')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror

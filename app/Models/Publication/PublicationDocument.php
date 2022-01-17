@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Report;
+namespace App\Models\Publication;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class ReportDocument extends Model
+class PublicationDocument extends Model
 {
     use HasFactory, HasSlug;
 
-    protected $table = 'report_documents';
+    protected $table = 'publications_documents';
     protected $fillable = [
         'type',
         'slug',
@@ -20,8 +20,8 @@ class ReportDocument extends Model
         'extension',
         'path',
         'description',
-        'report_template_id',
-        'report_type_id',
+        'publication_template_id',
+        'publication_type_id',
         'year'
 
     ];
@@ -47,10 +47,10 @@ class ReportDocument extends Model
 
     public function type()
     {
-       return $this->belongsTo(ReportType::class, 'report_type_id','id');
+       return $this->belongsTo(PublicationType::class, 'publication_type_id','id');
     }
     public function getRealPath()
     {
-        return Storage::url('report/'.$this->path.$this->slug.$this->extension);
+        return Storage::url('publication/'.$this->path.$this->slug.$this->extension);
     }
 }

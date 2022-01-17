@@ -46,15 +46,15 @@
                 </li>
                 @endif
 
-                @if ($reports->count() > 0)
+                @if ($publications->count() > 0)
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle text-dark" href="#" id="report" role="button" data-toggle="dropdown"
+                  <a class="nav-link dropdown-toggle text-dark" href="#" id="publication" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    relatórios
+                    publicação
                   </a>
-                  <div class="dropdown-menu" aria-labelledby="report">
-                    @foreach ($reports as $report )
-                      <a class="dropdown-item" href="{{route('site.report.index', $report)}}">{{$report->title}}</a>
+                  <div class="dropdown-menu" aria-labelledby="publication">
+                    @foreach ($publications as $publication )
+                      <a class="dropdown-item" href="{{route('site.publication.index', $publication)}}">{{$publication->title}}</a>
                     @endforeach
                   </div>
                 </li>

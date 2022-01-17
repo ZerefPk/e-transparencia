@@ -1,17 +1,17 @@
 <div>
     <div class="container">
-        <h2 class="text-uppercase">{{ $report->title }}</h2>
+        <h2 class="text-uppercase">{{ $publication->title }}</h2>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="/">Home</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">{{ $report->title }}</li>
+                <li class="breadcrumb-item active" aria-current="page">{{ $publication->title }}</li>
             </ol>
         </nav>
         <div class="border-top  border-primary my-1"></div>
         <div class="text-justify">
-            {{ $report->description }}
+            {{ $publication->description }}
         </div>
         <div class="card my-4">
             <div class="card-body">
@@ -33,7 +33,7 @@
                             <label>Titulo:</label>
                             <select class="form-control" style="width: 100%;" name="t" wire:model="t">
                                 <option selected value="">Todos</option>
-                                @foreach ($report->reportType->where('status', 1) as $type)
+                                @foreach ($publication->publicationType->where('status', 1) as $type)
                                     <option value="{{ $type->slug }}">{{ $type->type }}</option>
                                 @endforeach
                             </select>

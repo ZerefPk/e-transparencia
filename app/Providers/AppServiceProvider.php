@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Report\ReportTemplate;
+use App\Models\Publication\PublicationTemplate;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,8 +28,8 @@ class AppServiceProvider extends ServiceProvider
         //
         Paginator::useBootstrap();
         view()->composer(['*'], function ($view) {
-            $reports = ReportTemplate::where('status', true)->orderBy('title')->get();
-            $view->with('reports', $reports);
+            $publications = PublicationTemplate::where('status', true)->orderBy('title')->get();
+            $view->with('publications', $publications);
         });
     }
 }

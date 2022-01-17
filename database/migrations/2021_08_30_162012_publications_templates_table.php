@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReportTypesTable extends Migration
+class PublicationsTemplatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreateReportTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('report_types', function (Blueprint $table) {
+        Schema::create('publications_templates', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->string('title');
             $table->string('slug');
             $table->boolean('status');
-            $table->unsignedBigInteger('report_template_id');
+            $table->text('description')->nullable();
             $table->timestamps();
-
-            $table->foreign('report_template_id')
-                ->references('id')
-                ->on('report_templates');
         });
     }
 
@@ -34,6 +30,6 @@ class CreateReportTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('report_types');
+        Schema::dropIfExists('publications_templates');
     }
 }

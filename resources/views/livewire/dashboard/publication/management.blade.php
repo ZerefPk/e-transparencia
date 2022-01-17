@@ -1,15 +1,15 @@
-@section('title', 'Dashboard - Relatórios')
+@section('title', 'Dashboard - Publicação')
 
 @section('content_header')
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0">Gestão de Relatórios</h1>
+            <h1 class="m-0">Gestão de Publicação</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{route('dashboard.report.index')}}">Relatórios</a></li></li>
-                <li class="breadcrumb-item active">{{$report->title}}</li>
+                <li class="breadcrumb-item"><a href="{{route('dashboard.publication.index')}}">Publicação</a></li></li>
+                <li class="breadcrumb-item active">{{$publication->title}}</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
@@ -18,7 +18,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-          <h3 class="card-title text-uppercase">{{$report->title}}</h3>
+          <h3 class="card-title text-uppercase">{{$publication->title}}</h3>
         </div>
         <div class="card-body">
           <div class="row">
@@ -32,23 +32,23 @@
                                     href="#documents" data-toggle="tab">Relatorios Incluidos</a></li>
                             <li class="nav-item border-right"><a
                                     class="nav-link"
-                                    href="#category" data-toggle="tab">Titulos de Relatórios</a></li>
+                                    href="#category" data-toggle="tab">Titulos de Publicação</a></li>
                         </ul>
                     </div>
                     <div class="tab-content">
-                        @livewire('dashboard.report.document', ['report' => $report])
-                        @livewire('dashboard.report.category', ['report' => $report])
+                        @livewire('dashboard.publication.document', ['publication' => $publication])
+                        @livewire('dashboard.publication.category', ['publication' => $publication])
                     </div>
                 </div>
               </div>
             </div>
             <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-              <h3 class="text-primary text-uppercase">{{$report->title}}</h3>
-              <p class="text-muted text-justify">{{$report->description}}</p>
+              <h3 class="text-primary text-uppercase">{{$publication->title}}</h3>
+              <p class="text-muted text-justify">{{$publication->description}}</p>
               <br>
 
               <div class="text-center mt-5 mb-3">
-                <a href="{{route('dashboard.report.index')}}" class="btn btn-lg btn-primary"> <i class="fa fa-arrow-left"></i> Voltar</a>
+                <a href="{{route('dashboard.publication.index')}}" class="btn btn-lg btn-primary"> <i class="fa fa-arrow-left"></i> Voltar</a>
               </div>
             </div>
           </div>

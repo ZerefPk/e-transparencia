@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\Dashboard\Report;
+namespace App\Http\Livewire\Dashboard\Publication;
 
-use App\Models\Report\ReportTemplate;
-use App\Models\Report\ReportType;
+use App\Models\Publication\PublicationTemplate;
+use App\Models\Publication\PublicationType;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,7 +14,7 @@ class Category extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public ReportTemplate $report;
+    public PublicationTemplate $publication;
 
     public $category;
     public $type;
@@ -26,13 +26,13 @@ class Category extends Component
         'status' => 'required'
     ];
     protected $validationAttributes = [
-        'type' => '[ Categória ]',
+        'type' => '[ Titulo ]',
         'status' => '[ Status ]'
     ];
 
-    public function mount($report)
+    public function mount($publication)
     {
-        $this->report = $report;
+        $this->publication = $publication;
     }
 
     public function create()
@@ -44,9 +44,9 @@ class Category extends Component
     public function store()
     {
        $data = $this->validate();
-       $data['report_template_id'] = $this->report->id;
+       $data['publication_template_id'] = $this->publication->id;
 
-       $save = ReportType::create($data);
+       $save = PublicationType::create($data);
 
        if($save){
         $this->reset(['type', 'method', 'status']);
@@ -62,7 +62,7 @@ class Category extends Component
     public function edit($id)
     {
         $this->reset(['type', 'method', 'status']);
-        $this->category = ReportType::findOrFail($id);
+        $this->category = PublicationType::findOrFail($id);
         $this->type = $this->category->type;
         $this->status = $this->category->status;
         $this->method=1;
@@ -87,8 +87,8 @@ class Category extends Component
     }
     public function render()
     {
-        $categories = ReportType::where('report_template_id', $this->report->id)->paginate(10);
-        return view('livewire.dashboard.report.category', [
+        $categories = PublicationType::where('publication_template_id', $this->publication->id)->paginate(10);
+        return view('livewire.dashboard.publication.category', [
            'categories' => $categories,
         ]);
     }
