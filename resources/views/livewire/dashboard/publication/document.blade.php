@@ -104,7 +104,7 @@
                             @enderror
                         </div>
                         <div class="col-sm-6">
-                            {{ Form::label('document', 'Relatório [PDF]: ') }}
+                            {{ Form::label('document', 'Arquivo [PDF]: ') }}
 
                             {{ Form::file('document',['class' => 'form-control', 'wire:model' => 'document']) }}
                             @error('document')

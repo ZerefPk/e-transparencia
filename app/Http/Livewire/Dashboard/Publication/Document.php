@@ -7,6 +7,7 @@ use App\Models\Publication\PublicationTemplate;
 use App\Models\Publication\PublicationType;
 use App\Models\Year;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -20,7 +21,7 @@ class Document extends Component
     public PublicationTemplate $publication;
     protected $paginationTheme = 'bootstrap';
     protected $listeners = ['destroy' => 'destroy'];
-    public $years;
+
     public $types;
     public $documetDestroy;
     public $year;
@@ -40,7 +41,7 @@ class Document extends Component
         'year' => '[ Ano ]',
         'publication_date' => '[ Publicação ]',
         'type_id' => '[ Categoria ]',
-        'document' =>' [ Publicação [PDF] ]',
+        'document' =>' [ Arquivo [PDF] ]',
         'description' => '[ Descrição ]',
     ];
     public function mount($publication)
@@ -68,20 +69,24 @@ class Document extends Component
         ]);
 
         if ($save) {
+            $nameFile = "{$save->type->slug}-{$save->slug}";
             $extension = $this->document->extension();
             $save->extension = '.'.$extension;
+            $save->slug =  Str::limit($nameFile, '254', '') ;
             $save->save();
+
+
             $path = $this->document->storeAs('publication/'.$path, $save->slug.'.'.$extension, env('FILESYSTEM_DRIVER'));
 
             if ($path) {
                 $this->dispatchBrowserEvent('close-form-report');
                 $this->reset([ 'year','publication_date' ,'type_id','document', 'description']);
-                $this->alert('success', 'Documento incluido com sucesso');
+                $this->alert('success', 'Publicação incluida com sucesso');
             }
             else{
 
 
-                $this->alert('success', 'Houve um erro ao incluir documento...');
+                $this->alert('success', 'Houve um erro ao incluir publicação...');
                 $save->delete();
             }
 
@@ -122,11 +127,12 @@ class Document extends Component
     }
     public function render()
     {
-        $this->years = Year::where('status', true)->orderBy('year', 'DESC')->pluck('year','year');
+        $years = Year::where('status', true)->orderBy('year', 'desc')->pluck('year','year');
         $this->types = PublicationType::where('status', 1)->where('publication_template_id', $this->publication->id)->pluck('type', 'id');
         $documentsPublication = PublicationDocument::where('publication_template_id', $this->publication->id)->paginate(10);
         return view('livewire.dashboard.publication.document', [
             'documentsPublication' => $documentsPublication,
+            'years' =>  $years
         ]);
     }
 }
