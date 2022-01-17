@@ -147,7 +147,7 @@
                     <div class="card my-5">
                         <div class="card-body">
                             <h5 class="text-uppercase">
-                                Não há registros de relatórios
+                                Não há registros de publicações
                             </h5>
                         </div>
                     </div>
