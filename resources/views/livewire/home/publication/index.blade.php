@@ -77,7 +77,7 @@
                                 <th class="text-center align-middle" scope="col">Ano</th>
                                 <th class="text-center align-middle" scope="col">Titulo</th>
                                 <th class="text-center align-middle" scope="col">Descrição</th>
-                                <th class="text-center align-middle" scope="col">Data da Publícação</th>
+                                <th class="text-center align-middle" scope="col">Data da Publicação</th>
 
                                 <th class="text-center align-middle" scope="col">Detalhes</th>
                             </tr>
@@ -100,7 +100,7 @@
 
                                     </td>
                                     <td class="text-center">
-                                        <a class="btn btn-primary" href="{{$document->getRealPath()}}">
+                                        <a class="btn btn-primary" target="_blank" href="{{$document->getRealPath()}}">
                                             <i class="fa fa-download"></i>
                                         </a>
                                     </td>
