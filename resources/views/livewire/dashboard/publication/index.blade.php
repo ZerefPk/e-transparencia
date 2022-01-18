@@ -50,7 +50,7 @@
                                 </select>
                             </td>
                             <td>
-                                <button wire:click="resetPage()" class="btn btn-warning"><i
+                                <button wire:click="refreshQuery()" class="btn btn-warning"><i
                                     class="fa fa-broom"></i>
                                 </button>
                             </td>

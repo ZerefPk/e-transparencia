@@ -40,7 +40,10 @@ class Index extends Component
     {
         $this->gotoPage(1);
     }
-
+    public function refreshQuery()
+    {
+        $this->reset(['s','q']);
+    }
     public function query()
     {
         $query = PublicationTemplate::query();

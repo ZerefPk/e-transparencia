@@ -242,11 +242,18 @@ return [
             'text' => 'search',
         ],
 
-        ['header' => 'LICITAÇÃO'],
+        ['header' => 'LICITAÇÃO E CONTRATOS'],
         [
             'text' => 'Licitação',
             'route'  => 'dashboard.bidding.index',
             'icon' => 'fas fa-fw fa-balance-scale',
+        ],
+        [
+            'text' => 'Fornecedores',
+            'route' => 'dashboard.provider.index',
+            'icon' => 'fas fa-fw fa-building',
+            'active' => ['dashboard/provider/*']
+
         ],
         ['header' => 'PUBLICAÇÕES'],
         [
@@ -256,6 +263,7 @@ return [
             'active' => ['dashboard/publication/*']
 
         ],
+
         ['header' => 'Configurações do sistema'],
         [
             'text'    => 'Tabelas',
