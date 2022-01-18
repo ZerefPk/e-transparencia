@@ -28,7 +28,11 @@ class Providers extends Migration
             $table->string('cnpj')->nullable();
             $table->timestamps();
 
-
+            $table->foreign('modality_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('RESTRICT')
+                ->onUpdate('CASCADE');
         });
     }
 

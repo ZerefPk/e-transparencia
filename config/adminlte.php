@@ -255,6 +255,13 @@ return [
             'active' => ['dashboard/provider/*']
 
         ],
+        [
+            'text' => 'Contratos',
+            'route' => 'dashboard.contract.index',
+            'icon' => 'fas fa-fw fa-file-contract',
+            'active' => ['dashboard/contract/*']
+
+        ],
         ['header' => 'PUBLICAÇÕES'],
         [
             'text' => 'Publicações',
