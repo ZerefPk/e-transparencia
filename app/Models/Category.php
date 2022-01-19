@@ -10,11 +10,11 @@ use Spatie\Sluggable\SlugOptions;
 class Category extends Model
 {
     use HasFactory, HasSlug;
-    
+
     protected $table = 'categories';
 
     protected $fillable = [
-        
+
         'slug',
         'category',
         'color',
@@ -39,18 +39,19 @@ class Category extends Model
                 'bidding_finality'  => 'Finalidade de Licitação',
                 'bidding_document'  => 'Documento de Licitação',
                 'bidding_unity'     => 'Unidade de Medida',
-                
+
             ],
             'Perguntas Frequentes' => [
-                'faq' => 'Perguntas Frequentes',    
+                'faq' => 'Perguntas Frequentes',
             ],
             'Contratos' => [
-                'contracts' => 'Contratos',    
+                'contract_form' => 'Forma de Contratação',
+                'contract_payment' => 'Forma de Pagamento',
             ]
-    
-    
+
+
         ];
-    
+
     }
     /**
      * Get the options for generating the slug.
