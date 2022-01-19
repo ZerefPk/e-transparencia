@@ -2,7 +2,7 @@
 
 namespace App\Models\Contract;
 
-use App\Http\Livewire\Dashboard\Publication\Category;
+use App\Models\Category;
 use App\Models\Bidding\Bidding;
 use App\Models\Provider\Provider;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -99,5 +99,9 @@ class Contract extends Model
     public function formPayment()
     {
         return $this->belongsTo(Category::class, 'form_payment_id', 'id');
+    }
+    public function documents()
+    {
+        return $this->hasMany(ContractDocument::class, 'contract_id', 'id');
     }
 }

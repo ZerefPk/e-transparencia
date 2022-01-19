@@ -1,4 +1,4 @@
-@section('title', 'Dashboard')
+@section('title', 'Dashboard - Editar {{$contract->getRealNumber()}}')
 
 @section('content_header')
     <div class="row mb-2">
@@ -209,7 +209,7 @@
         </div>
 
        <div class="card-footer">
-        <a class="btn  btn-secondary" href="{{route('dashboard.contract.index')}}">Cancelar</a>
+        <a class="btn  btn-secondary" href="{{route('dashboard.contract.details', $contract->id)}}">Cancelar</a>
         {{ Form::submit('Salvar', ['class' => 'btn  btn-success']) }}
        </div>
     </div>

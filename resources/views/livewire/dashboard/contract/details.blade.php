@@ -1,4 +1,4 @@
-@section('title', 'Dashboard')
+@section('title', 'Dashboard -  Contrato ')
 
 @section('content_header')
     <div class="row mb-2">
@@ -24,19 +24,23 @@
 
                 <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
-                        <b>Tipo: </b> <span class="float-right"></span>
+                        <b>Objeto: </b>
+                        <p class="text-justify text-break">{{$contract->object}}</p>
+
                     </li>
                     <li class="list-group-item">
-                        <b>Finalidade: </b> <span class="float-right"></span>
+                        <b>Fornecedor: </b> <p class="text-justify text-break">
+                            {{ $contract->provider->type ? $contract->provider->cnpj : $contract->provider->cpf }} -
+                            {{ $contract->provider->corporate_name }}</p>
                     </li>
                     <li class="list-group-item">
-                        <b>Status: </b> <span class="float-right">
-                            @if ($contract->status)
-                                Publicado
-                            @else
-                                Não publicado
-                            @endif
-                        </span>
+                        <b>Status: </b>
+                        @if ($contract->status)
+                            Habilitado
+                        @else
+                            Desabilitado
+                        @endif
+
                     </li>
                 </ul>
 
@@ -52,15 +56,17 @@
             <!-- /.card-header -->
             <div class="card-body">
 
-                <strong><i class="fas fa-map-marker-alt mr-1"></i> Local:</strong>
+                <strong><i class="fas fa-coins mr-1"></i> Valor Total do Contrato R$:</strong>
 
-                <p class="text-muted">{{ $contract->localization }}</p>
+                <p class="text-muted"> {{ number_format($contract->overall_contract_value, 2, ',', '.') }}
+                    - Pagamento:{{$contract->formPayment->category}} </p>
                 <hr>
-                <strong><i class="fas fa-calendar mr-1"></i> Data do certame:</strong>
+                <strong><i class="fas fa-calendar mr-1"></i>Vigência:</strong>
 
                 <p class="text-muted">
-                    {{ isset($contract->event_date) ? date('d/m/Y', strtotime($contract->event_date)) : '-' }}
-                    {{ isset($contract->event_time) ? date('H:i', strtotime($contract->event_time)) : '' }}</p>
+                    {{ date('d/m/Y', strtotime($contract->start__validity)) }} até
+                    {{date('d/m/Y', strtotime($contract->end_term))}}
+                </p>
 
 
             </div>
@@ -75,13 +81,15 @@
                 <ul class="nav nav-pills">
                     <li class="nav-item border-right"><a
                             class="nav-link active"
-                            href="#basicInformation" data-toggle="tab">Informações Basicas</a></li>
+                            href="#documents" data-toggle="tab">Documentos Anexados</a></li>
 
                 </ul>
             </div>
             <div class="card-body">
 
-
+                <div class="tab-content">
+                    @livewire('dashboard.contract.document', ['contract' => $contract])
+                </div>
             </div>
 
         </div>
