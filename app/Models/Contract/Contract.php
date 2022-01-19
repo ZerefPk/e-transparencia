@@ -55,17 +55,49 @@ class Contract extends Model
     {
         return 'slug';
     }
-
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+    */
+    public function getRealNumber()
+    {
+        return "{$this->year}/{$this->number}";
+    }
+    /**
+     * Get the route key for the model.
+     *
+     * @return Provider
+    */
     public function provider()
     {
         return $this->belongsTo(Provider::class, 'provider_id', 'id');
     }
+    /**
+     * Get the route key for the model.
+     *
+     * @return Bidding
+    */
     public function bidding()
     {
         return $this->belongsTo(Bidding::class, 'bidding_id', 'id');
     }
-    public function formOfContract()
+    /**
+     * Get the route key for the model.
+     *
+     * @return Category
+    */
+    public function formContract()
     {
-        return $this->belongsTo(Category::class, 'form_of_contract_id', 'id');
+        return $this->belongsTo(Category::class, 'form_contract_id', 'id');
+    }
+    /**
+     * Get the route key for the model.
+     *
+     * @return Category
+    */
+    public function formPayment()
+    {
+        return $this->belongsTo(Category::class, 'form_payment_id', 'id');
     }
 }

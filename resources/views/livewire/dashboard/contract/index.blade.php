@@ -94,9 +94,9 @@
                                     {{ $contract->status ? 'Habilitado' : 'Desabilitado' }}
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary">
+                                    <a href="{{route('dashboard.contract.details', $contract->id)}}" class="btn btn-primary">
                                         <i class="fa fa-eye"></i>
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                         @empty
