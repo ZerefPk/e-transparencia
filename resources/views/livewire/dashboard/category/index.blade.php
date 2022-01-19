@@ -59,7 +59,7 @@
                                 <select class="form-control" style="width: 100%;" name="status" wire:model="status">
                                     <option selected>Status</option>
                                     <option value="1">Habilitado</option>
-                                    <option value="0"> Disabilitado</option>
+                                    <option value="0"> Desabilitado</option>
                                 </select>
                             </td>
                             <td>

@@ -22,7 +22,7 @@ class Contracts extends Migration
             $table->string('process_number')->nullable();
             $table->unsignedBigInteger('form_of_contract_id')->nullable();
             $table->boolean('bidding');
-            $table->string('overall_Contract_Value')->nullable();
+            $table->string('overall_contract_Value')->nullable();
             $table->date('signature_date');
             $table->date('start__validity');
             $table->date('end_term');
