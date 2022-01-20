@@ -111,7 +111,7 @@ class Bidding extends Model
     public function biddingItens()
     {
         return $this
-        ->hasMany(BiddingItem::class, 'bidding_id', 'id')->where('bidding_item_group_id', null);
+        ->hasMany(BiddingItem::class, 'bidding_id', 'id');
     }
     public function additional()
     {

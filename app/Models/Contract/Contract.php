@@ -100,8 +100,22 @@ class Contract extends Model
     {
         return $this->belongsTo(Category::class, 'form_payment_id', 'id');
     }
+    /**
+     * Get the route key for the model.
+     *
+     * @return ContractDocument
+    */
     public function documents()
     {
         return $this->hasMany(ContractDocument::class, 'contract_id', 'id');
+    }
+    /**
+     * Get the route key for the model.
+     *
+     * @return ContractItem
+    */
+    public function contractItens()
+    {
+        return $this->hasMany(ContractItem::class, 'contract_id', 'id');
     }
 }

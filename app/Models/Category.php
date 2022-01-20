@@ -47,6 +47,8 @@ class Category extends Model
             'Contratos' => [
                 'contract_form' => 'Forma de Contratação',
                 'contract_payment' => 'Forma de Pagamento',
+                'contract_document' => 'Tipo de Documento',
+                'contract_unity' => 'Unidade de Medida',
             ]
 
 
