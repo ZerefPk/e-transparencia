@@ -27,6 +27,7 @@ class Edit extends Component
     public $contract_tax;
     public $contract_manager;
     public $status;
+    public $situation_id;
     public $year;
     public $bidding_id;
     public $provider_id;
@@ -87,7 +88,7 @@ class Edit extends Component
                     'position' => 'center'
                 ]);
 
-                return redirect()->route('dashboard.contract.index');
+                return redirect()->route('dashboard.contract.details', $this->contract->id);
             }
             else{
                 $this->alert('error', 'Ocorreu um erro ao atualizar o contrato...');
@@ -111,6 +112,7 @@ class Edit extends Component
         $this->contract_tax = $this->contract->contract_tax;
         $this->contract_manager = $this->contract->contract_manager;
         $this->status = $this->contract->status;
+        $this->situation_id = $this->contract->situation_id;
         $this->year = $this->contract->year;
         $this->bidding_id = $this->contract->bidding_id;
         $this->provider_id  = $this->contract->provider_id;

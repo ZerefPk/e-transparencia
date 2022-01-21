@@ -35,7 +35,7 @@
                     </li>
                     <li class="list-group-item">
                         <b>Situação: </b>
-                        {{$contract->situation->type)}}
+                        {{$contract->situation->category}}
                     </li>
                     <li class="list-group-item">
                         <b>Status: </b>
