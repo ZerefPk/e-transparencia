@@ -86,6 +86,9 @@
                     <li class="nav-item border-right"><a class="nav-link" href="#item"
                                 data-toggle="tab">Itens</a>
                     </li>
+                    <li class="nav-item border-right"><a class="nav-link" href="#additive"
+                                data-toggle="tab">Aditivos Contratuais</a>
+                    </li>
                 </ul>
             </div>
             <div class="card-body">
@@ -93,6 +96,7 @@
                 <div class="tab-content">
                     @livewire('dashboard.contract.document', ['contract' => $contract])
                     @livewire('dashboard.contract.item', ['contract' => $contract])
+                    @livewire('dashboard.contract.additive', ['contract' => $contract])
                 </div>
             </div>
 

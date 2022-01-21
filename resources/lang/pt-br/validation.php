@@ -187,5 +187,12 @@ return [
         'password_confirmation' => 'confirmação da senha',
         'current_password' => 'senha atual',
     ],
+    'values' => [
+        'type_modification' => [
+            '1' => 'acréscimo',
+            '2' => 'decréscimo',
+            '3' => 'recisão',
+        ]
+    ]
 
 ];

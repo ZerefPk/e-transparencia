@@ -1,5 +1,6 @@
-@section('title', 'Dashboard - Editar {{$contract->getRealNumber()}}')
-
+@section('title')
+Dashboard - Editar contrato: {{$contract->getRealNumber()}}
+@stop
 @section('content_header')
     <div class="row mb-2">
         <div class="col-sm-6">

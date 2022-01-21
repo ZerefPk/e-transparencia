@@ -13,7 +13,7 @@ class Item extends Component
     use LivewireAlert;
     protected $listeners = ['destroyItem' => 'destroyItem'];
     public Contract $contract;
-
+    public $method;
     public $sequence;
 
     public $description;
@@ -51,12 +51,14 @@ class Item extends Component
             'quantity',
             'unity_value',
             'total_value',
-            'itemEdit'
+            'itemEdit',
+            'method'
         ]);
     }
     public function create()
     {
         $this->resetAttributes();
+        $this->method = 0;
         $item = ContractItem::where('contract_id', $this->contract->id)->max('item');
 
         if($item){
@@ -66,7 +68,7 @@ class Item extends Component
         else{
             $this->sequence = 1;
         }
-        $this->dispatchBrowserEvent('open-form-item-create');
+        $this->dispatchBrowserEvent('open-form-item');
     }
     public function store()
     {
@@ -77,7 +79,7 @@ class Item extends Component
         $save = ContractItem::create($dataForm);
 
         $this->resetAttributes();
-        $this->dispatchBrowserEvent('close-form-item-create');
+        $this->dispatchBrowserEvent('close-form-item');
 
         if($save)
         {
@@ -91,6 +93,7 @@ class Item extends Component
 
     public function edit($id)
     {
+        $this->method = 1;
         $this->itemEdit = $this->contract->contractItens()->find($id);
         $this->sequence = $this->itemEdit->item;
         $this->description = $this->itemEdit->description;
@@ -99,7 +102,7 @@ class Item extends Component
         $this->unity_value = $this->itemEdit->unity_value;
         $this->total_value = $this->itemEdit->total_value;
 
-        $this->dispatchBrowserEvent('open-form-item-edit');
+        $this->dispatchBrowserEvent('open-form-item');
 
     }
     public function update()
@@ -108,7 +111,7 @@ class Item extends Component
 
         $update = $this->itemEdit->update($dataForm);
         $this->resetAttributes();
-        $this->dispatchBrowserEvent('close-form-item-edit');
+        $this->dispatchBrowserEvent('close-form-item');
         if($update)
         {
 

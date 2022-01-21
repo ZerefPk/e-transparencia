@@ -55,7 +55,7 @@ class Create extends Component
         'form_contract_id' => '[ Tipo de Contratação ]',
         'form_payment_id' => '[ Forma de Pagamento ]',
         'overall_contract_value' => '[ Valor Total do Contrato ]',
-        'signature_date' => '[Data da Assintura]',
+        'signature_date' => '[Data da Assinatura]',
         'start__validity' => '[ Inicio da Vigência ]',
         'end_term'  => '[ Fim da Vigência ]',
         'contract_tax' => '[ Fiscal do Contrato ]',
