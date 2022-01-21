@@ -30,6 +30,7 @@ class Contract extends Model
         'contract_tax',
         'contract_manager',
         'status',
+        'situation_id',
         'year',
         'bidding_id',
         'provider_id',
@@ -37,7 +38,7 @@ class Contract extends Model
 
     protected $primaryKey = "id";
 
-    protected $foreignKey = ['form_of_contract_id', 'bidding_id','year' ,'provider_id'];
+    protected $foreignKey = ['form_of_contract_id', 'bidding_id','year' ,'provider_id', 'situation_id'];
 
     public function getSlugOptions() : SlugOptions
     {
@@ -99,6 +100,15 @@ class Contract extends Model
     public function formPayment()
     {
         return $this->belongsTo(Category::class, 'form_payment_id', 'id');
+    }
+    /**
+     * Get the route key for the model.
+     *
+     * @return Category
+    */
+    public function situation()
+    {
+        return $this->belongsTo(Category::class, 'situation_id', 'id');
     }
     /**
      * Get the route key for the model.

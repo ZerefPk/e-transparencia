@@ -26,6 +26,7 @@ class Create extends Component
     public $contract_tax;
     public $contract_manager;
     public $status;
+    public $situation_id;
     public $year;
     public $bidding_id;
     public $provider_id;
@@ -44,6 +45,7 @@ class Create extends Component
         'contract_tax' => 'nullable|min:5|max:55',
         'contract_manager' => 'nullable|min:5|max:55',
         'status' =>'required|boolean',
+        'situation_id' => 'required',
         'year' =>  'required',
         'bidding_id' => 'nullable',
         'provider_id' => 'required',
@@ -61,6 +63,7 @@ class Create extends Component
         'contract_tax' => '[ Fiscal do Contrato ]',
         'contract_manager' => '[ Gestor do Contrato ]',
         'status' =>'[ Status ]',
+        'situation_id' => '[ Situação ]',
         'year' =>  '[ Ano ]',
         'bidding_id' => '[ Histórico da Contratação]',
         'provider_id' => '[ Fornecedor ]',
@@ -97,6 +100,7 @@ class Create extends Component
         $years = Year::where('status', true)->orderBy('year', 'DESC')->pluck('year','year');
         $formContracts = Category::where('type', 'contract_form')->where('status', true)->orderBy('type', 'ASC')->pluck('category', 'id');
         $formPayments = Category::where('type', 'contract_payment')->where('status', true)->orderBy('type', 'ASC')->pluck('category', 'id');
+        $situations = Category::where('type', 'contract_situation')->where('status', true)->orderBy('type', 'ASC')->pluck('category', 'id');
         $providers = Provider::where('status', true)->orderBy('corporate_name', 'ASC')->get();
         $biddings = Bidding::where('status', true)->orderBy('year', 'DESC')->orderBy('number', 'ASC')->get();
 
@@ -104,6 +108,7 @@ class Create extends Component
             'years' => $years,
             'formContracts' => $formContracts,
             'formPayments' => $formPayments,
+            'situations' => $situations,
             'providers' => $providers,
             'biddings' => $biddings,
         ]);

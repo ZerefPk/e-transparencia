@@ -87,10 +87,21 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        {{ Form::label('form_contract_id', 'Forma de Contração: ') }}
+                        {{ Form::label('form_contract_id', 'Situação do Contrato: ') }}
 
                         {{ Form::select('form_contract_id', $formContracts, null, ['placeholder' => 'Selecione', 'class' => 'form-control', 'wire:model' => 'form_contract_id']) }}
                         @error('form_contract_id')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        {{ Form::label('situation_id', 'Forma de Contração: ') }}
+
+                        {{ Form::select('situation_id', $situations, null, ['placeholder' => 'Selecione', 'class' => 'form-control', 'wire:model' => 'situation_id']) }}
+                        @error('situation_id')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>

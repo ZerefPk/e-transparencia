@@ -99,6 +99,17 @@ Dashboard - Editar contrato: {{$contract->getRealNumber()}}
                 </div>
                 <div class="col">
                     <div class="form-group">
+                        {{ Form::label('situation_id', 'Situação do Contrato: ') }}
+
+                        {{ Form::select('situation_id', $situations, null, ['placeholder' => 'Selecione', 'class' => 'form-control', 'wire:model' => 'situation_id']) }}
+                        @error('situation_id')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                </div>
+                <div class="col">
+                    <div class="form-group">
                         <div wire:ignore>
                             <label for="provider-select">Histórico da Contratação: </label>
                             <select class="form-control" id="bidding-select" style="width: 100%">

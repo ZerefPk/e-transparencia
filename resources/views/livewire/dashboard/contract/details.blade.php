@@ -34,6 +34,10 @@
                             {{ $contract->provider->corporate_name }}</p>
                     </li>
                     <li class="list-group-item">
+                        <b>Situação: </b>
+                        {{$contract->situation->type)}}
+                    </li>
+                    <li class="list-group-item">
                         <b>Status: </b>
                         @if ($contract->status)
                             Habilitado

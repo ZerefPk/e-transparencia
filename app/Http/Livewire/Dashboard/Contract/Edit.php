@@ -45,6 +45,7 @@ class Edit extends Component
         'contract_tax' => 'nullable|min:5|max:55',
         'contract_manager' => 'nullable|min:5|max:55',
         'status' =>'required|boolean',
+        'situation_id' => 'required',
         'year' =>  'required',
         'bidding_id' => 'nullable',
         'provider_id' => 'required',
@@ -62,10 +63,12 @@ class Edit extends Component
         'contract_tax' => '[ Fiscal do Contrato ]',
         'contract_manager' => '[ Gestor do Contrato ]',
         'status' =>'[ Status ]',
+        'situation_id' => '[ Situação ]',
         'year' =>  '[ Ano ]',
         'bidding_id' => '[ Histórico da Contratação]',
         'provider_id' => '[ Fornecedor ]',
     ];
+
 
     public function update(){
         $data = $this->validate();
@@ -117,6 +120,7 @@ class Edit extends Component
         $years = Year::where('status', true)->orderBy('year', 'DESC')->pluck('year','year');
         $formContracts = Category::where('type', 'contract_form')->where('status', true)->orderBy('type', 'ASC')->pluck('category', 'id');
         $formPayments = Category::where('type', 'contract_payment')->where('status', true)->orderBy('type', 'ASC')->pluck('category', 'id');
+        $situations = Category::where('type', 'contract_situation')->where('status', true)->orderBy('type', 'ASC')->pluck('category', 'id');
         $providers = Provider::where('status', true)->orderBy('corporate_name', 'ASC')->get();
         $biddings = Bidding::where('status', true)->orderBy('year', 'DESC')->orderBy('number', 'ASC')->get();
 
@@ -126,6 +130,7 @@ class Edit extends Component
             'formPayments' => $formPayments,
             'providers' => $providers,
             'biddings' => $biddings,
+            'situations' => $situations,
         ]);
     }
 }
