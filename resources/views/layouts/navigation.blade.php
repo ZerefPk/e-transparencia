@@ -62,13 +62,16 @@
                 <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle text-dark" href="#" id="licitacao" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Licitação
+                        Contrato
                     </a>
                     <div class="dropdown-menu" aria-labelledby="licitacao">
-                        <a class="dropdown-item" href="{{ route('site.bidding.index') }}">Licitação</a>
-                        <a class="dropdown-item" href="#">Convenios</a>
-                        <a class="dropdown-item" href="#">Contratos</a>
+                        <a class="dropdown-item" href="{{ route('site.contract.index') }}">Contratos</a>
+
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ route('site.bidding.index') }}">Licitação</a>
+
                 </li>
                 @if (env('APP_DEBUG'))
                 <li class="nav-item">

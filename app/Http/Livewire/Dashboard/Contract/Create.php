@@ -89,7 +89,7 @@ class Create extends Component
                     'position' => 'center'
                 ]);
 
-                return redirect()->route('dashboard.contract.details', $this->contract->id);
+                return redirect()->route('dashboard.contract.details', $save->id);
             }
             else{
                 $this->alert('error', 'Ocorreu um erro ao cadastar o contrato...');
