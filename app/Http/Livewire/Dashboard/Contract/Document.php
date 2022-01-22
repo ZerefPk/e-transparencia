@@ -56,6 +56,7 @@ class Document extends Component
         $document = ContractDocument::create([
             'name' => $this->name,
             'path' => $path,
+            'description' => $this->description,
             'contract_id' => $this->contract->id,
         ]);
 

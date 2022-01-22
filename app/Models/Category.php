@@ -48,6 +48,7 @@ class Category extends Model
                 'contract_form' => 'Forma de Contratação',
                 'contract_payment' => 'Forma de Pagamento',
                 'contract_situation' => 'Situação do Contrato',
+                'contract_finality' => 'Finalidade do Contrato',
                 'contract_document' => 'Tipo de Documento',
                 'contract_unity' => 'Unidade de Medida',
             ]

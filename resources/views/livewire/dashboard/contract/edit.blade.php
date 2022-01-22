@@ -88,17 +88,6 @@ Dashboard - Editar contrato: {{$contract->getRealNumber()}}
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        {{ Form::label('form_contract_id', 'Forma de Contração: ') }}
-
-                        {{ Form::select('form_contract_id', $formContracts, null, ['placeholder' => 'Selecione', 'class' => 'form-control', 'wire:model' => 'form_contract_id']) }}
-                        @error('form_contract_id')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                </div>
-                <div class="col">
-                    <div class="form-group">
                         {{ Form::label('situation_id', 'Situação do Contrato: ') }}
 
                         {{ Form::select('situation_id', $situations, null, ['placeholder' => 'Selecione', 'class' => 'form-control', 'wire:model' => 'situation_id']) }}
@@ -108,6 +97,31 @@ Dashboard - Editar contrato: {{$contract->getRealNumber()}}
                     </div>
 
                 </div>
+                <div class="col">
+                    <div class="form-group">
+                        {{ Form::label('finality_id', 'Finalidade do Contrato: ') }}
+
+                        {{ Form::select('finality_id', $finalities, null, ['placeholder' => 'Selecione', 'class' => 'form-control', 'wire:model' => 'finality_id']) }}
+                        @error('finality_id')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        {{ Form::label('form_contract_id', 'Forma de Contração: ') }}
+
+                        {{ Form::select('form_contract_id', $formContracts, null, ['placeholder' => 'Selecione', 'class' => 'form-control', 'wire:model' => 'form_contract_id']) }}
+                        @error('form_contract_id')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                </div>
+
                 <div class="col">
                     <div class="form-group">
                         <div wire:ignore>

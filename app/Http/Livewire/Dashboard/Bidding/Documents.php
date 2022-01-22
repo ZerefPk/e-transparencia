@@ -56,6 +56,7 @@ class Documents extends Component
         $document = BiddingDocument::create([
             'name' => $this->name,
             'path' => $path,
+            'description' => $this->description,
             'bidding_id' => $this->bidding->id,
         ]);
 

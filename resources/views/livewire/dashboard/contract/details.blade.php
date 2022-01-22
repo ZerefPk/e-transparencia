@@ -33,9 +33,13 @@
                             {{ $contract->provider->type ? $contract->provider->cnpj : $contract->provider->cpf }} -
                             {{ $contract->provider->corporate_name }}</p>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item text-capitalize">
                         <b>Situação: </b>
                         {{$contract->situation->category}}
+                    </li>
+                    <li class="list-group-item">
+                        <b>Finalidade: </b>
+                        {{$contract->finality->category}}
                     </li>
                     <li class="list-group-item">
                         <b>Status: </b>

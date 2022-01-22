@@ -23,6 +23,7 @@ class Contracts extends Migration
             $table->unsignedBigInteger('form_contract_id')->nullable();
             $table->unsignedBigInteger('form_payment_id');
             $table->unsignedBigInteger('situation_id');
+            $table->unsignedBigInteger('finality_id');
             $table->string('overall_contract_value')->nullable();
             $table->date('signature_date');
             $table->date('start__validity');
@@ -47,6 +48,11 @@ class Contracts extends Migration
                 ->onDelete('RESTRICT')
                 ->onUpdate('CASCADE');
             $table->foreign('situation_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('RESTRICT')
+                ->onUpdate('CASCADE');
+            $table->foreign('finality_id')
                 ->references('id')
                 ->on('categories')
                 ->onDelete('RESTRICT')

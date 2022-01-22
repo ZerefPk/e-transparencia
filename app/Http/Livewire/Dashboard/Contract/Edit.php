@@ -28,6 +28,7 @@ class Edit extends Component
     public $contract_manager;
     public $status;
     public $situation_id;
+    public $finality_id;
     public $year;
     public $bidding_id;
     public $provider_id;
@@ -47,6 +48,7 @@ class Edit extends Component
         'contract_manager' => 'nullable|min:5|max:55',
         'status' =>'required|boolean',
         'situation_id' => 'required',
+        'finality_id' => 'required',
         'year' =>  'required',
         'bidding_id' => 'nullable',
         'provider_id' => 'required',
@@ -65,6 +67,7 @@ class Edit extends Component
         'contract_manager' => '[ Gestor do Contrato ]',
         'status' =>'[ Status ]',
         'situation_id' => '[ Situação ]',
+        'finality_id' => '[ Finalidade ]',
         'year' =>  '[ Ano ]',
         'bidding_id' => '[ Histórico da Contratação]',
         'provider_id' => '[ Fornecedor ]',
@@ -113,6 +116,7 @@ class Edit extends Component
         $this->contract_manager = $this->contract->contract_manager;
         $this->status = $this->contract->status;
         $this->situation_id = $this->contract->situation_id;
+        $this->finality_id = $this->contract->finality_id;
         $this->year = $this->contract->year;
         $this->bidding_id = $this->contract->bidding_id;
         $this->provider_id  = $this->contract->provider_id;
@@ -123,6 +127,7 @@ class Edit extends Component
         $formContracts = Category::where('type', 'contract_form')->where('status', true)->orderBy('type', 'ASC')->pluck('category', 'id');
         $formPayments = Category::where('type', 'contract_payment')->where('status', true)->orderBy('type', 'ASC')->pluck('category', 'id');
         $situations = Category::where('type', 'contract_situation')->where('status', true)->orderBy('type', 'ASC')->pluck('category', 'id');
+        $finalities = Category::where('type', 'contract_finality')->where('status', true)->orderBy('type', 'ASC')->pluck('category', 'id');
         $providers = Provider::where('status', true)->orderBy('corporate_name', 'ASC')->get();
         $biddings = Bidding::where('status', true)->orderBy('year', 'DESC')->orderBy('number', 'ASC')->get();
 
@@ -133,6 +138,7 @@ class Edit extends Component
             'providers' => $providers,
             'biddings' => $biddings,
             'situations' => $situations,
+            'finalities' => $finalities,
         ]);
     }
 }
