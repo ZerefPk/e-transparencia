@@ -21,7 +21,7 @@ class Create extends Component
     public $form_payment_id;
     public $overall_contract_value;
     public $signature_date;
-    public $start__validity;
+    public $start_validity;
     public $end_term;
     public $contract_tax;
     public $contract_manager;
@@ -41,7 +41,7 @@ class Create extends Component
         'form_payment_id' => 'required',
         'overall_contract_value' => 'required',
         'signature_date' => 'required|date',
-        'start__validity' => 'required|date',
+        'start_validity' => 'required|date',
         'end_term'  => 'required|date',
         'contract_tax' => 'nullable|min:5|max:55',
         'contract_manager' => 'nullable|min:5|max:55',
@@ -60,7 +60,7 @@ class Create extends Component
         'form_payment_id' => '[ Forma de Pagamento ]',
         'overall_contract_value' => '[ Valor Total do Contrato ]',
         'signature_date' => '[Data da Assinatura]',
-        'start__validity' => '[ Inicio da Vigência ]',
+        'start_validity' => '[ Inicio da Vigência ]',
         'end_term'  => '[ Fim da Vigência ]',
         'contract_tax' => '[ Fiscal do Contrato ]',
         'contract_manager' => '[ Gestor do Contrato ]',

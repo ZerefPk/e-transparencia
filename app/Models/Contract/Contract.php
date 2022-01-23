@@ -25,7 +25,7 @@ class Contract extends Model
         'form_payment_id',
         'overall_contract_value',
         'signature_date',
-        'start__validity',
+        'start_validity',
         'end_term',
         'contract_tax',
         'contract_manager',
@@ -39,7 +39,7 @@ class Contract extends Model
 
     protected $primaryKey = "id";
 
-    protected $foreignKey = ['form_of_contract_id', 'bidding_id','year' ,'provider_id', 'situation_id'];
+    protected $foreignKey = ['form_of_contract_id', 'bidding_id','year' ,'provider_id', 'situation_id', 'subject_id'];
 
     public function getSlugOptions() : SlugOptions
     {

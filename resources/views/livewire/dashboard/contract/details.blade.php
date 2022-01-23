@@ -72,7 +72,7 @@
                 <strong><i class="fas fa-calendar mr-1"></i>Vigência:</strong>
 
                 <p class="text-muted">
-                    {{ date('d/m/Y', strtotime($contract->start__validity)) }} até
+                    {{ date('d/m/Y', strtotime($contract->start_validity)) }} até
                     {{date('d/m/Y', strtotime($contract->end_term))}}
                 </p>
 

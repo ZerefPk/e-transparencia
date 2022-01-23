@@ -177,9 +177,9 @@ Dashboard - Editar contrato: {{$contract->getRealNumber()}}
 
                 <div class="col">
                     <div class="form-group">
-                        {{Form::label('start__validity', 'Inicio da Vigência:')}}
-                        {{Form::date('start__validity', null, ['class'=>'form-control', 'wire:model' => 'start__validity'])}}
-                        @error('start__validity')
+                        {{Form::label('start_validity', 'Inicio da Vigência:')}}
+                        {{Form::date('start_validity', null, ['class'=>'form-control', 'wire:model' => 'start_validity'])}}
+                        @error('start_validity')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
