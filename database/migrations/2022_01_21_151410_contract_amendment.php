@@ -45,6 +45,6 @@ class ContractAmendment extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('contractual_additives');
+        Schema::dropIfExists('contractual_amendment');
     }
 }
