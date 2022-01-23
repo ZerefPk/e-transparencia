@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('publicacao')->group(function () {
+Route::prefix('publicacoes')->group(function () {
 
     Route::get('/{publication}', Index::class)->name('site.publication.index');
 

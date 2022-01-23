@@ -3,6 +3,7 @@
 use App\Http\Livewire\Home\Contract\{
 
     Index,
+    Details,
 
 };
 use Illuminate\Support\Facades\Route;
@@ -18,9 +19,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('contrato')->group(function () {
+Route::prefix('contratos')->group(function () {
 
     Route::get('/', Index::class)->name('site.contract.index');
+    Route::get('/{contract:slug}', Details::class)->name('site.contract.details');
 
 
 });

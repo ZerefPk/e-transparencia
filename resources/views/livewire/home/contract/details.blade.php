@@ -1,30 +1,29 @@
 @section('title')
-    | LIC {{ $bidding->year }}/{{ $bidding->number }}
+    | Contrato - {{ $contract->getRealNumber() }}
 @stop
 @section('meta-description')
 
-    <meta name="description" content="{{ $bidding->object }}">
+    <meta name="description" content="{{ $contract->object }}">
 
 @stop
 
 <div>
     <div class="container">
-        <h3 class="text-uppercase">Processo Licitatório: {{ $bidding->year }}/{{ $bidding->number }} </h3>
+        <h3 class="text-uppercase">Contrato: {{ $contract->getRealNumber() }} </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="/">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{ route('site.bidding.index', $bidding->year) }}">Licitações {{ $bidding->year }}</a>
+                    <a href="{{ route('site.contract.index') }}">Contratos</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">{{ $bidding->year }}/{{ $bidding->number }}
+                <li class="breadcrumb-item active" aria-current="page">{{ $contract->getRealNumber() }}
                 </li>
             </ol>
         </nav>
         <div class="border-top  border-primary my-4"></div>
     </div>
-
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -47,66 +46,74 @@
             <div class="card-body">
                 <div class="tab-content">
                     <div class="active tab-pane" id="basicInformation">
+                        <div class="d-flex d-row">
+                            <div class="col-sm-4">
+                                <p class="text-uppercase"> <strong>Número do Termo:</strong> {{ $contract->getRealNumber() }} </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="text-uppercase"> <strong>Número Contrato: </strong> {{ $contract->process_number }}</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="text-uppercase"> <strong>Situação: </strong> {{ $contract->situation->category }}</p>
+                            </div>
+
+                        </div>
                         <div class="col">
-                            <p> <strong> Objeto:</strong></p>
-                            <div class="text-break text-justify">
-                                {{ $bidding->object }}
-                            </div>
+                            <strong class="text-uppercase"> Objeto:</strong>
+                            <p class="text-break text-justify">
+                                {{ $contract->object }}
+                            </p>
                         </div>
                         <div class="d-flex d-row">
-                            <div class="col-sm-4">
-                                <p> <strong>Modalidade: </strong>{{ $bidding->modality->category }} </p>
+                            <div class="col-sm-6">
+                                <div class="d-flex">
+                                    <p class="text-uppercase">
+                                        <strong>Fornecedor: </strong> {{ $contract->provider->corporate_name }}
+                                        <i class="fa fa-eye" data-toggle="modal" data-target="#provider"></i>
+                                    </p>
+
+
+                                </div>
                             </div>
                             <div class="col-sm-4">
-                                <p> <strong>Tipo: </strong>{{ $bidding->type->category }} </p>
-                            </div>
-                            <div class="col-sm-4">
-                                <p> <strong>Situação: </strong>{{ $bidding->situation->category }} </p>
+                                <p class="text-uppercase"> <strong>{{ $contract->provider->type ? 'CNPJ' : 'CPF' }}: </strong>
+                                    {{ $contract->provider->type ? $contract->provider->cnpj : $contract->provider->cpf }}
+                                </p>
                             </div>
 
                         </div>
+
                         <div class="d-flex d-row">
                             <div class="col-sm-4">
-                                <p> <strong>Local: </strong>{{ $bidding->localization }} </p>
+                                 <strong class="text-uppercase">Data da Assinatura do Contrato: </strong>
+                                 <p > {{ date('d/m/Y', strtotime($contract->signature_date)) }}
+                                </p>
                             </div>
                             <div class="col-sm-4">
-                                <p> <strong>Data do certame:
-                                    </strong>{{ isset($bidding->event_date) ? date('d/m/Y', strtotime($bidding->event_date)) : '-' }}
-                                    {{ isset($bidding->event_time) ? date('H:i', strtotime($bidding->event_time)) : '' }}
+                                <strong class="text-uppercase">Data do inicio do contrato:
+                                </strong>
+                                <p> {{ date('d/m/Y', strtotime($contract->start__validity)) }}
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <strong class="text-uppercase">Data do fim do contrato:
+                                    </strong>
+                                <p> {{ date('d/m/Y', strtotime($contract->end_term)) }}
                                 </p>
                             </div>
                         </div>
                         <div class="d-flex d-row">
                             <div class="col-sm-4">
-                                <p> <strong>Valor estimado:
-                                    </strong>{{ 'R$ ' . number_format($bidding->estimated_value, 2, ',', '.') }}
+                                 <strong>Valor do Contrato:</strong>
+                                 <p>
+                                   R$: {{ number_format($contract->overall_contract_value, 2, ',', '.') }}
                                 </p>
                             </div>
                             <div class="col-sm-4">
-                                <p> <strong>Valor Contratado:
-                                    </strong>{{ 'R$ ' . number_format($bidding->contracted_value, 2, ',', '.') }}</p>
+                                <p></p>
                             </div>
                         </div>
-                        @if ($bidding->additional)
-                            <div class="d-flex d-row">
-                                <div class="col-sm-4">
-                                    <p> <strong>Edital: </strong>{{ $bidding->additional->notice_number }} </p>
-                                </div>
-                                <div class="col-sm-4">
-                                    <p> <strong>Inicio do acolhimento das propostas:
-                                        </strong>{{ isset($bidding->additional->bid_opening_date) ? date('d/m/Y', strtotime($bidding->additional->bid_opening_date)) : '-' }}
-                                        {{ isset($bidding->additional->bid_opening_hour) ? date('H:i', strtotime($bidding->additional->bid_opening_hour)) : '' }}
-                                    </p>
-                                </div>
-                                <div class="col-sm-4">
-                                    <p> <strong>Limite do acolhimento das propostas:
-                                        </strong>{{ isset($bidding->additional->bid_closing_date) ? date('d/m/Y', strtotime($bidding->additional->bid_closing_date)) : '-' }}
-                                        {{ isset($bidding->additional->bid_closing_hour) ? date('H:i', strtotime($bidding->additional->bid_closing_hour)) : '' }}
-                                    </p>
-                                </div>
 
-                            </div>
-                        @endif
 
                         <div class="card my-4">
                             <div class="card-header">
@@ -114,10 +121,10 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    @if ($bidding->documents->count() > 0)
+                                    @if ($contract->documents->count() > 0)
                                         <table class="table table-bordered">
                                             <tbody>
-                                                @foreach ($bidding->documents as $document)
+                                                @foreach ($contract->documents as $document)
                                                     <tr>
                                                         <th scope="row" width="75%">
                                                             <p>{{ $document->name }}</p>
@@ -133,15 +140,15 @@
                                             </tbody>
                                         </table>
                                     @else
-                                        <p class="text-muted">Não há anexos para o Processo:
-                                            {{ $bidding->getRealNumber() }}</p>
+                                        <p class="text-muted">Não há anexos para o Contrato:
+                                            {{ $contract->getRealNumber() }}</p>
                                     @endif
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane" id="itens">
-                        @if (count($bidding->biddingItens) > 0)
+                        @if (count($contract->contractItens) > 0)
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
@@ -157,7 +164,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($bidding->biddingItens as $item)
+                                        @foreach ($contract->contractItens as $item)
                                             <tr>
 
                                                 <td class="text-center align-middle">{{ $item->item }}</td>
@@ -179,26 +186,20 @@
                                     </tbody>
                                 </table>
                             </div>
-                        @elseif (count($bidding->biddingItens) <= 0) <p class="text-muted">Não há itens para o
-                                Processo:
-                                {{ $bidding->getRealNumber() }}</p>
+                        @elseif (count($contract->contractItens) <= 0) <p class="text-muted">Não há itens para o
+                                Contrato:
+                                {{ $contract->getRealNumber() }}</p>
                         @endif
                     </div>
 
                     <div class="tab-pane" id="winners">
-                        <p class="text-muted">Não há registros para o Processo:
-                            {{ $bidding->getRealNumber() }}</p>
+                        <p class="text-muted">Não há registros para o Contrato:
+                            {{ $contract->getRealNumber() }}</p>
                     </div>
 
                     <div class="tab-pane" id="budget">
                         <div class="table-responsive">
-                            @if (!is_null($bidding->budget_information))
-                                {!! $bidding->budget_information !!}
 
-                            @else
-                                <p class="text-muted">Não há registro para o Processo:
-                                    {{ $bidding->getRealNumber() }}</p>
-                            @endif
 
                         </div>
                     </div>
@@ -208,5 +209,65 @@
         </div>
 
     </div>
+    <!-- Modal -->
+    <div class="modal" id="provider" tabindex="-1" role="dialog" aria-labelledby="providerLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="providerLabel">Fornecedor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-uppercase">
+                    <strong>Razão Social: </strong>
+                    <p>{{ $contract->provider->corporate_name }}</p>
+                    @if ($contract->provider->type)
+                        <strong>Nome Fantasia: </strong>
+                        <p>{{ $contract->provider->fantasy_name }}</p>
+                        <div class="row">
+                            <div class="col">
+                                <strong>CNPJ: </strong>
+                                <p>{{ $contract->provider->cnpj }}</p>
+                            </div>
+                            <div class="col">
 
+                                <strong>Tipo: </strong>
+                                <p>{{ $contract->provider->headquarters ? 'Matriz' : 'Filial' }}</p>
+                            </div>
+                            <div class="col">
+
+                                <strong>Empresa MEI: </strong>
+                                <p>{{ $contract->provider->mei_company ? 'Sim' : 'Não' }}</p>
+                            </div>
+
+                        </div>
+
+                    @else
+                    <div class="row">
+                        <div class="col">
+                            <strong>CPF: </strong>
+                        <p>{{ $contract->provider->cpf }}</p>
+                        </div>
+                        <div class="col">
+                            <strong>Empresa MEI: </strong>
+                            <p>{{ $contract->provider->mei_company ? 'Sim' : 'Não' }}</p>
+                        </div>
+                    </div>
+
+
+                    @endif
+
+                    <strong>Natureza Jurídica: </strong>
+                    <p>{{ $contract->provider->legal_nature }}</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('licitacao')->group(function () {
+Route::prefix('licitacoes')->group(function () {
     Route::get('/{data?}', Index::class)->name('site.bidding.index');
     Route::get('{year}/estatisticas', Statistic::class)->name('site.bidding.statistic');
-    Route::get('link/outros', Others::class)->name('site.bidding.others');
+    Route::get('links/outros', Others::class)->name('site.bidding.others');
 
 });
 

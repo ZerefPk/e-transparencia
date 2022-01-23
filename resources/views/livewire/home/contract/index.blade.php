@@ -13,7 +13,7 @@
         <div class="d-flex justify-content-between">
             <div class="p-2">
                 <h5 class="text-primary text-uppercase">
-                    Visão geral do contratos
+                    Visão geral dos contratos
                 </h5>
             </div>
             <div class="p-2">
@@ -90,8 +90,7 @@
                     <table class="table table-bordered">
                         <thead class="">
                             <tr>
-                                <th class="text-center align-middle" scope="col">Ano</th>
-                                <th class="text-center align-middle" scope="col">Numero</th>
+                                <th class="text-center align-middle" scope="col">Contrato Nº.</th>
                                 <th class="text-center align-middle" scope="col">Objeto</th>
                                 <th class="text-center align-middle" scope="col">Fornecedor</th>
                                 <th class="text-center align-middle" scope="col">Valor</th>
@@ -102,11 +101,9 @@
                         <tbody>
                             @foreach ($contracts as $contract)
                                 <tr>
+
                                     <td class="text-center align-middle">
-                                        <strong>{{ $contract->year }}</strong>
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        <strong>{{ $contract->number }}</strong>
+                                        <strong>{{ $contract->getRealNumber() }}</strong>
                                     </td>
                                     <td class="align-middle text-break text-justify">
                                         {{ $contract->object }}
@@ -121,9 +118,9 @@
                                         R$: {{ number_format($contract->overall_contract_value, 2, ',', '.') }}
 
                                     </td>
-                                    <td class="text-center">
-                                        <a class="btn btn-primary" target="_blank"
-                                            href="#">
+                                    <td class="text-center align-middle">
+                                        <a class="btn btn-primary"
+                                            href="{{route('site.contract.details', $contract->slug)}}">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     </td>
@@ -170,7 +167,7 @@
                     <div class="card my-5">
                         <div class="card-body">
                             <h5 class="text-uppercase">
-                                Não há registros de publicações
+                                Não há registros de contratos
                             </h5>
                         </div>
                     </div>

@@ -50,7 +50,7 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-dark" href="#" id="publication" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    publicação
+                    publicações
                   </a>
                   <div class="dropdown-menu" aria-labelledby="publication">
                     @foreach ($publications as $publication )
@@ -60,17 +60,17 @@
                 </li>
                 @endif
                 <li class="nav-item dropdown ">
-                    <a class="nav-link dropdown-toggle text-dark" href="#" id="licitacao" role="button"
+                    <a class="nav-link dropdown-toggle text-dark" href="#" id="contacts" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Contrato
+                        Contratos
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="licitacao">
+                    <div class="dropdown-menu" aria-labelledby="contacts">
                         <a class="dropdown-item" href="{{ route('site.contract.index') }}">Contratos</a>
 
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{ route('site.bidding.index') }}">Licitação</a>
+                    <a class="nav-link text-dark" href="{{ route('site.bidding.index') }}">Licitações</a>
 
                 </li>
                 @if (env('APP_DEBUG'))

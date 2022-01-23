@@ -54,8 +54,7 @@ class Index extends Component
         }
         if(isset($this->q) && $this->q != ""){
 
-            #$query->where('contracts.number', 'like' ,$this->q.'%')
-            #->orWhere('contracts.object', 'like' , $this->q.'%');
+
             $query->join('providers', 'contracts.provider_id','providers.id')
             ->where('providers.corporate_name', 'like', $this->q.'%')->orWhere('contracts.number', 'like' ,$this->q.'%')
             ->orWhere('contracts.object', 'like' , $this->q.'%');;
@@ -74,7 +73,7 @@ class Index extends Component
 
         }
 
-        $query->orderBy('year', 'DESC')->orderBy('number', 'ASC');
+        $query->orderBy('year', 'DESC')->orderBy('slug', 'ASC');
         return $query;
     }
     public function render()
