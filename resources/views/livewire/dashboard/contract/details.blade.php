@@ -39,7 +39,7 @@
                     </li>
                     <li class="list-group-item">
                         <b>Finalidade: </b>
-                        {{$contract->finality->category}}
+                        {{$contract->subject->category}}
                     </li>
                     <li class="list-group-item">
                         <b>Status: </b>
