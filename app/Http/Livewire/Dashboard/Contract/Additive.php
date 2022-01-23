@@ -106,7 +106,7 @@ class Additive extends Component
     public function edit($id)
     {
         $this->method = 1;
-        $this->additiveEdit = $this->contract->additive()->find($id);
+        $this->additiveEdit = $this->contract->additives()->find($id);
 
 
         $this->sequence = $this->additiveEdit->sequence;

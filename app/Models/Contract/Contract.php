@@ -143,7 +143,7 @@ class Contract extends Model
      *
      * @return ContractAmendment
     */
-    public function additive()
+    public function additives()
     {
         return $this->hasMany(ContractAmendment::class, 'contract_id', 'id');
     }
