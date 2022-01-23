@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ContractAmendment extends Model
 {
     use HasFactory;
-    protected $table = 'contractual_additives';
+    protected $table = 'contractual_amendment';
 
     protected $fillable = [
         'sequence',
