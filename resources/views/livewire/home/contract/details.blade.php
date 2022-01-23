@@ -89,7 +89,7 @@
                             <div class="col-sm-4">
                                 <strong class="text-uppercase">inicio da Vigência:
                                 </strong>
-                                <p> {{ date('d/m/Y', strtotime($contract->start__validity)) }}
+                                <p> {{ date('d/m/Y', strtotime($contract->start_validity)) }}
                                 </p>
                             </div>
                             <div class="col-sm-4">
@@ -239,7 +239,7 @@
                             </tbody>
                         </table>
                     @else
-                        <p class="text-muted">Não há emepenhos para o Contrato:
+                        <p class="text-muted">Não há empenhos para o Contrato:
                             {{ $contract->getRealNumber() }}</p>
                     @endif
                 </div>
@@ -332,7 +332,7 @@
 
                         @endforeach
                     @else
-                        <p class="text-muted">Não há emepenhos para o Contrato:
+                        <p class="text-muted">Não há aditivos para o Contrato:
                             {{ $contract->getRealNumber() }}</p>
                     @endif
             </div>

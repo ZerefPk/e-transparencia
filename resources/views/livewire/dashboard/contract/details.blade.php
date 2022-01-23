@@ -38,7 +38,7 @@
                         {{$contract->situation->category}}
                     </li>
                     <li class="list-group-item">
-                        <b>Finalidade: </b>
+                        <b>Assunto: </b>
                         {{$contract->subject->category}}
                     </li>
                     <li class="list-group-item">
