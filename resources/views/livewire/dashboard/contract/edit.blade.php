@@ -99,10 +99,10 @@ Dashboard - Editar contrato: {{$contract->getRealNumber()}}
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        {{ Form::label('finality_id', 'Finalidade do Contrato: ') }}
+                        {{ Form::label('subject_id', 'Finalidade do Contrato: ') }}
 
-                        {{ Form::select('finality_id', $finalities, null, ['placeholder' => 'Selecione', 'class' => 'form-control', 'wire:model' => 'finality_id']) }}
-                        @error('finality_id')
+                        {{ Form::select('subject_id', $subjects, null, ['placeholder' => 'Selecione', 'class' => 'form-control', 'wire:model' => 'subject_id']) }}
+                        @error('subject_id')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>

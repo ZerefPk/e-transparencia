@@ -30,7 +30,7 @@ class Contract extends Model
         'contract_tax',
         'contract_manager',
         'status',
-        'finality_id',
+        'subject_id',
         'situation_id',
         'year',
         'bidding_id',
@@ -116,9 +116,9 @@ class Contract extends Model
      *
      * @return Category
     */
-    public function finality()
+    public function subject()
     {
-        return $this->belongsTo(Category::class, 'finality_id', 'id');
+        return $this->belongsTo(Category::class, 'subject_id', 'id');
     }
     /**
      * Get the route key for the model.
