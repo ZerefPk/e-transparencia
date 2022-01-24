@@ -31,6 +31,8 @@ require __DIR__.'/dashboard/provider.php';
 
 require __DIR__.'/dashboard/contract.php';
 
+require __DIR__.'/dashboard/budget.php';
+
 require __DIR__.'/home/bidding.php';
 
 require __DIR__.'/home/contract.php';

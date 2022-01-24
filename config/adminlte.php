@@ -244,7 +244,7 @@ return [
 
         ['header' => 'LICITAÇÃO E CONTRATOS'],
         [
-            'text' => 'Licitação',
+            'text' => 'Licitações',
             'route'  => 'dashboard.bidding.index',
             'icon' => 'fas fa-fw fa-balance-scale',
         ],
@@ -281,6 +281,19 @@ return [
                     'route'  => 'dashboard.category.index',
                     'icon'    => 'fas fa-fw fa-tag',
                     'active' => ['dashboard/category/*']
+                ],
+                [
+                    'text' => 'Orçamento',
+                    'icon'    => 'fas fa-fw fa-wallet',
+                    'active' => ['dashboard/budeg/ramification'],
+                    'submenu' => [
+                        [
+                            'text' => 'Desdobramentos',
+                            'route'  => 'dashboard.ramification.index',
+                            'icon'    => 'fas fa-fw fa-code-branch',
+
+                        ],
+                    ]
                 ],
             ],
         ],

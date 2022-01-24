@@ -13,7 +13,7 @@ class ContractAmendment extends Migration
      */
     public function up()
     {
-        Schema::create('contractual_amendment', function (Blueprint $table) {
+        Schema::create('contractual_amendments', function (Blueprint $table) {
             $table->id();
             $table->integer('sequence');
 
@@ -45,6 +45,6 @@ class ContractAmendment extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('contractual_amendment');
+        Schema::dropIfExists('contractual_amendments');
     }
 }

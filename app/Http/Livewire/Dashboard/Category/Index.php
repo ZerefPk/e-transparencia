@@ -83,8 +83,22 @@ class Index extends Component
     {
         $this->reset();
     }
+    public function resetAttr()
+    {
+        $this->reset([
+            'categoryInput',
+            'colorInput',
+            'in_graficInput' ,
+            'special_fieldInput',
+            'typeInput',
+            'statusInput',
+            'method',
+            'category'
+        ]);
+    }
     public function create()
     {
+        $this->resetAttr();
         $this->method = 0;
         $this->dispatchBrowserEvent('open-form');
     }
@@ -111,7 +125,7 @@ class Index extends Component
 
             if($save){
                 $this->dispatchBrowserEvent('close-form');
-                $this->reset();
+                $this->resetAttr();
                 $this->alert('success', 'Categoria cadastrada!', [
                     'toast' => false,
                     'position' => 'center'
@@ -126,7 +140,7 @@ class Index extends Component
     }
     public function edit($id)
     {
-        $this->reset();
+        $this->resetAttr();
 
         $this->category = Category::find($id);
 
@@ -164,7 +178,7 @@ class Index extends Component
 
             if($save){
                 $this->dispatchBrowserEvent('close-form');
-                $this->reset();
+                $this->resetAttr();
                 $this->alert('success', 'Categoria atualizada!', [
                     'toast' => false,
                     'position' => 'center'
