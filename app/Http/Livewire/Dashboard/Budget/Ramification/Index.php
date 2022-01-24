@@ -25,6 +25,8 @@ class Index extends Component
     public $t;
     public $s;
 
+    public $queryString = ['c','d','t','s'];
+
     public $rules = [
         'cod' => 'required|min:2|max:255',
         'description' => 'required|min:2|max:255',
@@ -64,7 +66,10 @@ class Index extends Component
             $query->where('description', 'like',  $this->d.'%');
         }
         if(isset($this->t) && $this->t == ""){
-            $query->where('type',  $this->t.'%');
+            $query->where('type',  $this->t);
+        }
+        if(isset($this->s) && $this->s == ""){
+            $query->where('status',  $this->s);
         }
 
         $query->orderBy('type', 'ASC')->orderBy('cod', 'ASC');
@@ -84,7 +89,7 @@ class Index extends Component
     }
     public function refreshQuery()
     {
-        $this->resetPage();
+        $this->reset();
     }
     public function create()
     {
@@ -136,12 +141,13 @@ class Index extends Component
     public function update()
     {
         $data = $this->validate();
-        $save = $this->ramification->update($data);
+
         $unique = BudgetRamification::where('cod' , $data['cod'])->first();
         if($unique && $unique->type == $this->type && $unique->id != $this->ramification->id){
             $this->alert('error', 'Código já cadastrado...');
         }
         else{
+            $save = $this->ramification->update($data);
             if ($save) {
                 if ($save) {
 

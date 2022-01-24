@@ -17,6 +17,7 @@ class BudgetRamification extends Model
         'status',
 
     ];
+    protected $primaryKey = 'id';
 
     /**
      * get types ramification

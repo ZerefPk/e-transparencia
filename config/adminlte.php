@@ -285,12 +285,19 @@ return [
                 [
                     'text' => 'Orçamento',
                     'icon'    => 'fas fa-fw fa-wallet',
-                    'active' => ['dashboard/budeg/ramification'],
+
                     'submenu' => [
                         [
                             'text' => 'Desdobramentos',
                             'route'  => 'dashboard.ramification.index',
                             'icon'    => 'fas fa-fw fa-code-branch',
+                            'active' => ['dashboard/budeg/ramification'],
+                        ],
+                        [
+                            'text' => 'Contas',
+                            'route'  => 'dashboard.account.index',
+                            'icon'    => 'fas fa-fw fa-file-invoice-dollar',
+                            'active' => ['dashboard/budeg/account'],
 
                         ],
                     ]
