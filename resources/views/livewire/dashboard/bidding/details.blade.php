@@ -88,6 +88,8 @@
 
                     <li class="nav-item border-right"><a class="nav-link" href="#item"
                             data-toggle="tab">Itens</a></li>
+                    <li class="nav-item border-right"><a class="nav-link" href="#wins"
+                            data-toggle="tab">Vencedores</a></li>
 
                 </ul>
             </div>
@@ -137,6 +139,7 @@
                         @livewire('dashboard.bidding.additional', ['bidding' => $bidding])
                     @endif
                     @livewire('dashboard.bidding.item', ['bidding' => $bidding])
+                    @livewire('dashboard.bidding.bidding-win', ['bidding' => $bidding])
                 </div>
 
 

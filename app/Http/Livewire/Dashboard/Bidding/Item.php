@@ -16,8 +16,6 @@ class Item extends Component
 
     public $sequence;
 
-    public $biddingItens;
-
     public $description;
     public $catmat;
     public $unity;
@@ -84,7 +82,7 @@ class Item extends Component
 
         if($save)
         {
-            $this->biddingItens = BiddingItem::where('bidding_id',  $this->bidding->id)->get();
+
             $this->alert('success', 'Item criado com sucesso!');
         }
         else{
@@ -114,7 +112,7 @@ class Item extends Component
         $this->dispatchBrowserEvent('close-form-item-edit');
         if($update)
         {
-            $this->biddingItens = BiddingItem::where('bidding_id',  $this->bidding->id)->get();
+
             $this->alert('success', 'Item atualizado com sucesso!');
         }
         else{
@@ -131,7 +129,7 @@ class Item extends Component
         $this->resetAttributes();
         if($delete)
         {
-            $this->biddingItens = BiddingItem::where('bidding_id',  $this->bidding->id)->get();
+
             $this->alert('success', 'Item removido com sucesso!');
         }
         else{
@@ -140,10 +138,12 @@ class Item extends Component
     }
     public function render()
     {
+        $biddingItens = BiddingItem::where('bidding_id',  $this->bidding->id)->get();
         $unityList = Category::where('type','bidding_unity')
         ->where('status', true)->pluck('category');
         return view('livewire.dashboard.bidding.item', [
             'unityList' => $unityList,
+            'biddingItens' => $biddingItens,
         ]);
     }
 }

@@ -28,5 +28,9 @@ class BiddingItem extends Model
     {
         return $this->belongsTo(Bidding::class, 'bidding_id', 'id');
     }
+    public function win()
+    {
+        return $this->hasOne(BiddingWin::class, 'bidding_item_id', 'id');
+    }
 
 }
