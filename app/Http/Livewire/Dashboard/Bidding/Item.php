@@ -15,7 +15,7 @@ class Item extends Component
     public Bidding $bidding;
 
     public $sequence;
-
+    public $method;
     public $description;
     public $catmat;
     public $unity;
@@ -52,12 +52,14 @@ class Item extends Component
             'unity',
             'quantity',
             'estimated_total_value',
-            'itemEdit'
+            'itemEdit',
+            'method'
         ]);
     }
     public function create()
     {
         $this->resetAttributes();
+        $this->method = 0;
         $item = BiddingItem::where('bidding_id', $this->bidding->id)->max('item');
 
         if($item){
@@ -67,7 +69,7 @@ class Item extends Component
         else{
             $this->sequence = 1;
         }
-        $this->dispatchBrowserEvent('open-form-item-create');
+        $this->dispatchBrowserEvent('open-form-item');
     }
     public function store()
     {
@@ -77,8 +79,10 @@ class Item extends Component
 
         $save = BiddingItem::create($dataForm);
 
+        $dataForm['estimated_total_value'] = ($dataForm['estimated_total_value']!=null) ? $dataForm['estimated_total_value'] : 0;
+
         $this->resetAttributes();
-        $this->dispatchBrowserEvent('close-form-item-create');
+        $this->dispatchBrowserEvent('close-form-item');
 
         if($save)
         {
@@ -92,6 +96,8 @@ class Item extends Component
 
     public function edit($id)
     {
+        $this->resetAttributes();
+        $this->method = 1;
         $this->itemEdit = $this->bidding->biddingItens()->find($id);
         $this->sequence = $this->itemEdit->item;
         $this->description = $this->itemEdit->description;
@@ -100,16 +106,16 @@ class Item extends Component
         $this->quantity = $this->itemEdit->quantity;
         $this->estimated_total_value = $this->itemEdit->estimated_total_value;
 
-        $this->dispatchBrowserEvent('open-form-item-edit');
+        $this->dispatchBrowserEvent('open-form-item');
 
     }
     public function update()
     {
         $dataForm =  $this->validate();
-
+        $dataForm['estimated_total_value'] = ($dataForm['estimated_total_value']!=null) ? $dataForm['estimated_total_value'] : 0;
         $update = $this->itemEdit->update($dataForm);
         $this->resetAttributes();
-        $this->dispatchBrowserEvent('close-form-item-edit');
+        $this->dispatchBrowserEvent('close-form-item');
         if($update)
         {
 
@@ -138,12 +144,14 @@ class Item extends Component
     }
     public function render()
     {
-        $biddingItens = BiddingItem::where('bidding_id',  $this->bidding->id)->get();
+
         $unityList = Category::where('type','bidding_unity')
         ->where('status', true)->pluck('category');
+        $biddingItens = BiddingItem::where('bidding_id',  $this->bidding->id)->orderBy('item', 'ASC')->get();
+
         return view('livewire.dashboard.bidding.item', [
             'unityList' => $unityList,
-            'biddingItens' => $biddingItens,
+            'biddingItensA' => $biddingItens,
         ]);
     }
 }
