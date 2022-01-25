@@ -271,7 +271,15 @@ return [
 
         ],
 
-        ['header' => 'Configurações do sistema'],
+        ['header' => 'DESPESAS'],
+        [
+            'text' => 'Empenhos',
+            'route' => 'dashboard.effort.index',
+            'icon' => 'fas fa-fw fa-receipt',
+            'active' => ['dashboard/effort/*']
+
+        ],
+        ['header' => 'CONFIGURAÇÕES DO SISTEMA'],
         [
             'text'    => 'Tabelas',
             'icon'    => 'fas fa-fw fa-table',

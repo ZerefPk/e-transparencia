@@ -1,23 +1,23 @@
-@section('title', 'Dashboard - Ramificações')
+@section('title', 'Dashboard - Desdoboramentos')
 
 @section('content_header')
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0">Ramificações</h1>
+            <h1 class="m-0">Desdoboramentos</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Ramificações</li>
+                <li class="breadcrumb-item active">Desdoboramentos</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
 @stop
 <div>
+
     <div class="card card-primary card-outline">
         <div class="card-header">
-
-            <h3 class="card-title">Ramificações:
+            <h3 class="card-title">Desdoboramentos:
             </h3>
             <div class="card-tools">
                 <button class="btn btn-primary btn-block" wire:click="create"><i class="fa fa-plus"></i>
@@ -49,8 +49,8 @@
                             <td>
                                 <select class="form-control" style="width: 100%;" wire:model="t">
                                     <option value="">Tipo</option>
-                                    @foreach ($types as $key => $type )
-                                        <option value="{{$key}}"> {{$type}} </option>
+                                    @foreach ($types as $key => $item)
+                                        <option value="{{ $key }}"> {{ $item }} </option>
                                     @endforeach
                                 </select>
                             </td>
@@ -59,36 +59,36 @@
                                 <select class="form-control" style="width: 100%;" wire:model="s">
                                     <option value="" selected>Status</option>
                                     <option value="1">Habilitado</option>
-                                    <option value="0" > Disabilitado</option>
+                                    <option value="0"> Disabilitado</option>
                                 </select>
                             </td>
                             <td>
                                 <button wire:click="refreshQuery()" class="btn btn-warning"><i
-                                    class="fa fa-broom"></i>
+                                        class="fa fa-broom"></i>
                                 </button>
                             </td>
                         </tr>
-                        @forelse ($ramifications as $ramification)
+                        @forelse ($ramifications as $ramificationItem)
                             <tr>
                                 <td>
-                                    {{ $ramification->id }}
+                                    {{ $ramificationItem->id }}
                                 </td>
                                 <td>
-                                    {{ $ramification->cod }}
+                                    {{ $ramificationItem->cod }}
                                 </td>
                                 <td>
-                                    {{ $ramification->description }}
+                                    {{ $ramificationItem->description }}
                                 </td>
                                 <td>
 
-                                    {{ $types[$ramification->type] }}
+                                    {{ $types[$ramificationItem->type] }}
                                 </td>
 
                                 <td>
-                                    {{ $ramification->status ? 'Habilitado' : 'Desabilitado' }}
+                                    {{ $ramificationItem->status ? 'Habilitado' : 'Desabilitado' }}
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" wire:click="edit({{$ramification->id}})">
+                                    <button class="btn btn-primary" wire:click="edit({{ $ramificationItem->id }})">
                                         <i class="fa fa-edit"></i>
                                     </button>
                                 </td>
@@ -114,17 +114,17 @@
     <!-- /.card -->
 
     <!-- Modal -->
-    <div class="modal fade" id="form-ramification" tabindex="-1" role="dialog" aria-labelledby="form-ramificationLabel"
-        aria-hidden="true" data-backdrop="static"  wire:ignore.self>
+    <div class="modal fade" id="form-ramification" tabindex="-1" role="dialog"
+        aria-labelledby="form-ramificationLabel" aria-hidden="true" data-backdrop="static" wire:ignore.self>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
 
                     <h5 class="modal-title" id="form-ramificationLabel">
-                        @if($method)
-                        Editar desdobramento
+                        @if ($method)
+                            Editar desdobramento
                         @else
-                        Novo desdobramento
+                            Novo desdobramento
                         @endif
 
                     </h5>
@@ -132,7 +132,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                @if($method)
+                @if ($method)
                     {!! Form::open(['wire:submit.prevent' => 'update']) !!}
                 @else
                     {!! Form::open(['wire:submit.prevent' => 'store']) !!}
@@ -160,18 +160,21 @@
                         <div class="col-sm-6">
                             {{ Form::label('type', 'Tipo: ') }}
 
-                            {{ Form::select('type', $types, null, ['placeholder' => 'selecione',
-                            'class' => 'form-control', 'wire:model' => 'type', 'row' => '8']) }}
+                            @if (isset($ramification) && $ramification->subProject->count() > 0)
+                            <p class="text-muted text-center">O projeto contém subprojetos</p>
+                            @else
+                            {{ Form::select('type', $types, null, ['placeholder' => 'selecione', 'class' => 'form-control', 'wire:model' => 'type']) }}
                             @error('type')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
+                            @endif
                         </div>
 
                         <div class="col-sm-6">
                             {{ Form::label('status', 'Status: ') }}
 
-                            {{ Form::select('status', ['1' => 'Habilitado', '0' => 'Desativado'], null, ['placeholder' => 'selecione',
-                            'class' => 'form-control', 'wire:model' => 'status', 'row' => '8']) }}
+                            {{ Form::select('status', ['1' => 'Habilitado', '0' => 'Desativado'], null, ['placeholder' => 'selecione', 'class' => 'form-control', 'wire:model' => 'status', 'row' => '8']) }}
+
                             @error('status')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -179,6 +182,31 @@
 
                     </div>
 
+
+
+                    @if ($type == 2)
+                        <div class="form-group">
+                            <div>
+                                <label for="project-select">Projeto: </label>
+
+                                <select class="form-control" id="project-select" style="width: 100%" wire:model="project_id">
+                                    <option selected >Selecione</option>
+                                    @foreach ($projects as $project)
+                                        <option value="{{ $project->id }}"
+                                            @if(isset($ramification) && $project->id == $ramification->id )
+                                            disabled
+                                        @endif
+                                        >{{ $project->getName() }}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+
+                            @error('project_id')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    @endif
 
                 </div>
                 <div class="modal-footer">
@@ -197,15 +225,17 @@
 
 @stop
 
-@section('js')
-<script>
-    window.addEventListener('open-form', event => {
-        $('#form-ramification').modal('show');
+@push('js')
 
-    });
-    window.addEventListener('close-form', event => {
-        $('#form-ramification').modal('hide');
-    });
+    <script>
+        window.addEventListener('open-form', event => {
+            $('#form-ramification').modal('show');
 
-</script>
-@stop
+        });
+        window.addEventListener('close-form', event => {
+            $('#form-ramification').modal('hide');
+        });
+    </script>
+
+
+@endpush

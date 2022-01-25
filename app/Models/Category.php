@@ -51,7 +51,9 @@ class Category extends Model
                 'contract_subject' => 'Assunto do Contrato',
                 'contract_document' => 'Tipo de Documento',
                 'contract_unity' => 'Unidade de Medida',
-            ]
+            ],
+
+
 
 
         ];

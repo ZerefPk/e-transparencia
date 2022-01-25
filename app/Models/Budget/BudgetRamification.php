@@ -14,10 +14,12 @@ class BudgetRamification extends Model
         'cod',
         'description',
         'type',
+        'project_id',
         'status',
 
     ];
     protected $primaryKey = 'id';
+    protected $foreignKey = 'project_id';
 
     /**
      * get types ramification
@@ -28,8 +30,33 @@ class BudgetRamification extends Model
 
         return [
             '1' => 'Projeto',
-            '2' => 'Ação',
-            '3' => 'SubProjeto',
+            '2' => 'SubProjeto',
+            '3' => 'Ação',
+            '4' => 'Modalidade',
         ];
+    }
+    /**
+     * get types ramification
+     * @return BudgetRamification()
+     */
+    public function subProject()
+    {
+        return $this->hasMany(BudgetRamification::class, 'project_id', 'id');
+    }
+    /**
+     * get types ramification
+     * @return BudgetRamification()
+     */
+    public function project()
+    {
+        return $this->belongsTo(BudgetRamification::class, 'project_id', 'id');
+    }
+    /**
+     * get types ramification
+     * @return string
+     */
+    public function getName()
+    {
+        return "{$this->cod} - {$this->description}";
     }
 }

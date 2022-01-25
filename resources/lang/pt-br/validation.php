@@ -192,6 +192,9 @@ return [
             '1' => 'acréscimo',
             '2' => 'decréscimo',
             '3' => 'recisão',
+        ],
+        'type' => [
+            '3' => 'SubProjeto',
         ]
     ]
 

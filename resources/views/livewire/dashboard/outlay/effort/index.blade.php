@@ -1,14 +1,14 @@
-@section('title', 'Dashboard - Contratos')
+@section('title', 'Dashboard - Empenhos')
 
 @section('content_header')
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0">Contratos</h1>
+            <h1 class="m-0">Empenhos</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Contratos</li>
+                <li class="breadcrumb-item active">Empenhos</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
@@ -17,10 +17,10 @@
     <div class="card card-primary card-outline">
         <div class="card-header">
 
-            <h3 class="card-title">Contratos:
+            <h3 class="card-title">Empenhos:
             </h3>
             <div class="card-tools">
-                <a class="btn btn-primary btn-block" href="{{route('dashboard.contract.create')}}"><i class="fa fa-plus"></i>
+                <a class="btn btn-primary btn-block" href="{{route('dashboard.effort.create')}}"><i class="fa fa-plus"></i>
                     Novo</a>
             </div>
         </div>
@@ -32,7 +32,7 @@
                             <th style="width: 10px">#</th>
                             <th>Ano</th>
                             <th>Numero</th>
-                            <th>Fornecedor</th>
+                            <th>Favorecido</th>
 
                             <th>Status</th>
                             <th>Ação</th>
@@ -51,10 +51,10 @@
                                 </select>
                             </td>
                             <td >
-                                <input type="text" class="form-control" wire:model="n" placeholder="Numero do Contrato">
+                                <input type="text" class="form-control" wire:model="n" placeholder="Numero do empenho">
                             </td>
                             <td>
-                                <input type="text" class="form-control" wire:model="f" placeholder="Fornecedor">
+                                <input type="text" class="form-control" wire:model="f" placeholder="Favorecido">
                             </td>
 
                             <td>
@@ -70,31 +70,32 @@
                                 </button>
                             </td>
                         </tr>
-                        @forelse ($contracts as $contract)
+                        @forelse ($efforts as $effort)
                             <tr>
                                 <th scope="row">
-                                    {{ $contract->id }}
+                                    {{ $effort->id }}
                                 </th>
                                 <td>
-                                    {{ $contract->year }}
+                                    {{ $effort->year }}
                                 </td>
                                 <td>
-                                    {{ $contract->number }}
+                                    {{ $effort->number }}
                                 </td>
                                 <td class="text-uppercase">
-                                    {{$contract->provider->corporate_name}}
-                                    @if ($contract->provider->type)
-                                        - {{ $contract->provider->cnpj }}
+                                    {{$effort->provider->corporate_name}}
+                                    @if ($effort->provider->type)
+                                        - {{ $effort->provider->cnpj }}
                                     @else
-                                        - {{ $contract->provider->cpf }}
+                                        - {{ $effort->provider->cpf }}
                                     @endif
                                 </td>
 
+
                                 <td>
-                                    {{ $contract->status ? 'Habilitado' : 'Desabilitado' }}
+                                    {{ $effort->status ? 'Habilitado' : 'Desabilitado' }}
                                 </td>
                                 <td>
-                                    <a href="{{route('dashboard.contract.details', $contract->id)}}" class="btn btn-primary">
+                                    <a href="" class="btn btn-primary">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>
@@ -113,7 +114,7 @@
         <!-- /.card-body -->
         <div class="card-footer clearfix">
             <ul class="pagination pagination-sm m-0 float-right">
-                {!! $contracts->links() !!}
+                {!! $efforts->links() !!}
             </ul>
         </div>
     </div>

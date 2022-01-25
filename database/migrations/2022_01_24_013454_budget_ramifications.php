@@ -19,9 +19,15 @@ class BudgetRamifications extends Migration
             $table->string('cod');
             $table->string('description');
             $table->string('type');
+            $table->unsignedBigInteger('project_id')->nullable();
             $table->boolean('status');
             $table->timestamps();
 
+            $table->foreign('project_id')
+                ->references('id')
+                ->on('budget_ramifications')
+                ->onDelete('RESTRICT')
+                ->onUpdate('CASCADE');
         });
     }
 

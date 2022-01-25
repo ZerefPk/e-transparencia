@@ -20,4 +20,12 @@ class BudgetAccount extends Model
     ];
 
     protected $primaryKey = 'id';
+   /**
+     * get types ramification
+     * @return string
+     */
+    public function getName()
+    {
+        return "{$this->ledger_account} - {$this->description}";
+    }
 }

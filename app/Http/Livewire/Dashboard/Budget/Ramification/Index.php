@@ -18,6 +18,7 @@ class Index extends Component
     public $cod;
     public $description;
     public $type;
+    public $project_id;
     public $status;
 
     public $c;
@@ -31,12 +32,14 @@ class Index extends Component
         'cod' => 'required|min:2|max:255',
         'description' => 'required|min:2|max:255',
         'type' => 'required',
+        'project_id' => 'required_if:type,2',
         'status' => 'required',
     ];
     public $validationAttributes = [
         'cod' => '[Código]',
         'description' => '[Descrição]',
         'type' => '[Tipo]',
+        'project_id' => '[Projeto]',
         'status' => '[Status]'
     ];
     public function updatingC()
@@ -85,6 +88,7 @@ class Index extends Component
             'status',
             'method',
             'ramification',
+            'project_id'
         ]);
     }
     public function refreshQuery()
@@ -102,7 +106,15 @@ class Index extends Component
         $data = $this->validate();
         $unique = BudgetRamification::where('cod' , $data['cod'])->first();
 
-        if($unique && $unique->type == $this->type){
+        if($unique && $unique->type == $this->type &&
+        $this->project_id == $unique->project_id){
+            $this->alert('error', 'Código já cadastrado...');
+        }
+        $unique = BudgetRamification::where('cod' , $data['cod'])
+        ->where('project_id' , $data['project_id'])->first();
+
+        if($unique)
+        {
             $this->alert('error', 'Código já cadastrado...');
         }
         else{
@@ -136,6 +148,7 @@ class Index extends Component
         $this->description = $this->ramification->description;
         $this->type = $this->ramification->type;
         $this->status = $this->ramification->status;
+        $this->project_id = $this->ramification->project_id;
         $this->dispatchBrowserEvent('open-form');
     }
     public function update()
@@ -143,10 +156,22 @@ class Index extends Component
         $data = $this->validate();
 
         $unique = BudgetRamification::where('cod' , $data['cod'])->first();
-        if($unique && $unique->type == $this->type && $unique->id != $this->ramification->id){
+        if($unique && $unique->type == $this->type &&
+        $unique->id != $this->ramification->id){
+            $this->alert('error', 'Código já cadastrado...');
+        }
+        $unique = BudgetRamification::where('cod' , $data['cod'])
+        ->where('project_id' , $data['project_id'])->first();
+
+        if($unique && $unique->id != $this->ramification->id)
+        {
             $this->alert('error', 'Código já cadastrado...');
         }
         else{
+            if($this->type != 2)
+            {
+                $data['project_id'] = null;
+            }
             $save = $this->ramification->update($data);
             if ($save) {
                 if ($save) {
@@ -171,9 +196,13 @@ class Index extends Component
     {
         $ramifications = $this->query()->paginate(10);
         $types = BudgetRamification::types();
+
+        $projects = BudgetRamification::where('status', true)
+        ->where('type', 1)->orderBy('cod', 'ASC')->get();
         return view('livewire.dashboard.budget.ramification.index', [
             'ramifications' => $ramifications,
             'types' => $types,
+            'projects' => $projects,
         ]);
     }
 }
