@@ -95,7 +95,7 @@
                                     {{ $effort->status ? 'Habilitado' : 'Desabilitado' }}
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-primary">
+                                    <a href="{{route('dashboard.effort.edit', $effort->id)}}" class="btn btn-primary">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

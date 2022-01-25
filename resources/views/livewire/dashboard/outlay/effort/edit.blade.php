@@ -3,13 +3,13 @@
 @section('content_header')
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0">Empenho: Novo</h1>
+            <h1 class="m-0">Empenho: Editar</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item"> <a href="{{ route('dashboard.contract.index') }}">Empenhos</a></li>
-                <li class="breadcrumb-item active">Novo</li>
+                <li class="breadcrumb-item active">Editar</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
@@ -18,7 +18,7 @@
     {!! Form::open(['wire:submit.prevent' => 'store']) !!}
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Novo Empenho</h3>
+            <h3 class="card-title">Editar Empenho</h3>
         </div>
         <div class="card-body">
             <div class="row">
@@ -100,7 +100,11 @@
                             <select class="form-control" id="provider-select" style="width: 100%">
                                 <option selected disabled>Selecione</option>
                                 @foreach ($providers as $provider)
-                                    <option value="{{ $provider->id }}">{{ $provider->type ? $provider->cnpj : $provider->cpf }} -
+                                    <option value="{{ $provider->id }}"
+                                        @if ($provider->id == $effort->provider_id)
+                                        selected
+                                        @endif
+                                    >{{ $provider->type ? $provider->cnpj : $provider->cpf }} -
                                         {{ $provider->corporate_name }}</option>
                                 @endforeach
                             </select>
@@ -141,7 +145,8 @@
                 <div class="col">
                     {{ Form::label('number_installments', 'Parcelas:') }}
 
-                    {{Form::number('number_installments', null, ['class' => 'form-control', 'id' => 'number_installments', 'placeholder' => 'Parcelas', 'wire:model' => 'number_installments']) }}
+                    {{Form::number('number_installments', null, ['class' => 'form-control',
+                     'placeholder' => 'Parcelas', 'wire:model' => 'number_installments']) }}
 
                     @error('number_installments')
                         <p class="text-danger">{{ $message }}</p>
@@ -232,7 +237,11 @@
                             <select class="form-control" id="project-select" style="width: 100%">
                                 <option selected disabled>Selecione</option>
                                 @foreach ($projects as $project)
-                                    <option value="{{ $project->id }}">{{$project->getName()}}</option>
+                                    <option value="{{ $project->id }}"
+                                        @if ($project->id == $effort->project_id)
+                                            selected
+                                        @endif
+                                        >{{$project->getName()}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -249,7 +258,11 @@
                             <select class="form-control" id="subProject-select" style="width: 100%" wire:model='subproject_id'>
                                 <option selected>Selecione</option>
                                 @foreach ($subProjects as $subProject)
-                                    <option value="{{ $subProject->id }}">{{$subProject->getName()}}</option>
+                                    <option value="{{ $subProject->id }}"
+                                        @if ($subProject->id == $effort->subproject_id)
+                                        selected
+                                        @endif
+                                    >{{$subProject->getName()}}</option>
                                 @endforeach
                             </select>
                             @error('subproject_id')
@@ -265,7 +278,11 @@
                             <select class="form-control" id="account-select" style="width: 100%">
                                 <option selected disabled>Selecione</option>
                                 @foreach ($accounts as $account)
-                                    <option value="{{ $account->id }}">{{$account->getName()}}</option>
+                                    <option value="{{ $account->id }}"
+                                        @if ($account->id == $effort->account_id)
+                                        selected
+                                        @endif
+                                    >{{$account->getName()}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -284,7 +301,11 @@
                             <select class="form-control" id="action-select" style="width: 100%">
                                 <option selected disabled>Selecione</option>
                                 @foreach ($actions as $action)
-                                    <option value="{{ $action->id }}">{{$action->getName()}}</option>
+                                    <option value="{{ $action->id }}"
+                                        @if ($action->id == $effort->action_id)
+                                        selected
+                                        @endif
+                                        >{{$action->getName()}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -301,7 +322,11 @@
                             <select class="form-control" id="modality-select" style="width: 100%">
                                 <option selected disabled>Selecione</option>
                                 @foreach ($modalities as $modality)
-                                    <option value="{{ $modality->id }}">{{$modality->getName()}}</option>
+                                    <option value="{{ $modality->id }}"
+                                        @if ($modality->id == $effort->modality_id)
+                                        selected
+                                        @endif
+                                    >{{$modality->getName()}}</option>
                                 @endforeach
                             </select>
                         </div>

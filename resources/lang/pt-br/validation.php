@@ -194,7 +194,7 @@ return [
             '3' => 'recisão',
         ],
         'type' => [
-            '3' => 'SubProjeto',
+            '2' => 'SubProjeto',
         ]
     ]
 

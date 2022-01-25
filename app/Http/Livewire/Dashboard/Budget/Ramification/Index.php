@@ -105,18 +105,12 @@ class Index extends Component
     {
         $data = $this->validate();
         $unique = BudgetRamification::where('cod' , $data['cod'])->first();
-
-        if($unique && $unique->type == $this->type &&
-        $this->project_id == $unique->project_id){
-            $this->alert('error', 'Código já cadastrado...');
-        }
-        $unique = BudgetRamification::where('cod' , $data['cod'])
+        $unique2 = BudgetRamification::where('cod' , $data['cod'])
         ->where('project_id' , $data['project_id'])->first();
-
-        if($unique)
-        {
+        if($unique && $unique->type == $this->type && $unique2){
             $this->alert('error', 'Código já cadastrado...');
         }
+
         else{
             $save = BudgetRamification::create($data);
 
@@ -156,15 +150,9 @@ class Index extends Component
         $data = $this->validate();
 
         $unique = BudgetRamification::where('cod' , $data['cod'])->first();
-        if($unique && $unique->type == $this->type &&
-        $unique->id != $this->ramification->id){
-            $this->alert('error', 'Código já cadastrado...');
-        }
-        $unique = BudgetRamification::where('cod' , $data['cod'])
+        $unique2 = BudgetRamification::where('cod' , $data['cod'])
         ->where('project_id' , $data['project_id'])->first();
-
-        if($unique && $unique->id != $this->ramification->id)
-        {
+        if($unique && $unique->type == $this->type && $unique2 && $unique2->id != $this->ramification->id){
             $this->alert('error', 'Código já cadastrado...');
         }
         else{

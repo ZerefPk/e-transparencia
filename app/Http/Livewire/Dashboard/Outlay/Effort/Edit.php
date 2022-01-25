@@ -11,10 +11,11 @@ use App\Models\Year;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
-class Create extends Component
+class Edit extends Component
 {
     use LivewireAlert;
 
+    public Effort $effort;
     public $year;
     public $number;
     public $date_effort;
@@ -24,11 +25,11 @@ class Create extends Component
     public $number_installments;
     public $unitary_value;
     public $total_value;
-    public $adjusted_value = 0;
+    public $adjusted_value;
     public $current_value;
     public $executed_installments;
-    public $total_executed = 0;
-    public $total_to_executed = 0;
+    public $total_executed;
+    public $total_to_executed;
     public $finished;
     public $status;
     public $complement;
@@ -99,15 +100,15 @@ class Create extends Component
     {
        $data = $this->validate();
         $validate = Effort::where('year', $this->year)
-        ->where('number', $this->number)->get();
-        if(count($validate) > 0){
+        ->where('number', $this->number)->first();
+        if($validate && $validate->id != $this->effort->id){
             $this->alert('error', 'Empenho já cadastrado!');
         }
         else
         {
-            $save = Effort::create($data);
+            $save = $this->effort->update($data);
             if ($save) {
-                $this->flash('success', 'Empenho cadastrado!', [
+                $this->flash('success', 'Empenho atualizado!', [
                     'toast' => false,
                     'position' => 'center'
                 ]);
@@ -115,11 +116,42 @@ class Create extends Component
                 return redirect()->route('dashboard.effort.index');
             }
             else{
-                $this->alert('error', 'Ocorreu um erro ao cadastar o Empenho...');
+                $this->alert('error', 'Ocorreu um erro ao atualizar o Empenho...');
 
             }
 
         }
+    }
+    public function mount($effort){
+
+
+        $this->effort = $effort;
+        $this->year = $this->effort->year;
+        $this->number = $this->effort->number;
+        $this->date_effort = $this->effort->date_effort;
+        $this->type = $this->effort->type;
+        $this->reservation_number = $this->effort->reservation_number;
+        $this->description = $this->effort->description;
+        $this->number_installments = $this->effort->number_installments;
+        $this->unitary_value = $this->effort->unitary_value;
+        $this->total_value = $this->effort->total_value;
+        $this->adjusted_value = $this->effort->adjusted_value;
+        $this->current_value = $this->effort->current_value;
+        $this->executed_installments = $this->effort->executed_installments;
+        $this->total_executed = $this->effort->total_executed;
+        $this->total_to_executed = $this->effort->total_to_executed;
+        $this->finished = $this->effort->finished;
+        $this->status = $this->effort->status;
+        $this->complement = $this->effort->complement;
+        $this->process_number = $this->effort->process_number;
+        $this->provider_id = $this->effort->provider_id;
+        $this->contract_id = $this->effort->contract_id;
+        $this->project_id = $this->effort->project_id;
+        $this->subproject_id = $this->effort->subproject_id;
+        $this->action_id = $this->effort->action_id;
+        $this->budget_account_id = $this->effort->budget_account_id;
+        $this->modality_id = $this->effort->modality_id;
+
     }
     public function render()
     {
@@ -157,7 +189,7 @@ class Create extends Component
 
 
 
-        return view('livewire.dashboard.outlay.effort.create',[
+        return view('livewire.dashboard.outlay.effort.edit',[
             'years' => $years,
             'providers' => $providers,
             'contracts'=> $contracts,
@@ -170,4 +202,5 @@ class Create extends Component
 
         ]);
     }
+
 }
