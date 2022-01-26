@@ -108,9 +108,9 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        {{ Form::label('approved_value', 'Valor total estimado:') }}
+                        {{ Form::label('approved_value', 'Valor total da proposta:') }}
                         {{ Form::number('approved_value', null, ['class' => 'form-control', 'wire:model' => 'approved_value']) }}
-                        @error('value_total_estimed')
+                        @error('approved_value')
                             <p class="text-danger"> {{ $message }} </p>
                         @enderror
                     </div>
