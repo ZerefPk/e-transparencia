@@ -12,41 +12,40 @@
 
                     <th>Item</th>
                     <th>Fornecedor</th>
-                    <th>Valor homologado</th>
+                    <th>Valor da Proposta</th>
                     <th>Ação</th>
 
 
                 </tr>
             </thead>
             <tbody>
-                @forelse ($itens  as  $item)
-                    @if ($item->win)
-                    <tr>
+
+                @forelse ($wins  as  $win)
+                <tr>
 
 
-                        <td>{{ $item->win->itemBidding->item}}
+                    <td>{{ $win->id}}
 
-                        </td>
+                    </td>
 
-                        <td>
-                            {{ $item->win->provider->type ? $item->win->provider->cnpj : $item->win->provider->cpf }} -
-                            {{ $item->win->provider->corporate_name }}
-                        </td>
+                    <td>
+                        {{ $win->provider->type ? $win->provider->cnpj : $win->provider->cpf }} -
+                        {{ $win->provider->corporate_name }}
+                    </td>
 
 
-                        <td>R$ {{ number_format($item->win->approved_value, 2, ',', '.') }}</td>
-                        <td class="text-center " style="width: 10%">
-                            <div class="d-flex">
-                                <button type="button" class="btn btn-danger"
-                                    wire:click="delete({{ $item->win->id }})">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </div>
+                    <td>R$ {{ number_format($win->approved_value, 2, ',', '.') }}</td>
+                    <td class="text-center " style="width: 10%">
+                        <div class="d-flex">
+                            <button type="button" class="btn btn-danger"
+                                wire:click="delete({{ $win->id }})">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
 
-                        </td>
+                    </td>
 
-                    </tr>
-                    @endif
+                </tr>
                 @empty
                     <tr>
                         <td colspan="6">
@@ -78,7 +77,7 @@
                             <option selected >Selecione</option>
                             @foreach ($itens as $item)
                                 @if (!$item->win)
-                                    <option value="{{ $item->id }}">{{ $item->item }} - R$
+                                    <option value="{{ $item->id }}"> ITEM: {{ $item->item }} - R$
                                     {{ number_format($item->estimated_total_value, 2, ',', '.') }}</option>
                                 @endif
                             @endforeach
@@ -90,8 +89,13 @@
                     <div class="form-group">
                         <div wire:ignore>
                             <label for="provider-select">Fornecedor: </label>
-                            <select class="form-control" id="provider-select" style="width: 100%">
-                                <option selected disabled>Selecione</option>
+                            <select class="form-control" id="provider-select" style="width: 100%" x-init="
+                            $('#provider-select').select2({
+                                theme: 'bootstrap4',
+                                dropdownParent:  $('#form-win'),
+
+                            });">
+                                <option selected >Selecione</option>
                                 @foreach ($providers as $provider)
                                     <option value="{{ $provider->id }}">
                                         {{ $provider->type ? $provider->cnpj : $provider->cpf }} -
@@ -121,6 +125,7 @@
         </div>
     </div>
 </div>
+
 @section('css')
 <link rel="stylesheet" href="{{url('css/select2-bootstrap4.min.css')}}">
 <link rel="stylesheet" href="{{ url('css/select2.min.css') }}">
@@ -129,15 +134,18 @@
 @push('js')
     <script src="{{ url('js/select2.min.js') }}"></script>
     <script>
-        $('#provider-select').select2({
-            theme: 'bootstrap4',
-            dropdownParent:  $('#form-win'),
+        document.addEventListener('livewire:load', function () {
+            $('#provider-select').select2({
+                theme: 'bootstrap4',
+                dropdownParent:  $('#form-win'),
 
-        })
-        $('#provider-select').on('change', function(e) {
-                var data = $('#provider-select').select2("val");
-                @this.set('provider_id', data);
             });
+
+            $('#provider-select').on('change', function(e) {
+                    var data = $('#provider-select').select2("val");
+                    @this.set('provider_id', data);
+                });
+        });
     </script>
     <script>
         window.addEventListener('open-form-win', event => {

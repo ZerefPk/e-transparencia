@@ -17,6 +17,7 @@ class BiddingsWinrs extends Migration
             $table->id();
             $table->unsignedBigInteger('bidding_item_id');
             $table->unsignedBigInteger('provider_id');
+            $table->unsignedBigInteger('bidding_id');
             $table->string('approved_value')->nullable();
             $table->timestamps();
 
@@ -29,6 +30,12 @@ class BiddingsWinrs extends Migration
             $table->foreign('provider_id')
                 ->references('id')
                 ->on('providers')
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
+
+            $table->foreign('bidding_id')
+                ->references('id')
+                ->on('biddings')
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
 

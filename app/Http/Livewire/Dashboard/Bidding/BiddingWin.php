@@ -54,6 +54,7 @@ class BiddingWin extends Component
     public function store()
     {
         $data = $this->validate();
+        $data['bidding_id'] = $this->bidding->id;
         $save = BiddingBiddingWin::create($data);
         $this->resetAttributes();
         $this->dispatchBrowserEvent('close-form-win');
@@ -68,7 +69,7 @@ class BiddingWin extends Component
     }
     public function delete($id){
 
-        $this->delete = BiddingBiddingWin::find($id);
+        $this->delete = $this->bidding->wins()->find($id);
         $this->dispatchBrowserEvent('open-form-win-delete');
     }
     public function destroyWin()
@@ -88,13 +89,17 @@ class BiddingWin extends Component
     {
 
         $providers = Provider::where('status', true)->orderBy('corporate_name', 'ASC')->get();
-        $itens = BiddingItem::where('bidding_id', $this->bidding->id)
+        $itens = BiddingItem::where('bidding_id', $this->bidding->id)->orderBy('item', 'ASC')
                     ->get();
+
+        $wins = BiddingBiddingWin::where('bidding_id', $this->bidding->id)
+                ->orderBy('id', 'ASC')->get();
 
 
         return view('livewire.dashboard.bidding.bidding-win', [
             'providers' => $providers,
             'itens' => $itens,
+            'wins' => $wins,
 
         ]);
     }

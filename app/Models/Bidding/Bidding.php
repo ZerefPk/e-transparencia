@@ -108,11 +108,31 @@ class Bidding extends Model
     {
         return $this->hasMany(BiddingDocument::class, 'bidding_id', 'id');
     }
+    /**
+     * Get the route key for the model.
+     *
+     * @return BiddingItem
+    */
     public function biddingItens()
     {
         return $this
         ->hasMany(BiddingItem::class, 'bidding_id', 'id');
     }
+    /**
+     * Get the route key for the model.
+     *
+     * @return BiddingWin
+    */
+    public function wins()
+    {
+        return $this
+        ->hasMany(BiddingWin::class, 'bidding_id', 'id');
+    }
+    /**
+     * Get the route key for the model.
+     *
+     * @return BiddingAdditional
+    */
     public function additional()
     {
         return $this->hasOne(BiddingAdditional::class, 'bidding_id', 'id');

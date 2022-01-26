@@ -14,6 +14,7 @@ class BiddingWin extends Model
     protected $fillable = [
         'bidding_item_id',
         'provider_id',
+        'bidding_id',
         'approved_value',
     ];
     protected $primaryKey = 'id';
@@ -27,5 +28,9 @@ class BiddingWin extends Model
     public function provider()
     {
         return $this->belongsTo(Provider::class, 'provider_id', 'id');
+    }
+    public function bidding()
+    {
+        return $this->belongsTo(Bidding::class, 'bidding_id', 'id');
     }
 }
