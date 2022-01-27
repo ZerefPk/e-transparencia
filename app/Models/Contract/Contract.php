@@ -147,4 +147,13 @@ class Contract extends Model
     {
         return $this->hasMany(ContractAmendment::class, 'contract_id', 'id');
     }
+    /**
+     * Get the route key for the model.
+     *
+     * @return ContractAmendment
+    */
+    public function efforts()
+    {
+        return $this->hasMany(ContractEffort::class, 'contract_id', 'id');
+    }
 }

@@ -146,4 +146,15 @@ class Effort extends Model
     {
         return $this->belongsTo(BudgetAccount::class, 'modality_id', 'id');
     }
+
+    /**
+     * Get the account.
+     *
+     * @return string
+     */
+
+     public function getRealNumber()
+     {
+        return "{$this->year}/{$this->number}";
+     }
 }
