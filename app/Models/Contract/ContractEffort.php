@@ -17,6 +17,9 @@ class ContractEffort extends Model
 
     protected $fillable = [
         'number_effort',
+        'type_effort',
+        'total_value',
+        'date_effort',
         'slug_file',
         'extension',
         'path',
@@ -65,7 +68,15 @@ class ContractEffort extends Model
     }
     public function getRealPath()
     {
-        return Storage::url('contract/'.$this->path.$this->slug.$this->extension);
+        return Storage::url('contract/'.$this->path.$this->slug_file.$this->extension);
     }
-
+    /**
+     * Get the contract.
+     *
+     * @return string
+     */
+    function type(){
+        $types = Effort::types();
+        return $types[$this->type_effort];
+    }
 }

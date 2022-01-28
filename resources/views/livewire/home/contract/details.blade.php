@@ -228,12 +228,47 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    @if (0 > 0)
+                    @if (count($efforts))
                         <table class="table table-bordered">
+                            <thead>
+                                <tr class="text-uppercase text-center">
+                                    <th>
+                                        Empenho
+                                    </th>
+                                    <th>
+                                        Data do empenho
+                                    </th>
+                                    <th>
+                                        Tipo de empenho
+                                    </th>
+                                    <th>
+                                        Valor do empenho
+                                    </th>
+                                    <th>
+                                        Ação
+                                    </th>
+                                </tr>
+                            </thead>
                             <tbody>
-                                @foreach ($a = [] as $aditive)
-                                    <tr>
-
+                                @foreach ($efforts as $effort)
+                                    <tr class="text-center">
+                                        <th scope="row">
+                                            {{$effort->number_effort}}
+                                        </th>
+                                        <td>
+                                            {{date('m/d/Y', strtotime($effort->date_effort))}}
+                                        </td>
+                                        <td>
+                                            {{$effort->type()}}
+                                        </td>
+                                        <td>
+                                            R$ {{number_format($effort->total_value,2 , ',', '.')}}
+                                        </td>
+                                        <td >
+                                            <a href="{{$effort->getRealPath()}}" target="_blank" class="btn btn-primary">
+                                                <i class="fa fas fa-file-download"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -292,12 +327,15 @@
                                         <strong class="text-uppercase">Tipo </strong>
                                         @if ($additive->type_modification == 3)
                                            <p class="text-uppercase">Recisção Contatual</p>
+                                        @elseif($additive->type_modification == 0)
+                                        <p class="text-uppercase">Inicial</p>
                                         @else
                                             <p class="text-uppercase">Aditivo Contratual</p>
 
                                         @endif
                                         </p>
                                     </div>
+                                    @if($additive->type_modification != 0)
                                     <div class="col-sm-4">
                                         <strong class="text-uppercase">Valor
                                             @if ($additive->type_modification == 1)
@@ -320,6 +358,7 @@
 
                                         </p>
                                     </div>
+                                    @endif
                                     <div class="col-sm-4">
                                         <strong class="text-uppercase">Valor do contrato:
                                             </strong>

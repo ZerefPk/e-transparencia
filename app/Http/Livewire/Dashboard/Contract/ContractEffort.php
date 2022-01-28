@@ -22,18 +22,27 @@ class ContractEffort extends Component
     public $contractEffortSelect;
 
     public $number_effort;
+    public $type_effort;
+    public $total_value;
+    public $date_effort;
     public $effort_id;
     public $document;
 
 
     protected $rules = [
             'number_effort' => 'required|min:2|max:254',
+            'type_effort' => 'required',
+            'total_value' => 'required',
             'effort_id' => 'nullable',
+            'date_effort' => 'required|date',
             'document' => 'required|file',
         ];
 
     public $validationAttributes = [
             'number_effort' => '[Nome do arquivo]',
+            'type_effort' => '[Tipo de empenho]',
+            'total_value' => '[Valor total]',
+            'date_effort' => '[Data do empenho]',
             'effort_id' => '[Descrição]',
             'document' => '[Documento]',
         ];
@@ -44,8 +53,15 @@ class ContractEffort extends Component
 
     }
     public function resetAttributes(){
-        $this->reset(['number_effort', 'effort_id', 'document']);
+        $this->reset(['number_effort','type_effort' , 'total_value' ,'effort_id','date_effort', 'document']);
         $this->dispatchBrowserEvent('clearInput');
+    }
+    public function create()
+    {
+        $this->resetAttributes();
+
+        $this->dispatchBrowserEvent('open-form-effort');
+
     }
 
     public function store()
@@ -56,6 +72,9 @@ class ContractEffort extends Component
 
         $document = ModelContractEffort::create([
             'number_effort' => $this->number_effort,
+            'type_effort' => $this->type_effort,
+            'total_value' => $this->total_value,
+            'date_effort' => $this->date_effort,
             'path' => $path,
             'effort_id' => $this->effort_id,
             'contract_id' => $this->contract->id,
@@ -64,32 +83,35 @@ class ContractEffort extends Component
         if ($document) {
             $extension = $this->document->extension();
             $document->extension = '.'.$extension;
+
             $document->save();
             $path = $this->document->storeAs('contract/'.$path, $document->slug_file.'.'.$extension, env('FILESYSTEM_DRIVER'));
 
             if ($path) {
                 $this->resetAttributes();
-                $this->dispatchBrowserEvent('clearInput');
+                $this->dispatchBrowserEvent('close-form-effort');
                 $this->alert('success', 'Empenho incluido com sucesso');
 
             }
             else{
-                $this->resetAttributes();
+                $document->delete();
+
 
                 $this->alert('success', 'Houve um erro ao incluir o Empenho no contrato!');
-                $document->delete();
+
             }
 
         }
 
     }
+
     public function delete($id)
     {
         $document = $this->contract->efforts->find($id);
 
         if($document)
         {
-            $this->contractEffortSelect = ModelContractEffort::find($id);
+            $this->contractEffortSelect = $document;
             $this->dispatchBrowserEvent('delete-effort', ['number_effort' => $document['number_effort']]);
         }
         else{
@@ -99,7 +121,7 @@ class ContractEffort extends Component
     public function destroy()
     {
 
-        $path = Storage::delete('contract/'.$this->contractEffortSelect->path.$this->contractEffortSelect->slug.$this->contractEffortSelect->extension);
+        $path = Storage::delete('contract/'.$this->contractEffortSelect->path.$this->contractEffortSelect->slug_file.$this->contractEffortSelect->extension);
         if($path){
 
             $delete = $this->contractEffortSelect->delete();
@@ -120,11 +142,13 @@ class ContractEffort extends Component
     public function render()
     {
         $efforts = Effort::where('status', true)->get();
+        $typesEfforts = Effort::types();
 
-        $contractEfforts = ModelContractEffort::where('contract_id', $this->contract->id)->get();
+        $contractEfforts = ModelContractEffort::where('contract_id', $this->contract->id)->orderBy('date_effort')->get();
         return view('livewire.dashboard.contract.contract-effort', [
             'efforts' => $efforts,
             'contractEfforts' => $contractEfforts,
+            'typesEfforts' => $typesEfforts,
         ]);
     }
 

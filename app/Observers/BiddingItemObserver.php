@@ -37,20 +37,10 @@ class BiddingItemObserver
     public function deleted(BiddingItem $biddingItem)
     {
         $biddingItens = BiddingItem::where('bidding_id', $biddingItem->bidding_id)
-            ->orderBy('item')->where('bidding_item_group_id', null)->get();
+            ->orderBy('item')->get();
 
         $cont = 1;
         if ($biddingItens) {
-            foreach ($biddingItens as $item) {
-                $item->item = $cont;
-
-                $cont = $cont + 1;
-
-                $item->save();
-            }
-        } else {
-            $biddingItens = BiddingItem::where('bidding_id', $biddingItem->bidding_id)
-                ->orderBy('item')->get();
             foreach ($biddingItens as $item) {
                 $item->item = $cont;
 

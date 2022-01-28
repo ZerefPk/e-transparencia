@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Dashboard\Contract;
 use App\Models\Bidding\Bidding;
 use App\Models\Category;
 use App\Models\Contract\Contract;
+use App\Models\Contract\ContractAmendment;
 use App\Models\Provider\Provider;
 use App\Models\Year;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -84,6 +85,19 @@ class Create extends Component
         {
             $save = Contract::create($data);
             if ($save) {
+                $additive = ContractAmendment::create([
+                    'sequence' => 1,
+                    'description' => "INICIAL",
+                    'type_modification' => '0',
+                    'decrease_value',
+                    'addition_value',
+                    'termination_value',
+                    'total_value' => $save->overall_contract_value,
+                    'signature_date' => $save->signature_date,
+                    'contract_id' => $save->id,
+                    'start_validity' => $save->start_validity,
+                    'end_term' => $save->end_term,
+                ]);
                 $this->flash('success', 'Contrato cadastrado!', [
                     'toast' => false,
                     'position' => 'center'

@@ -140,7 +140,7 @@ class Additive extends Component
         }
     }
     public function delete($id){
-        $this->additiveEdit = $this->contract->additive()->find($id);
+        $this->additiveEdit = $this->contract->additives()->find($id);
         $this->dispatchBrowserEvent('open-form-additive-delete');
     }
     public function destroyadditive()

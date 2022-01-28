@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Bidding\BiddingItem;
+use App\Models\Contract\ContractAmendment;
 use App\Observers\BiddingItemObserver;
+use App\Observers\ContractAmendmentObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -31,5 +33,6 @@ class EventServiceProvider extends ServiceProvider
     {
         //
         BiddingItem::observe(BiddingItemObserver::class);
+        ContractAmendment::observe(ContractAmendmentObserver::class);
     }
 }

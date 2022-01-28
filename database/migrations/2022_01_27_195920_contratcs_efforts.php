@@ -17,6 +17,9 @@ class ContratcsEfforts extends Migration
         Schema::create('contracts_efforts', function (Blueprint $table) {
             $table->id();
             $table->string('number_effort');
+            $table->string('type_effort');
+            $table->decimal('total_value', 12,2);
+            $table->date('date_effort');
             $table->string('slug_file')->unique();
             $table->string('extension', 35)->nullable();
             $table->text('path', 400);

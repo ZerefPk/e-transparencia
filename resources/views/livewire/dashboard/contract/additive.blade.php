@@ -28,6 +28,8 @@
                             <td style="width: 20%">
                                 @if ($additive->type_modification == 3)
                                     Recisção Contatual
+                                @elseif($additive->type_modification == 0)
+                                    INICIAL
                                 @else
 
                                     Aditivo Contratual
@@ -35,7 +37,9 @@
                             </td>
                             <td style="width: 10%" class="text-break">
 
-                                @if ($additive->type_modification == 1)
+                                @if ($additive->type_modification == 0)
+                                -
+                                @elseif ($additive->type_modification == 1)
                                     Acréscimo: {{ number_format($additive->addition_value, 2, ',', '.') }}
                                 @elseif($additive->type_modification == 2)
                                     Decréscimo: {{ number_format($additive->decrease_value, 2, ',', '.') }}
@@ -49,10 +53,13 @@
                             </td>
                             <td class="text-center " style="width: 10%">
                                 <div class="d-flex">
-                                    <button type="button" class="btn btn-danger"
+                                    @if($additive->type_modification != 0)
+                                        <button type="button" class="btn btn-danger"
                                         wire:click="delete({{ $additive->id }})">
                                         <i class="fa fa-trash"></i>
                                     </button>
+                                    @endif
+
                                     <button type="button" wire:click="edit({{ $additive->id }})"
                                         class="btn btn-primary">
                                         <i class="fa fa-edit"></i>
@@ -80,9 +87,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     @if ($method)
-                        <h5 class="modal-title" id="form-additive-label">Editar additive</h5>
+                        <h5 class="modal-title" id="form-additive-label">Editar Aditivo</h5>
                     @else
-                        <h5 class="modal-title" id="form-additive-label">Criar histórico</h5>
+                        <h5 class="modal-title" id="form-additive-label">Criar Aditivo</h5>
                     @endif
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -97,6 +104,8 @@
                 @endif
 
                 <div class="modal-body">
+                    @if ($type_modification !=0)
+
 
                     <div class="row">
                         <div class="col-sm-6">
@@ -106,12 +115,14 @@
 
                             </div>
                         </div>
+
                         <div class="col-sm-6">
                             <div class="form-group">
                                 {{ Form::label('type_modification', 'Tipo de modificação:') }}
                                 {{ Form::select('type_modification', ['1' => 'Acréscimo',
                                 '2' => 'Decréscimo', '3' =>'Recisão'],null,['class' => 'form-control', 'placeholder' => 'Selecione' ,
-                                'wire:model' => 'type_modification']) }}
+                                'wire:model' =>
+                                'type_modification']) }}
 
                                 @error('type_modification')
                                     <p class="text-danger"> {{ $message }} </p>
@@ -159,6 +170,28 @@
                             </div>
                         </div>
                     </div>
+                    @else
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ Form::label('sequence', 'Sequência:') }}
+                                {{ Form::number('sequence', $sequence, ['class' => 'form-control', 'disabled']) }}
+
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                {{ Form::label('total_value', 'Valor total:') }}
+                                {{ Form::number('total_value', null, ['class' => 'form-control', 'wire:model' => 'total_value']) }}
+                                @error('total_value')
+                                    <p class="text-danger"> {{ $message }} </p>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    @endif
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
