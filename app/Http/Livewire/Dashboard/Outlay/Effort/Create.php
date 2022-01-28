@@ -97,14 +97,12 @@ class Create extends Component
     ];
     public function store()
     {
-       $data = $this->validate();
+        $data = $this->validate();
         $validate = Effort::where('year', $this->year)
-        ->where('number', $this->number)->get();
-        if(count($validate) > 0){
+            ->where('number', $this->number)->get();
+        if (count($validate) > 0) {
             $this->alert('error', 'Empenho já cadastrado!');
-        }
-        else
-        {
+        } else {
             $save = Effort::create($data);
             if ($save) {
                 $this->flash('success', 'Empenho cadastrado!', [
@@ -113,12 +111,9 @@ class Create extends Component
                 ]);
 
                 return redirect()->route('dashboard.effort.index');
-            }
-            else{
+            } else {
                 $this->alert('error', 'Ocorreu um erro ao cadastar o Empenho...');
-
             }
-
         }
     }
     public function render()
@@ -126,7 +121,7 @@ class Create extends Component
 
         $providers = Provider::where('status', true)->orderBy('slug', 'DESC')->get();
         $contracts = Contract::where('provider_id', $this->provider_id)->where('status', true)->orderBy('slug', 'DESC')->get();
-        $years = Year::where('status', true)->orderBy('year', 'DESC')->pluck('year','year');
+        $years = Year::where('status', true)->orderBy('year', 'DESC')->pluck('year', 'year');
         $types = Effort::types();
         $projects = BudgetRamification::where('status', true)
             ->where('type', 1)
@@ -149,18 +144,25 @@ class Create extends Component
             ->orderBy('cod', 'ASC')
             ->get();
 
-        if($this->total_value > 0 && $this->number_installments>0){
-            $this->unitary_value = round(($this->total_value + $this->adjusted_value) / $this->number_installments,2);
-            $this->current_value = round($this->total_value + $this->adjusted_value,2);
-            $this->total_to_executed = round($this->current_value - $this->total_executed,2);
+        if (
+            $this->total_value > 0 && $this->number_installments > 0
+            && is_numeric($this->adjusted_value) && is_numeric($this->total_value)
+            && is_numeric($this->number_installments)
+        ) {
+            if (is_numeric($this->number_installments)) {
+                $this->unitary_value = round(($this->total_value + ($this->adjusted_value)) / $this->number_installments, 2);
+            }
+
+            $this->current_value = round($this->total_value + ($this->adjusted_value), 2);
+            $this->total_to_executed = round($this->current_value - ($this->total_executed), 2);
         }
 
 
 
-        return view('livewire.dashboard.outlay.effort.create',[
+        return view('livewire.dashboard.outlay.effort.create', [
             'years' => $years,
             'providers' => $providers,
-            'contracts'=> $contracts,
+            'contracts' => $contracts,
             'types' => $types,
             'projects' => $projects,
             'subProjects' => $subProjects,

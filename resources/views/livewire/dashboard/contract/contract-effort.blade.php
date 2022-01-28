@@ -71,7 +71,34 @@
                 </div>
                 {{ Form::open(['wire:submit.prevent' => 'store']) }}
                 <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div wire:ignore>
+                                <label for="effort-select">Histórico do Empenho: </label>
+                                <select class="form-control" id="effort-select" style="width: 100%" x-init="$('#effort-select').select2({
+                                    theme: 'bootstrap4',
+                                    dropdownParent: $('#form-effort'),
 
+                                });">
+                                    <option selected>Selecione</option>
+                                    @foreach ($efforts as $effort)
+                                        <option value="{{ $effort->id }}">{{$effort->getRealNumber()}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Buscar</label>
+                            <button type="button" class="btn btn-primary text-center" wire:click="setEffort">
+                                <i class="fa fas fa-search"></i>
+                            </button>
+
+                        </div>
+
+                        @error('effort_id')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -125,24 +152,7 @@
 
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div wire:ignore>
-                            <label for="effort-select">Histórico do Empenho: </label>
-                            <select class="form-control" id="effort-select" style="width: 100%" x-init="$('#effort-select').select2({
-                                theme: 'bootstrap4',
-                                dropdownParent: $('#form-effort'),
 
-                            });">
-                                <option selected>Selecione</option>
-                                @foreach ($efforts as $effort)
-                                    <option value="{{ $effort->id }}">{{$effort->getRealNumber()}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        @error('effort_id')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
                     <div class="row">
                         <div class="col-sm-10">
                             <div class="form-group">

@@ -47,6 +47,20 @@ class ContractEffort extends Component
             'document' => '[Documento]',
         ];
 
+    public function setEffort()
+    {
+
+        if($this->effort_id != "")
+        {
+            $effort = Effort::find($this->effort_id);
+            if($effort){
+            $this->number_effort = $effort->getRealNumber();
+            $this->total_value = $effort->total_value;
+            $this->date_effort = $effort->date_effort;
+            $this->type_effort = $effort->type;
+            }
+        }
+    }
     public function mount($contract)
     {
         $this->contract = $contract;
