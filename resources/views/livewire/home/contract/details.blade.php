@@ -285,8 +285,8 @@
                 <h5 class="card-title text-uppercase">Aditivos</h5>
             </div>
             <div class="card-body">
-                @if ($this->contract->additives->count() > 0)
-                        @foreach ($this->contract->additives as $additive)
+                @if (count($additives) > 0)
+                        @foreach ($additives as $additive)
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex d-row">
