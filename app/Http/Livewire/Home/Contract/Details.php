@@ -21,7 +21,7 @@ class Details extends Component
         $additives = ContractAmendment::where('contract_id', $this->contract->id)->orderBy('sequence', 'ASC')->get();
         return view('livewire.home.contract.details',[
             'efforts' => $efforts,
-            'additives' = >$additives,
+            'additives' => $additives,
         ])->layout('layouts.app');
     }
 }
