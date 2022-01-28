@@ -368,6 +368,7 @@
                                 </div>
                             </div>
                           </div>
+                          <div class="my-2"></div>
 
                         @endforeach
                     @else
