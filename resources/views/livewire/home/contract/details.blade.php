@@ -282,7 +282,7 @@
         </div>
         <div class="card my-4">
             <div class="card-header">
-                <h5 class="card-title text-uppercase">Aditivos</h5>
+                <h5 class="card-title text-uppercase">Andamentos</h5>
             </div>
             <div class="card-body">
                 @if (count($additives) > 0)
