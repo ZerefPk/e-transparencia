@@ -148,6 +148,30 @@ class Edit extends Component
         $this->budget_account_id = $this->effort->budget_account_id;
         $this->modality_id = $this->effort->modality_id;
     }
+    public function calc()
+    {
+
+        $this->total_value= (is_numeric($this->total_value) && $this->total_value >=0 ) ? $this->total_value : 0;
+        $this->number_installments = (is_numeric($this->number_installments) && $this->number_installments > 0) ? $this->number_installments : 1;
+        $this->total_executed = (is_numeric($this->total_executed)) ? $this->total_executed : 0;
+        $this->total_executed = (is_numeric($this->total_executed)) ? $this->total_executed: 0;
+        $this->current_value = (is_numeric($this->current_value)) ? $this->current_value : 0;
+
+
+
+
+        if(is_numeric($this->adjusted_value)){
+            $this->current_value = round($this->total_value + ($this->adjusted_value), 2);
+            $this->unitary_value = round(($this->total_value + ($this->adjusted_value)) / $this->number_installments, 2);
+        }
+        else{
+            if($this->number_installments  > 0){
+                $this->unitary_value = round($this->total_value / $this->number_installments, 2);
+            }
+        }
+
+        $this->total_to_executed = round($this->current_value - $this->total_executed, 2);
+    }
     public function render()
     {
 
@@ -176,18 +200,9 @@ class Edit extends Component
             ->orderBy('cod', 'ASC')
             ->get();
 
-        if (
-            $this->total_value > 0 && $this->number_installments > 0
-            && is_numeric($this->adjusted_value) && is_numeric($this->total_value)
-            && is_numeric($this->number_installments)
-        ) {
-            if (is_numeric($this->number_installments)) {
-                $this->unitary_value = round(($this->total_value + ($this->adjusted_value)) / $this->number_installments, 2);
-            }
 
-            $this->current_value = round($this->total_value + ($this->adjusted_value), 2);
-            $this->total_to_executed = round($this->current_value - ($this->total_executed), 2);
-        }
+        $this->calc();
+
 
 
 
