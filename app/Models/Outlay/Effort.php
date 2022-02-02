@@ -61,7 +61,7 @@ class Effort extends Model
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom(['year', 'number'])
+            ->generateSlugsFrom(['number','year'])
             ->saveSlugsTo('slug')
             ->slugsShouldBeNoLongerThan(70);
     }

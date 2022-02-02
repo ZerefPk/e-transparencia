@@ -213,7 +213,7 @@
                             @enderror
                         </div>
 
-                        @if (isset($type) && !$type || isset($mei_company) && $mei_company)
+                        @if (isset($type) && $type || isset($mei_company) && $mei_company)
                         <div class="col-sm-12">
                             {{ Form::label('legal_nature', 'Natureza Jurídica: ') }}
 
