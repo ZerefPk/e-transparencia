@@ -3,7 +3,6 @@
 @inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
 
 @section('adminlte_css')
-    <link rel="stylesheet" href="{{url('css/toastr.min.css')}}">
     <style>
         .tox-statusbar__branding {
           display: none;

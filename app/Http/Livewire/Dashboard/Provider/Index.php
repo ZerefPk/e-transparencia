@@ -42,7 +42,7 @@ class Index extends Component
         'headquarters' => 'nullable|boolean',
         'status' => 'required|boolean',
         'type' => 'required|boolean',
-        'cnpj' => 'exclude_if:type,0|min:14|max:14|unique:providers,cnpj',
+        'cnpj' => 'exclude_if:type,0|unique:providers,cnpj',
         'first_digit'=>'exclude_if:type,1|min:3|max:3',
         'verify_digit' => 'exclude_if:type,1|min:2|max:2',
     ];
@@ -92,6 +92,13 @@ class Index extends Component
     {
         $this->reset(['q','c','s']);
     }
+    function updatingType(){
+        if(!$this->type)
+        {
+            $this->dispatchBrowserEvent('load-mask');
+        }
+
+    }
     public function create()
     {
         $this->method = 0;
@@ -116,7 +123,7 @@ class Index extends Component
             $data['cpf'] = $data['first_digit'].".###.###-".$data['verify_digit'];
         }
         $save = Provider::create($data);
-
+        dd($this->cnpj);
         if($save){
             $this->reset(['corporate_name',
                     'fantasy_name',
@@ -170,6 +177,9 @@ class Index extends Component
             $temp = str_split($this->provider->cpf, 4);
             $this->first_digit = str_replace('.', '',$temp[0]);
             $this->verify_digit = $temp[3];
+        }
+        else{
+            $this->dispatchBrowserEvent('load-mask');
         }
         $this->method = 1;
 

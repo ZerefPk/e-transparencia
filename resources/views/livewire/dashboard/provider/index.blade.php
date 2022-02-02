@@ -161,7 +161,9 @@
                             <div class="col-sm-4">
                                 {{ Form::label('cnpj', 'CNPJ:') }}
 
-                                {{ Form::text('cnpj', null, ['class' => 'form-control', 'placeholder' => 'CNPJ', 'wire:model' => 'cnpj']) }}
+                                {{ Form::text('cnpj', null, ['class' => 'form-control', 'placeholder' => 'CNPJ','id'=>'cnpj', 'wire:model' => 'cnpj', 'x-init' => '$(document).ready(function() {
+                                    $("#cnpj").mask("99.999.999/9999-99");
+                                });']) }}
                                 @error('cnpj')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -244,7 +246,9 @@
 
 @stop
 
-@section('js')
+@push('js')
+<script src="{{url('js/jquerymask.min.js')}}"></script>
+
 <script>
     window.addEventListener('open-form', event => {
         $('#form-provider').modal('show');
@@ -253,6 +257,11 @@
     window.addEventListener('close-form', event => {
         $('#form-provider').modal('hide');
     });
+    window.addEventListener('load-mask', event => {
+        $(document).ready(function() {
+            $("#cnpj").mask("99.999.999/9999-99");
+        });
+    });
 
 </script>
-@stop
+@endpush
