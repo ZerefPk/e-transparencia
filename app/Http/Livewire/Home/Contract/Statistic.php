@@ -72,7 +72,7 @@ class Statistic extends Component
                             ->name('valuePerYear')
                             ->type('line')
                             ->size(['width' => 50, 'height' => 15])
-                        ->labels($labels)
+                        ->labels([$labels])
                         ->datasets([
                             [
                             "label" => 'Valor Contratado R$: ',
@@ -113,7 +113,7 @@ class Statistic extends Component
                             ->name('valuePerContract')
                             ->type('bar')
                             ->size(['width' => 50, 'height' => 15])
-                        ->labels($labels)
+                        ->labels([$labels])
                         ->datasets([
                             [
                             "label" => $labels,
