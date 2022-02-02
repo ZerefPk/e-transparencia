@@ -98,10 +98,21 @@
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        {{ Form::label('subject_id', 'Finalidade do Contrato: ') }}
+                        {{ Form::label('subject_id', 'Assunto do Contrato: ') }}
 
                         {{ Form::select('subject_id', $subjects, null, ['placeholder' => 'Selecione', 'class' => 'form-control', 'wire:model' => 'subject_id']) }}
                         @error('subject_id')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        {{ Form::label('legal_foundation', 'Fundamento Legal: ') }}
+
+                        {{ Form::text('legal_foundation', null, ['placeholder' => 'Fundamento Legal', 'class' => 'form-control', 'wire:model' => 'legal_foundation']) }}
+                        @error('legal_foundation')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>

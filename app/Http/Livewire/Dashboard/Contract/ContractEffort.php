@@ -155,7 +155,7 @@ class ContractEffort extends Component
     }
     public function render()
     {
-        $efforts = Effort::where('status', true)->get();
+        $efforts = Effort::where('contract_id', $this->contract->id)->where('status', true)->get();
         $typesEfforts = Effort::types();
 
         $contractEfforts = ModelContractEffort::where('contract_id', $this->contract->id)->orderBy('date_effort')->get();

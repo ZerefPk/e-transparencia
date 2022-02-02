@@ -25,6 +25,7 @@ class Contracts extends Migration
             $table->unsignedBigInteger('situation_id');
             $table->unsignedBigInteger('subject_id');
             $table->string('overall_contract_value')->nullable();
+            $table->string('legal_foundation')->nullable();
             $table->date('signature_date');
             $table->date('start_validity');
             $table->date('end_term');

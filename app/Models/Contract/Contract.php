@@ -24,6 +24,7 @@ class Contract extends Model
         'form_contract_id',
         'form_payment_id',
         'overall_contract_value',
+        'legal_foundation',
         'signature_date',
         'start_validity',
         'end_term',
@@ -64,7 +65,7 @@ class Contract extends Model
     */
     public function getRealNumber()
     {
-        return "{$this->year}/{$this->number}";
+        return "{$this->number}/{$this->year}";
     }
     /**
      * Get the route key for the model.

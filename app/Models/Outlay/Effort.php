@@ -155,6 +155,6 @@ class Effort extends Model
 
      public function getRealNumber()
      {
-        return "{$this->year}/{$this->number}";
+        return "{$this->number}/{$this->year}";
      }
 }

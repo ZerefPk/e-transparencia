@@ -21,6 +21,7 @@ class Create extends Component
     public $form_contract_id;
     public $form_payment_id;
     public $overall_contract_value;
+    public $legal_foundation;
     public $signature_date;
     public $start_validity;
     public $end_term;
@@ -41,6 +42,7 @@ class Create extends Component
         'form_contract_id' => 'nullable',
         'form_payment_id' => 'required',
         'overall_contract_value' => 'required',
+        'legal_foundation' => 'nullable|min:2',
         'signature_date' => 'required|date',
         'start_validity' => 'required|date',
         'end_term'  => 'required|date',
@@ -60,6 +62,7 @@ class Create extends Component
         'form_contract_id' => '[ Tipo de Contratação ]',
         'form_payment_id' => '[ Forma de Pagamento ]',
         'overall_contract_value' => '[ Valor Total do Contrato ]',
+        'legal_foundation' => '[ Fundamento Legal ]',
         'signature_date' => '[Data da Assinatura]',
         'start_validity' => '[ Inicio da Vigência ]',
         'end_term'  => '[ Fim da Vigência ]',
@@ -67,7 +70,7 @@ class Create extends Component
         'contract_manager' => '[ Gestor do Contrato ]',
         'status' =>'[ Status ]',
         'situation_id' => '[ Situação ]',
-        'subject_id' => '[ Finalidade ]',
+        'subject_id' => '[ Assunto ]',
         'year' =>  '[ Ano ]',
         'bidding_id' => '[ Histórico da Contratação]',
         'provider_id' => '[ Fornecedor ]',

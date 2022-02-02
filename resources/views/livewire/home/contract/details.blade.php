@@ -127,6 +127,10 @@
                         </div>
                         <div class="d-flex d-row">
                             <div class="col-sm-4">
+                                <strong class="text-uppercase">Fundamento Legal:</strong>
+                               <p class="text-uppercase">{{ $contract->legal_foundation }}</p>
+                            </div>
+                            <div class="col-sm-4">
                                 <strong class="text-uppercase">Gestor:</strong>
                                <p class="text-uppercase">{{ $contract->contract_manager }}</p>
                             </div>
