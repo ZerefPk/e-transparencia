@@ -22,7 +22,6 @@ class Index extends Component
 
     public $method;
     public $queryString = ['q','c','s'];
-    public $model_id = 0;
     public $corporate_name;
     public $type;
     public $fantasy_name;
