@@ -68,8 +68,8 @@ class Index extends Component
         }
         if(isset($this->f) && $this->f != ""){
             $category = Category::where('slug', $this->f)->first();
-            $query->where('contracts.finality_id', $category->id);
-            $this->listSearch['finality'] = ['field' =>'Finalidade', 'value' => $category->category];
+            $query->where('contracts.subejct_id', $category->id);
+            $this->listSearch['subejct'] = ['field' =>'Assunto', 'value' => $category->category];
 
         }
 
@@ -80,12 +80,12 @@ class Index extends Component
     {
         $contracts = $this->query()->paginate(10);
         $situations = Category::where('type', 'contract_situation')->where('status', true)->orderBy('type', 'ASC')->get();
-        $finalities = Category::where('type', 'contract_finality')->where('status', true)->orderBy('type', 'ASC')->get();
+        $subjects = Category::where('type', 'contract_subject')->where('status', true)->orderBy('type', 'ASC')->get();
         $years = Year::where('status', true)->orderBy('year', 'DESC')->get();
         return view('livewire.home.contract.index', [
             'contracts' => $contracts,
             'situations' => $situations,
-            'finalities' => $finalities,
+            'subjects' => $subjects,
             'years' => $years,
         ])->layout('layouts.app');
     }

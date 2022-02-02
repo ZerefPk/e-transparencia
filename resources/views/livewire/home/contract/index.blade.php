@@ -51,8 +51,8 @@
                             <label>Situação:</label>
                             <select class="form-control" style="width: 100%;" name="situation" wire:model="s">
                                 <option selected value="">Todos</option>
-                                @foreach ($situations as $situation )
-                                    <option value="{{$situation->slug}}">{{$situation->category}}</option>
+                                @foreach ($subjects as $subject )
+                                    <option value="{{$subject->slug}}">{{$subject->category}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -62,7 +62,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Finalidade:</label>
-                            <select class="form-control" style="width: 100%;" name="finality" wire:model="f">
+                            <select class="form-control" style="width: 100%;" name="subject" wire:model="f">
                                 <option selected value="">Todos</option>
                                 @foreach ($finalities as $finality )
                                     <option value="{{$finality->slug}}">{{$finality->category}}</option>
