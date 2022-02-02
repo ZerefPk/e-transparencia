@@ -68,7 +68,7 @@ class Index extends Component
         }
         if(isset($this->f) && $this->f != ""){
             $category = Category::where('slug', $this->f)->first();
-            $query->where('contracts.subejct_id', $category->id);
+            $query->where('contracts.subject_id', $category->id);
             $this->listSearch['subejct'] = ['field' =>'Assunto', 'value' => $category->category];
 
         }
