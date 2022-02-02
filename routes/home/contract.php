@@ -4,6 +4,7 @@ use App\Http\Livewire\Home\Contract\{
 
     Index,
     Details,
+    Statistic
 
 };
 use Illuminate\Support\Facades\Route;
@@ -22,7 +23,9 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('contratos')->group(function () {
 
     Route::get('/', Index::class)->name('site.contract.index');
+    Route::get('/estatisticas', Statistic::class)->name('site.contract.statistic');
     Route::get('/{contract:slug}', Details::class)->name('site.contract.details');
+
 
 
 });

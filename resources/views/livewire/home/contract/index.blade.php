@@ -17,7 +17,7 @@
                 </h5>
             </div>
             <div class="p-2">
-                <a href="#" class="text-uppercase btn hover border">
+                <a href="{{route('site.contract.statistic')}}" class="text-uppercase btn hover border">
                     Ver estatísticas <i class="fa fa-arrow-alt-circle-right"></i>
                 </a>
             </div>
