@@ -73,7 +73,7 @@ class Index extends Component
 
         }
 
-        $query->orderBy('year', 'DESC')->orderBy('number', 'ASC');
+        $query->orderBy('year', 'DESC');
         return $query;
     }
     public function render()
