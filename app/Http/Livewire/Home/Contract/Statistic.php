@@ -75,7 +75,7 @@ class Statistic extends Component
                         ->labels($labels)
                         ->datasets([
                             [
-                            "label" => 'Valor Contratado R$: ',
+                            "label" => 'Valor Contratado R$',
                             'backgroundColor' => '#FFD700',
                             'data' => $datas,
                             ],
@@ -96,10 +96,10 @@ class Statistic extends Component
         {
             array_push($labels,$contract->getRealNumber());
             array_push($colors,$this->getRandomColor());
-            $total = ContractAmendment::where('type_modification', 0)->sum('total_value');
+            $total = ContractAmendment::where('contract_id', $contract->id)->where('type_modification', 0)->sum('total_value');
 
-            $adds = ContractAmendment::where('type_modification', 1)->sum('total_value');
-            $subs = ContractAmendment::where('type_modification', 2)->sum('total_value');
+            $adds = ContractAmendment::where('contract_id', $contract->id)->where('type_modification', 1)->sum('total_value');
+            $subs = ContractAmendment::where('contract_id', $contract->id)->where('type_modification', 2)->sum('total_value');
 
             $termination = ContractAmendment::where('type_modification', 3)->sum('total_value');
 
