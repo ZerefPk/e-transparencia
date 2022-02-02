@@ -42,7 +42,7 @@ class Edit extends Component
         'form_contract_id' => 'nullable',
         'form_payment_id' => 'required',
         'overall_contract_value' => 'required',
-        'legal_foundation' => 'required|min:2',
+        'legal_foundation' => 'required|min:2|max:255',
         'signature_date' => 'required|date',
         'start_validity' => 'required|date',
         'end_term'  => 'required|date',
