@@ -260,6 +260,11 @@
     window.addEventListener('load-mask', event => {
         $(document).ready(function() {
             $("#cnpj").mask("99.999.999/9999-99");
+
+        });
+        $('#cnpj').on('change', function(e) {
+                var data = $('#cnpj').val();
+                @this.set('cnpj', data);
         });
     });
 

@@ -22,7 +22,7 @@ class Index extends Component
 
     public $method;
     public $queryString = ['q','c','s'];
-
+    public $model_id = 0;
     public $corporate_name;
     public $type;
     public $fantasy_name;
@@ -34,18 +34,22 @@ class Index extends Component
     public $status;
     public $legal_nature;
 
-    protected $rules = [
-        'corporate_name' => 'required|min:3|max:255',
-        'fantasy_name' => 'nullable|min:1|max:255',
-        'legal_nature' => 'nullable|min:3|max:255',
-        'mei_company'=> 'required|boolean',
-        'headquarters' => 'nullable|boolean',
-        'status' => 'required|boolean',
-        'type' => 'required|boolean',
-        'cnpj' => 'exclude_if:type,0|unique:providers,cnpj',
-        'first_digit'=>'exclude_if:type,1|min:3|max:3',
-        'verify_digit' => 'exclude_if:type,1|min:2|max:2',
-    ];
+    protected function rules (){
+
+        $id = (isset($this->provider)) ? $this->provider->id : 0;
+        return [
+            'corporate_name' => 'required|min:3|max:255',
+            'fantasy_name' => 'nullable|min:1|max:255',
+            'legal_nature' => 'nullable|min:3|max:255',
+            'mei_company'=> 'required|boolean',
+            'headquarters' => 'nullable|boolean',
+            'status' => 'required|boolean',
+            'type' => 'required|boolean',
+            'cnpj' => 'exclude_if:type,0|unique:providers,cnpj,'.$id,
+            'first_digit'=>'exclude_if:type,1|min:3|max:3',
+            'verify_digit' => 'exclude_if:type,1|min:2|max:2',
+        ];
+    }
     protected $validationAttributes =  [
         'corporate_name' => '[ Razão Social ]',
         'fantasy_name' => '[ Nome Fantasia ]',
@@ -123,7 +127,7 @@ class Index extends Component
             $data['cpf'] = $data['first_digit'].".###.###-".$data['verify_digit'];
         }
         $save = Provider::create($data);
-        dd($this->cnpj);
+
         if($save){
             $this->reset(['corporate_name',
                     'fantasy_name',
