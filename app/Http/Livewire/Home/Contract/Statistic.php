@@ -22,19 +22,16 @@ class Statistic extends Component
     {
         $subjects = Category::where('type', 'contract_subject')->where('status', true)->where('in_grafic', true)->get();
         $labels= [];
-        $datasets = [];
+        $datas = [];
+        $colors = [];
 
         foreach ($subjects as $subject )
         {
             array_push($labels,$subject->category);
+            array_push($colors,$subject->color);
+            array_push($datas,Contract::where('subject_id', $subject->id)->where('status', true)
+            ->count());
 
-            $temp = [
-                "label" => $subject->category,
-                'backgroundColor' => $subject->color,
-                'data' => Contract::where('subject_id', $subject->id)->where('status', true)
-                ->count(),
-            ];
-            array_push($datasets,$temp);
         }
 
         $perSubject = app()->chartjs
@@ -42,7 +39,13 @@ class Statistic extends Component
                             ->type('bar')
                             ->size(['width' => 50, 'height' => 15])
                         ->labels($labels)
-                        ->datasets($datasets)
+                        ->datasets([
+                            [
+                            "label" => "Assunto",
+                            'backgroundColor' => $colors,
+                            'data' => $datas,
+                            ],
+                        ])
                         ->options([
                             "indexAxis" => 'y',
                         ]);
@@ -62,7 +65,6 @@ class Statistic extends Component
 
             array_push($datas,Contract::where('year', $year->year)->where('status', true)
             ->sum('overall_contract_value'));
-
 
         }
 
@@ -87,13 +89,13 @@ class Statistic extends Component
     {
         $contracts = Contract::where('status', true)->get();
         $labels= [];
-
-        $datasets = [];
+        $datas = [];
+        $colors = [];
 
         foreach ($contracts as $contract )
         {
             array_push($labels,$contract->getRealNumber());
-
+            array_push($colors,$this->getRandomColor());
             $total = ContractAmendment::where('type_modification', 0)->sum('total_value');
 
             $adds = ContractAmendment::where('type_modification', 1)->sum('total_value');
@@ -103,12 +105,7 @@ class Statistic extends Component
 
 
             $sum = ($total + $adds) - $subs - $termination ;
-            $temp = [
-                "label" => $contract->getRealNumber().' R$:',
-                'backgroundColor' => $this->getRandomColor(),
-                'data' => $sum,
-            ];
-            array_push($datasets, $temp);
+            array_push($datas, $sum);
 
         }
 
@@ -117,7 +114,13 @@ class Statistic extends Component
                             ->type('bar')
                             ->size(['width' => 50, 'height' => 15])
                         ->labels($labels)
-                        ->datasets($datasets)
+                        ->datasets([
+                            [
+                            "label" => "Valor Total R$",
+                            'backgroundColor' => $colors,
+                            'data' => $datas,
+                            ],
+                        ])
                         ->options([
                             "indexAxis" => 'y',
                         ]);
