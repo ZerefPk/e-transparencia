@@ -20,7 +20,7 @@
             <h3 class="card-title">Atos Normativos:
             </h3>
             <div class="card-tools">
-                <a class="btn btn-primary btn-block" href="{{route('dashboard.contract.create')}}"><i class="fa fa-plus"></i>
+                <a class="btn btn-primary btn-block" href="{{route('dashboard.nomativesacts.create')}}"><i class="fa fa-plus"></i>
                     Novo</a>
             </div>
         </div>
@@ -88,19 +88,15 @@
                                     {{ $normativeAct->number }}
                                 </td>
                                 <td class="text-uppercase">
-                                    {{$normativeAct->provider->corporate_name}}
-                                    @if ($normativeAct->provider->type)
-                                        - {{ $normativeAct->provider->cnpj }}
-                                    @else
-                                        - {{ $normativeAct->provider->cpf }}
-                                    @endif
+                                    {{$normativeAct->type->type}}
+
                                 </td>
 
                                 <td>
                                     {{ $normativeAct->status ? 'Habilitado' : 'Desabilitado' }}
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-primary">
+                                    <a href="{{route('dashboard.nomativesacts.details', $normativeAct->id)}}" class="btn btn-primary">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

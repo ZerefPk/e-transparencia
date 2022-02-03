@@ -52,8 +52,18 @@ class NormativeAct extends Model
         return $this->belongsTo(TypeNormativeAct::class, 'type_id', 'id');
     }
     /**
+    *
+    *
+    * @return string
+    */
+    public function  getRealNumber()
+    {
+        return "{$this->number}/{$this->year}";
+    }
+    /**
      * Get the options for generating the slug.
      */
+
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
