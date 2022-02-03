@@ -270,6 +270,14 @@ return [
             'active' => ['dashboard/publication/*']
 
         ],
+        ['header' => 'ATOS NORMATIVOS'],
+        [
+            'text' => 'Atos Normativos',
+            'route' => 'dashboard.nomativesacts.index',
+            'icon' => 'fas fa-fw fa-scroll',
+            'active' => ['dashboard/nomative-acts/*']
+
+        ],
 
         ['header' => 'DESPESAS'],
         [
@@ -309,6 +317,12 @@ return [
 
                         ],
                     ]
+                ],
+                [
+                    'text' => 'Tipos de Atos Normativos',
+                    'route'  => 'dashboard.typenomativesacts.index',
+                    'icon'    => 'fas fa-fw fa-columns',
+                    'active' => ['dashboard/types-nomative-acts/*']
                 ],
             ],
         ],

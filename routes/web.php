@@ -25,6 +25,8 @@ require __DIR__.'/dashboard/bidding.php';
 
 require __DIR__.'/dashboard/category.php';
 
+require __DIR__.'/dashboard/normativesActs.php';
+
 require __DIR__.'/dashboard/publication.php';
 
 require __DIR__.'/dashboard/provider.php';
