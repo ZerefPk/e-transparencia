@@ -46,19 +46,34 @@
                 </li>
                 @endif
 
-                @if ($publications->count() > 0)
+                @if ($publicationsMenu->count() > 0)
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-dark" href="#" id="publication" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     publicações
                   </a>
                   <div class="dropdown-menu" aria-labelledby="publication">
-                    @foreach ($publications as $publication )
-                      <a class="dropdown-item" href="{{route('site.publication.index', $publication)}}">{{$publication->title}}</a>
+                    @foreach ($publicationsMenu as $publicationItem )
+                      <a class="dropdown-item" href="{{route('site.publication.index', $publicationItem)}}">{{$publicationItem->title}}</a>
                     @endforeach
                   </div>
                 </li>
                 @endif
+                @if ($publicationsMenu->count() > 0)
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle text-dark" href="#" id="publication" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Atos Normativo
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="publication">
+                    <a class="dropdown-item border-bottom" href="{{route('site.normativeact.advancedQuery')}}">Consulta Avançada</a>
+                    @foreach ($typesNormativesActsMenu as $typeNormativeActItem )
+                      <a class="dropdown-item" href="{{route('site.normativeact.index', $typeNormativeActItem)}}">{{$typeNormativeActItem->type}}</a>
+                    @endforeach
+                  </div>
+                </li>
+                @endif
+
                 <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle text-dark" href="#" id="contacts" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -81,6 +96,7 @@
                     <a class="nav-link text-dark" href="">Perguntas Frequentes</a>
                 </li>
                 @endif
+
             </ul>
         </div>
     </div>

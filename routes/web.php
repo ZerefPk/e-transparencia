@@ -42,3 +42,5 @@ require __DIR__.'/home/bidding.php';
 require __DIR__.'/home/contract.php';
 
 require __DIR__.'/home/publication.php';
+
+require __DIR__.'/home/normativesActs.php';

@@ -57,7 +57,12 @@ class TypeNormativeAct extends Model
         return $can_revokeds;
 
     }
-
+    /**
+     * @return NormativeAct
+     */
+    public function noramtivesActs(){
+        return $this->hasMany(NormativeAct::class, 'type_id', 'id');
+    }
     /**
      * Get the options for generating the slug.
      */
