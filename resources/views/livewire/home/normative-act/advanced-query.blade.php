@@ -1,3 +1,11 @@
+@section('title')
+    | Atos Normativos - Consulta Avançada
+@stop
+@section('meta-description')
+
+    <meta name="description" content="Consulta Avançada">
+
+@stop
 <div>
     <div class="container">
         <h2 class="text-uppercase">Atos Normativos</h2>

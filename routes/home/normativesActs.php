@@ -4,7 +4,7 @@ use App\Http\Livewire\Home\NormativeAct\{
 
     Index,
     AdvancedQuery,
-
+    Details,
 };
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +23,7 @@ Route::prefix('atos-normativos')->group(function () {
 
     Route::get('/consulta-avancada', AdvancedQuery::class)->name('site.normativeact.advancedQuery');
     Route::get('/{typeNormativeAct:slug}', Index::class)->name('site.normativeact.index');
+    Route::get('{normativeAct}/detalhes', Details::class)->name('site.normativeact.details');
 
 
 });

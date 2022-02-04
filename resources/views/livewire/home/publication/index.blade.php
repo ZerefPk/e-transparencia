@@ -1,3 +1,11 @@
+@section('title')
+    | Publicações - {{ $publication->title }}
+@stop
+@section('meta-description')
+
+    <meta name="description" content="{{ $publication->description }}">
+
+@stop
 <div>
     <div class="container">
         <h2 class="text-uppercase">{{ $publication->title }}</h2>

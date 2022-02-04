@@ -23,6 +23,7 @@ class NormativeAct extends Model
         'description',
         'ementa',
         'publication_date',
+        'date_journal_publication',
         'status',
         'active',
         'altered',

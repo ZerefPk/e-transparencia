@@ -21,7 +21,8 @@ class NormativeActs extends Migration
             $table->string('number');
             $table->string('description');
             $table->text('ementa');
-            $table->date('publication_date')->nullable();
+            $table->date('publication_date');
+            $table->date('date_journal_publication')->nullable();
             $table->boolean('status');
             $table->boolean('active');
             $table->boolean('altered')->nullable()->default(0);

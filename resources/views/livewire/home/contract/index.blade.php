@@ -1,3 +1,11 @@
+@section('title')
+    | Contratos
+@stop
+@section('meta-description')
+
+    <meta name="description" content="Contratos">
+
+@stop
 <div>
     <div class="container">
         <h2 class="text-uppercase">Contratos</h2>

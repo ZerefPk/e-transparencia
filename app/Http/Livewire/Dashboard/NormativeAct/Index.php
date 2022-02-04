@@ -18,6 +18,22 @@ class Index extends Component
     public $s;
 
     public $queryString = ['y','n','t','s'];
+    public function updatingS()
+    {
+        $this->gotoPage(1);
+    }
+    public function updatingY()
+    {
+        $this->gotoPage(1);
+    }
+    public function updatingN()
+    {
+        $this->gotoPage(1);
+    }
+    public function updatingT()
+    {
+        $this->gotoPage(1);
+    }
     public function query()
     {
         $query = NormativeAct::query();

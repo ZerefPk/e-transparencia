@@ -28,7 +28,7 @@
                     <div class="form-group">
                         {{ Form::label('year', 'Ano: ') }}
 
-                        {{ Form::select('year', $years, null, ['placeholder' => 'Selecione um ano', 'class' => 'form-control', 'wire:model' => 'year']) }}
+                        {{ Form::select('year', $years, null, ['placeholder' => 'Selecione um ano','class' => 'form-control','wire:model' => 'year']) }}
                         @error('year')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -38,7 +38,7 @@
                     <div class="form-group">
                         {{ Form::label('number', 'Numero:') }}
 
-                        {{ Form::text('number', null, ['class' => 'form-control', 'placeholder' => 'Ex. 000001', 'wire:model' => 'number']) }}
+                        {{ Form::text('number', null, ['class' => 'form-control','placeholder' => 'Ex. 000001','wire:model' => 'number']) }}
                         @error('number')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -48,7 +48,7 @@
                     <div class="form-group">
                         {{ Form::label('type_id', 'Tipo: ') }}
 
-                        {{ Form::select('type_id', $types, null, ['placeholder' => 'Selecione um tipo', 'class' => 'form-control', 'wire:model' => 'type_id']) }}
+                        {{ Form::select('type_id', $types, null, ['placeholder' => 'Selecione um tipo','class' => 'form-control','wire:model' => 'type_id']) }}
                         @error('type_id')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -59,7 +59,7 @@
 
                 {{ Form::label('ementa', 'Ementa:') }}
 
-                {{Form::textarea('ementa', null, ['class' => 'form-control', 'id' => 'ementa', 'placeholder' => 'Ementa', 'rows' => '4', 'wire:model' => 'ementa']) }}
+                {{ Form::textarea('ementa', null, ['class' => 'form-control','id' => 'ementa','placeholder' => 'Ementa','rows' => '4','wire:model' => 'ementa']) }}
 
                 @error('ementa')
                     <p class="text-danger">{{ $message }}</p>
@@ -69,7 +69,7 @@
 
                 {{ Form::label('description', 'Descrição:') }}
 
-                {{Form::textarea('description', null, ['class' => 'form-control', 'id' => 'description', 'placeholder' => 'Descrição', 'rows' => '4', 'wire:model' => 'description']) }}
+                {{ Form::textarea('description', null, ['class' => 'form-control','id' => 'description','placeholder' => 'Descrição','rows' => '4','wire:model' => 'description']) }}
 
                 @error('description')
                     <p class="text-danger">{{ $message }}</p>
@@ -104,47 +104,96 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        {{ Form::label('active', 'Em vigor:') }}
+            @if ($journaling)
+                <div class="row">
 
-                        {{ Form::select('active', ['1' => 'Sim', '0' => 'Não'],null, ['class' => 'form-control', 'placeholder' => 'Selecione', 'wire:model' => 'active']) }}
-                        @error('active')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            {{ Form::label('active', 'Em vigor:') }}
+
+                            {{ Form::select('active', ['1' => 'Sim', '0' => 'Não'], null, ['class' => 'form-control','placeholder' => 'Selecione','wire:model' => 'active']) }}
+                            @error('active')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            {{ Form::label('publication_date', 'Data da Publicação:') }}
+
+                            {{ Form::date('publication_date', null, ['class' => 'form-control', 'wire:model' => 'publication_date']) }}
+                            @error('publication_date')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            {{ Form::label('date_journal_publication', 'Data da Publicação em Diário:') }}
+
+                            {{ Form::date('date_journal_publication', null, ['class' => 'form-control','wire:model' => 'date_journal_publication']) }}
+                            @error('date_journal_publication')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+
+                            {{ Form::label('status', 'Status:') }}
+
+                            {{ Form::select('status', ['1' => 'Habilitado', '0' => 'Desabilitado'], null, ['class' => 'form-control','placeholder' => 'Selecione','wire:model' => 'status']) }}
+                            @error('status')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="form-group">
-                        {{ Form::label('publication_date', 'Data da Publicação:') }}
+            @else
+                <div class="row">
 
-                        {{ Form::date('publication_date', null, ['class' => 'form-control', 'wire:model' => 'publication_date']) }}
-                        @error('publication_date')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
+                    <div class="col">
+                        <div class="form-group">
+                            {{ Form::label('active', 'Em vigor:') }}
+
+                            {{ Form::select('active', ['1' => 'Sim', '0' => 'Não'], null, ['class' => 'form-control','placeholder' => 'Selecione','wire:model' => 'active']) }}
+                            @error('active')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            {{ Form::label('publication_date', 'Data da Publicação:') }}
+
+                            {{ Form::date('publication_date', null, ['class' => 'form-control', 'wire:model' => 'publication_date']) }}
+                            @error('publication_date')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+
+                            {{ Form::label('status', 'Status:') }}
+
+                            {{ Form::select('status', ['1' => 'Habilitado', '0' => 'Desabilitado'], null, ['class' => 'form-control','placeholder' => 'Selecione','wire:model' => 'status']) }}
+                            @error('status')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="form-group">
-
-                        {{ Form::label('status', 'Status:') }}
-
-                        {{ Form::select('status', ['1' => 'Habilitado', '0' => 'Desabilitado'],null, ['class' => 'form-control', 'placeholder' => 'Selecione', 'wire:model' => 'status']) }}
-                        @error('status')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
-            </div>
+            @endif
         </div>
 
 
 
-       <div class="card-footer">
-        <a class="btn  btn-secondary" href="{{route('dashboard.nomativesacts.details', $normativeAct->id)}}">Cancelar</a>
-        {{ Form::submit('Salvar', ['class' => 'btn  btn-success']) }}
-       </div>
+        <div class="card-footer">
+            <a class="btn  btn-secondary"
+                href="{{ route('dashboard.nomativesacts.details', $normativeAct->id) }}">Cancelar</a>
+            {{ Form::submit('Salvar', ['class' => 'btn  btn-success']) }}
+        </div>
     </div>
 
     {!! Form::close() !!}

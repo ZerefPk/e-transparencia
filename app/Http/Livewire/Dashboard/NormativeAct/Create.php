@@ -20,11 +20,12 @@ class Create extends Component
     public $ementa;
     public $active;
     public $publication_date;
+    public $date_journal_publication;
     public $status;
     public $doc;
     public $pdf;
 
-
+    public $journaling = 0;
     protected $rules = [
 
         'year' => 'required',
@@ -34,6 +35,7 @@ class Create extends Component
         'ementa' => 'required|min:2|max:1500',
         'active' => 'required',
         'publication_date' => 'required',
+        'date_journal_publication' => 'nullable',
         'status' => 'required',
         'doc' => 'nullable|file|mimes:docx,doc',
         'pdf' => 'nullable|file|mimes:pdf',
@@ -48,11 +50,13 @@ class Create extends Component
         'ementa' => '[Ementa]',
         'active' => '[Em vigor]',
         'publication_date' => '[Data da Publicação]',
+        'date_journal_publication' => '[Data da Publicação em diário]',
         'status' => '[Status]',
         'doc' => '[DOCX, DOC]',
         'pdf' => '[PDF]',
 
     ];
+
     public function store()
     {
         $data = $this->validate();
@@ -101,6 +105,10 @@ class Create extends Component
     {
         $years = Year::where('status', true)->orderBy('year', 'DESC')->pluck('year','year');
         $types = TypeNormativeAct::where('status', true)->orderBy('type', 'DESC')->pluck('type', 'id');
+        if(isset($this->type_id)){
+            $typeNormativeAct = TypeNormativeAct::find($this->type_id);
+            $this->journaling = $typeNormativeAct->journaling;
+        }
         return view('livewire.dashboard.normative-act.create', [
             'years' => $years,
             'types' => $types,

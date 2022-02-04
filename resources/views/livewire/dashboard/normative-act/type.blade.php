@@ -117,18 +117,35 @@
                     {!! Form::open(['wire:submit.prevent' => 'store']) !!}
                 @endif
                 <div class="modal-body">
+                    <div class="form-group">
+                        {{ Form::label('type', 'Tipo:') }}
 
+                        {{ Form::text('type', null, ['class' => 'form-control', 'placeholder' => 'Tipo', 'wire:model' => 'type']) }}
+                        @error('type')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('plural', 'Plural:') }}
 
+                        {{ Form::text('plural', null, ['class' => 'form-control', 'placeholder' => 'Plural', 'wire:model' => 'plural']) }}
+                        @error('plural')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="row">
-                        <div class="col-sm-8">
-                            {{ Form::label('type', 'Tipo:') }}
 
-                            {{ Form::text('type', null, ['class' => 'form-control', 'placeholder' => 'Tipo', 'wire:model' => 'type']) }}
-                            @error('type')
+                        <div class="col-sm-6">
+                            {{ Form::label('journaling', 'Publicado em Diário: ') }}
+
+                            {{ Form::select('journaling', ['1' => 'Sim', '0' => 'Não'], null, ['placeholder' => 'selecione',
+                            'class' => 'form-control', 'wire:model' => 'journaling', 'row' => '8']) }}
+                            @error('journaling')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="col-sm-4">
+
+                        <div class="col-sm-6">
                             {{ Form::label('status', 'Status: ') }}
 
                             {{ Form::select('status', ['1' => 'Habilitado', '0' => 'Desativado'], null, ['placeholder' => 'selecione',
@@ -139,15 +156,7 @@
                         </div>
 
                     </div>
-                    <div class="form-group">
-                        {{ Form::label('description', 'Descrição:') }}
-
-                        {{ Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Tipo', 'wire:model' => 'description', 'rows' => '4']) }}
-                        @error('description')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         {{ Form::label('can_altered', 'Pode Alterar: ') }}
 
                         <div>

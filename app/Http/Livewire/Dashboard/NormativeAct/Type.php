@@ -16,8 +16,9 @@ class Type extends Component
     public $method;
 
     public $type;
-    public $description;
+    public $plural;
     public $status;
+    public $journaling;
     public $can_altered;
     public $can_revoked;
 
@@ -30,8 +31,9 @@ class Type extends Component
         $id = ($this->typeNomativeAct) ? $this->typeNomativeAct->id : 0;
         return [
             'type' => 'required|min:2|max:255|unique:types_normatives_acts,type,'.$id,
-            'description' => 'nullable|min:2|max:255',
+            'plural' => 'required|min:2|max:255|unique:types_normatives_acts,type,'.$id,
             'status' => 'required',
+            'journaling' => 'required',
             'can_altered' => 'nullable',
             'can_revoked' => 'nullable',
 
@@ -39,8 +41,9 @@ class Type extends Component
     }
     protected $validationAttributes = [
         'type' => '[Tipo]',
-        'description' => '[Descrição]',
+        'plural' => '[Plural]',
         'status' => '[Status]',
+        'journaling' => '[Publicado em Diário]',
         'can_altered' => '[Pode Alterar]',
         'can_revoked' => '[Pode Revogar]',
 
@@ -49,7 +52,7 @@ class Type extends Component
     {
         $this->reset([
             'type',
-            'description',
+            'plural',
             'status',
             'can_altered',
             'can_revoked',
@@ -112,8 +115,9 @@ class Type extends Component
         $this->typeNomativeAct = TypeNormativeAct::find($id);
         //dd($this->typeNomativeAct->isCanRevoked(1));
         $this->type = $this->typeNomativeAct->type;
-        $this->description = $this->typeNomativeAct->type;
+        $this->plural = $this->typeNomativeAct->plural;
         $this->status = $this->typeNomativeAct->status;
+        $this->journaling = $this->typeNomativeAct->journaling;
         $this->can_altered = ($this->typeNomativeAct->can_altered) ? explode('|',$this->typeNomativeAct->can_altered) : null;
         $this->can_revoked = ($this->typeNomativeAct->can_revoked) ? explode('|',$this->typeNomativeAct->can_revoked) : null;
         $this->dispatchBrowserEvent('open-form');

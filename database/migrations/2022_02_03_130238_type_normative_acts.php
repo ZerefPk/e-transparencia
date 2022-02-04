@@ -17,7 +17,8 @@ class TypeNormativeActs extends Migration
         Schema::create('types_normatives_acts', function (Blueprint $table) {
             $table->id();
             $table->string('type')->unique();
-            $table->string('description')->nullable();
+            $table->string('plural')->unique();
+            $table->boolean('journaling');
             $table->boolean('status');
             $table->text('can_altered')->nullable();
             $table->text('can_revoked')->nullable();

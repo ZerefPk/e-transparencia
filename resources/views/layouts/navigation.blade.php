@@ -61,14 +61,14 @@
                 @endif
                 @if ($publicationsMenu->count() > 0)
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle text-dark" href="#" id="publication" role="button" data-toggle="dropdown"
+                  <a class="nav-link dropdown-toggle text-dark" href="#" id="normativesActs" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    Atos Normativo
+                    Atos Normativos
                   </a>
-                  <div class="dropdown-menu" aria-labelledby="publication">
+                  <div class="dropdown-menu" aria-labelledby="normativesActs">
                     <a class="dropdown-item border-bottom" href="{{route('site.normativeact.advancedQuery')}}">Consulta Avançada</a>
                     @foreach ($typesNormativesActsMenu as $typeNormativeActItem )
-                      <a class="dropdown-item" href="{{route('site.normativeact.index', $typeNormativeActItem)}}">{{$typeNormativeActItem->type}}</a>
+                      <a class="dropdown-item" href="{{route('site.normativeact.index', $typeNormativeActItem)}}">{{$typeNormativeActItem->plural}}</a>
                     @endforeach
                   </div>
                 </li>

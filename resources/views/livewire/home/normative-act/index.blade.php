@@ -1,3 +1,11 @@
+@section('title')
+    | Atos Normativos - {{$typeNormativeAct->type}}
+@stop
+@section('meta-description')
+
+    <meta name="description" content="{{ $typeNormativeAct->type }}">
+
+@stop
 <div>
     <div class="container">
         <h2 class="text-uppercase">Atos Normativos</h2>
@@ -87,7 +95,7 @@
                                     </td>
                                     <td class="text-center align-middle">
                                         <a class="btn btn-primary"
-                                            href="#">
+                                            href="{{route('site.normativeact.details', $normativeAct)}}">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     </td>
@@ -134,7 +142,7 @@
                     <div class="card my-5">
                         <div class="card-body">
                             <h5 class="text-uppercase">
-                                Não há registros de ato normativo
+                                Não há registros de {{$typeNormativeAct->type}}
                             </h5>
                         </div>
                     </div>

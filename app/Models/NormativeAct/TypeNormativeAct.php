@@ -17,8 +17,9 @@ class TypeNormativeAct extends Model
 
         'slug',
         'type',
-        'description',
+        'plural',
         'status',
+        'journaling',
         'can_altered',
         'can_revoked',
 
@@ -33,13 +34,14 @@ class TypeNormativeAct extends Model
      */
     public function getCanAltered()
     {
-        $ids = explode('|',$this->can_altered);
+        $ids = (isset($this->can_altered)) ? explode('|', $this->can_altered) : [];
         $canAltereds = [];
         foreach ($ids as $id){
             $temp = TypeNormativeAct::find($id);
             array_push($canAltereds, $temp);
         }
         return $canAltereds;
+
     }
 
     /**
@@ -48,7 +50,7 @@ class TypeNormativeAct extends Model
     public function getCanRevoked()
     {
 
-        $ids = explode('|', $this->can_revoked);
+        $ids = (isset($this->can_revoked)) ? explode('|', $this->can_revoked) : [];
         $can_revokeds = [];
         foreach ($ids as $id){
             $temp = TypeNormativeAct::find($id);
