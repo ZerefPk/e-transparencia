@@ -5,6 +5,7 @@ namespace App\Models\NormativeAct;
 use App\Models\Year;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -23,6 +24,7 @@ class NormativeAct extends Model
         'ementa',
         'publication_date',
         'status',
+        'active',
         'altered',
         'revoked',
         'slug',
@@ -67,7 +69,7 @@ class NormativeAct extends Model
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('type')
+            ->generateSlugsFrom(['number', 'year'])
             ->saveSlugsTo('slug')
             ->slugsShouldBeNoLongerThan(70);
     }
@@ -79,5 +81,21 @@ class NormativeAct extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+     /**.
+     *
+     * @return string
+     */
+    public function getPathDoc()
+    {
+        return Storage::url('normativeact/'.$this->path_doc.$this->extencion_doc);
+    }
+     /**
+     *
+     * @return string
+     */
+    public function getPathPdf()
+    {
+        return Storage::url('normativeact/'.$this->path_pdf.$this->extencion_pdf);
     }
 }

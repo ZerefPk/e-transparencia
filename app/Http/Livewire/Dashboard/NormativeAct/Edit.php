@@ -5,13 +5,16 @@ namespace App\Http\Livewire\Dashboard\NormativeAct;
 use App\Models\NormativeAct\NormativeAct;
 use App\Models\NormativeAct\TypeNormativeAct;
 use App\Models\Year;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Create extends Component
+class Edit extends Component
 {
-    use WithFileUploads,LivewireAlert;
+    use LivewireAlert, WithFileUploads;
+
+    public NormativeAct $normativeAct;
 
     public $year;
     public $type_id;
@@ -23,7 +26,6 @@ class Create extends Component
     public $status;
     public $doc;
     public $pdf;
-
 
     protected $rules = [
 
@@ -46,43 +48,69 @@ class Create extends Component
         'number' => '[Numero]',
         'description' => '[Descrição]',
         'ementa' => '[Ementa]',
-        'active' => '[Em vigor]',
+        'active' =>'[Em Vigor]',
         'publication_date' => '[Data da Publicação]',
         'status' => '[Status]',
         'doc' => '[DOCX, DOC]',
         'pdf' => '[PDF]',
 
     ];
-    public function store()
+    public function mount($id)
+    {
+        $this->normativeAct = NormativeAct::find($id);
+        $this->year = $this->normativeAct->year;
+        $this->type_id = $this->normativeAct->type_id;
+        $this->number = $this->normativeAct->number;
+        $this->description = $this->normativeAct->description;
+        $this->ementa = $this->normativeAct->ementa;
+        $this->publication_date = $this->normativeAct->publication_date;
+        $this->active = $this->normativeAct->active;
+        $this->status = $this->normativeAct->status;
+
+    }
+    public function update()
     {
         $data = $this->validate();
-        $validate = NormativeAct::where('year', $this->year)->where('number', $this->number)->where('type_id', $this->type_id)->first();
+
+        $validate = NormativeAct::where('year', $this->year)
+            ->where('number', $this->number)
+            ->where('type_id', $this->type_id)
+            ->where('id', '!=', $this->normativeAct->id )
+            ->first();
+
         if($validate){
+
             $this->alert('error', 'Ato normativo já cadastrado...');
             return;
+
         }
+
         $type = TypeNormativeAct::find($this->type_id);
-        $save = NormativeAct::create($data);
-        $save->slug = "{$type->slug}-{$save->slug}";
-        $save->save();
+        $save = $this->normativeAct->update($data);
+
+        $this->normativeAct->slug = "{$type->slug}-{$this->normativeAct->slug}";
+        $this->normativeAct->save();
 
         if($save){
+
             $path = "{$this->year}/";
             if($data['doc']){
-                $nameFile = "{$save->type->slug}-{$save->slug}";
+                $unset = Storage::delete('normativeact/'.$this->normativeAct->path_doc.$this->normativeAct->extencion_doc);
+                $nameFile = "{$this->normativeAct->type->slug}-{$this->normativeAct->slug}";
                 $extension = $this->doc->extension();
-                $save->extencion_doc = '.'.$extension;
+                $this->normativeAct->extencion_doc = '.'.$extension;
 
                 $set = $this->doc->storeAs('normativeact/'.$path, $nameFile.'.'.$extension, env('FILESYSTEM_DRIVER'));
-                $save->path_doc =  $path.$nameFile;
-                $save->save();
+                $this->normativeAct->path_doc =  $path.$nameFile;
+                $this->normativeAct->save();
             }
             if($data['pdf']){
-                $nameFile = "{$save->type->slug}-{$save->slug}";
+                $data = Storage::delete('normativeact/'.$this->normativeAct->path_pdf.$this->normativeAct->extencion_pdf);
+                $nameFile = "{$this->normativeAct->type->slug}-{$this->normativeAct->slug}";
                 $extension = $this->pdf->extension();
-                $save->extencion_pdf = '.'.$extension;
-                $save->path_pdf =  $path.$nameFile;
-                $save->save();
+                $this->normativeAct->extencion_pdf = '.'.$extension;
+                $this->normativeAct->path_pdf =  $path.$nameFile;
+                $this->normativeAct->save();
                 $set = $this->pdf->storeAs('normativeact/'.$path, $nameFile.'.'.$extension, env('FILESYSTEM_DRIVER'));
 
             }
@@ -91,7 +119,7 @@ class Create extends Component
                 'position' => 'center'
             ]);
 
-            return redirect()->route('dashboard.nomativesacts.details', $save->id);
+            return redirect()->route('dashboard.nomativesacts.details', $this->normativeAct->id);
         }
         else{
             $this->alert('error', 'Ocorreu um erro ao cadastar o Ato normativo...');
@@ -101,9 +129,10 @@ class Create extends Component
     {
         $years = Year::where('status', true)->orderBy('year', 'DESC')->pluck('year','year');
         $types = TypeNormativeAct::where('status', true)->orderBy('type', 'DESC')->pluck('type', 'id');
-        return view('livewire.dashboard.normative-act.create', [
+        return view('livewire.dashboard.normative-act.edit', [
             'years' => $years,
             'types' => $types,
         ]);
     }
+
 }

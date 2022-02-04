@@ -3,22 +3,23 @@
 @section('content_header')
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0">Ato Normativo: Novo</h1>
+            <h1 class="m-0">Ato Normativo: Editar</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item"> <a href="{{ route('dashboard.contract.index') }}">Ato Normativos</a></li>
-                <li class="breadcrumb-item active">Novo</li>
+                <li class="breadcrumb-item active">Editar</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
 @stop
 <div>
-    {!! Form::open(['wire:submit.prevent' => 'store']) !!}
+
+    {!! Form::open(['wire:submit.prevent' => 'update']) !!}
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Novo Ato Normativo</h3>
+            <h3 class="card-title">Editar Ato Normativo</h3>
         </div>
         <div class="card-body">
             <div class="row">
@@ -104,7 +105,6 @@
             </div>
 
             <div class="row">
-
                 <div class="col">
                     <div class="form-group">
                         {{ Form::label('active', 'Em vigor:') }}
@@ -142,7 +142,7 @@
 
 
        <div class="card-footer">
-        <a class="btn  btn-secondary" href="{{route('dashboard.nomativesacts.index')}}">Cancelar</a>
+        <a class="btn  btn-secondary" href="{{route('dashboard.nomativesacts.details', $normativeAct->id)}}">Cancelar</a>
         {{ Form::submit('Salvar', ['class' => 'btn  btn-success']) }}
        </div>
     </div>

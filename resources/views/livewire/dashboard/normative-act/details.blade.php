@@ -29,6 +29,15 @@
 
                     </li>
                     <li class="list-group-item">
+                        <b>Em vigor: </b>
+                        @if ($normativeAct->active)
+                            Sim
+                        @else
+                            Não
+                        @endif
+
+                    </li>
+                    <li class="list-group-item">
                         <b>Alterada: </b>
                         @if ($normativeAct->altered)
                             Sim
@@ -57,7 +66,7 @@
                     </li>
                 </ul>
 
-                <a href="#" class="btn btn-primary btn-block"><i
+                <a href="{{route('dashboard.nomativesacts.edit', $normativeAct->id)}}" class="btn btn-primary btn-block"><i
                         class="fa fa-edit"></i> <b> Editar</b></a>
             </div>
             <!-- /.card-body -->
@@ -73,6 +82,18 @@
 
                 <p class="text-muted"> {{date('d/m/Y', strtotime($normativeAct->publication_date))}}</p>
                 <hr>
+                @if(isset($normativeAct->path_doc))
+                <a href="{{$normativeAct->getPathDoc()}}" target="_blank" class="btn btn-lg btn-primary">
+                    <i class="fa fas fa-file-word"></i>
+                </a>
+                @endif
+                @if (isset($normativeAct->path_pdf))
+                <a href="{{$normativeAct->getPathPdf()}}" target="_blank" class="btn btn-lg btn-primary">
+                    <i class="fa fas fa-file-pdf"></i>
+                </a>
+                @endif
+
+
 
 
 
@@ -85,27 +106,11 @@
     <div class="col-md-9">
         <div class="card">
             <div class="card-header p-2">
-                <ul class="nav nav-pills">
-                    <li class="nav-item border-right"><a
-                            class="nav-link active"
-                            href="#documents" data-toggle="tab">Documentos Anexados</a>
-                    </li>
-                    <li class="nav-item border-right"><a class="nav-link" href="#item"
-                                data-toggle="tab">Itens</a>
-                    </li>
-                    <li class="nav-item border-right"><a class="nav-link" href="#additive"
-                                data-toggle="tab">Aditivos Contratuais</a>
-                    </li>
-                    <li class="nav-item border-right"><a class="nav-link" href="#efforts"
-                                data-toggle="tab">Empenhos</a>
-                    </li>
-                </ul>
+               <h5 class="card-title">Alteração e Revogação</h5>
             </div>
             <div class="card-body">
 
-                <div class="tab-content">
 
-                </div>
             </div>
 
         </div>
