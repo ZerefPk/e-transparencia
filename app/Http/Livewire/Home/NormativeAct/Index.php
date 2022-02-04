@@ -34,6 +34,7 @@ class Index extends Component
     {
         $query = NormativeAct::query();
         $query->where('status', true);
+        $query->where('type_id', $this->typeNormativeAct->id);
         if(isset($this->a) && $this->a != "")
         {
             $query->where('year', $this->a);
