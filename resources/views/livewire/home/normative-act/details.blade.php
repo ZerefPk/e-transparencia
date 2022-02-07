@@ -77,7 +77,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                @if (isset($normativeAct->doc))
+                @if (isset($normativeAct->path_doc))
                     <p>Para obter o arquivo completo em formato DOC, clique no link a seguir:
                         <a href="{{ route('download', ['doc', 'normativeAct' => $normativeAct]) }}" target="_blank"
                             class="btn btn-primary btn-xs">
@@ -85,7 +85,7 @@
                         </a>
                     </p>
                 @endif
-                @if (isset($normativeAct->pdf))
+                @if (isset($normativeAct->path_dpdf))
                     <p>Para obter o arquivo completo em formato PDF, clique no link a seguir:
                         <a href="{{ route('download', ['pdf', 'normativeAct' => $normativeAct]) }}" target="_blank"
                             class="btn btn-primary btn-xs">
