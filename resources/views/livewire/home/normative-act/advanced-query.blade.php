@@ -68,7 +68,7 @@
                                 <select name="" id="" class="form-control" wire:model="tI">
                                     <option value="">Selecione</option>
                                     @foreach ($types as $type)
-                                        <option value="{{ $type->slug }}">{{ $type->type }}</option>
+                                        <option value="{{ $type->slug }}">{{ $type->plural }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -102,7 +102,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-10 offset-sm-3">
-                                <button type="reset" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary" wire.click="refreshQuery">
                                     <i class="fa fa-broom"></i>
                                     Limpar
                                 </button>
