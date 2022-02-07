@@ -57,7 +57,7 @@ class AdvancedQuery extends Component
             $this->listSearch['ementa'] = ['field' =>'Ementa', 'value' => $this->e];
         }
         if(isset($this->t) && $this->t != ""){
-            $type = TypeNormativeAct::find($this->t);
+            $type = TypeNormativeAct::where('slug', $this->t)->first();
             $query->where('type_id',  $type->id);
             $this->listSearch['type'] = ['field' =>'Tipo', 'value' =>  $type->plural];
         }
