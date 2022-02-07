@@ -68,6 +68,7 @@
         @endif
     @endif
     @yield('js')
+    @stack('js')
 
 </body>
 
