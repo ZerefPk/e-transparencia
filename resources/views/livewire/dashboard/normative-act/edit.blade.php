@@ -48,7 +48,7 @@
                     <div class="form-group">
                         {{ Form::label('type_id', 'Tipo: ') }}
 
-                        {{ Form::select('type_id', $types, null, ['placeholder' => 'Selecione um tipo','class' => 'form-control','wire:model' => 'type_id']) }}
+                        {{  Form::select('type_id', $types, null, ['placeholder' => 'Selecione um tipo', 'class' => 'form-control', 'wire:model' => 'type_id']) }}
                         @error('type_id')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -59,7 +59,7 @@
 
                 {{ Form::label('ementa', 'Ementa:') }}
 
-                {{ Form::textarea('ementa', null, ['class' => 'form-control','id' => 'ementa','placeholder' => 'Ementa','rows' => '4','wire:model' => 'ementa']) }}
+                {{                 Form::textarea('ementa', null, ['class' => 'form-control', 'id' => 'ementa', 'placeholder' => 'Ementa', 'rows' => '4', 'wire:model' => 'ementa']) }}
 
                 @error('ementa')
                     <p class="text-danger">{{ $message }}</p>
@@ -69,8 +69,9 @@
 
                 {{ Form::label('description', 'Descrição:') }}
 
-                {{ Form::textarea('description', null, ['class' => 'form-control','id' => 'description','placeholder' => 'Descrição','rows' => '4','wire:model' => 'description']) }}
-
+                <div wire:ignore>
+                    {{                     Form::textarea('descriptionID', null, ['class' => 'form-control', 'id' => 'descriptionID', 'placeholder' => 'Descrição', 'rows' => '4', 'wire:model' => 'description']) }}
+                </div>
                 @error('description')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -203,5 +204,45 @@
 @stop
 @push('js')
 
+    <script>
+        tinymce.init({
+            selector: '#descriptionID',
+            language: 'pt_BR',
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'media table paste code help wordcount'
+            ],
+            menubar: "edit view format",
+            toolbar: "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent| table  | help",
+            setup: function(editor) {
+                editor.on('init change', function() {
+                    editor.save();
+                });
+                editor.on('change', function(e) {
+                    @this.set('description', editor.getContent());
+                });
+            },
 
+        });
+    </script>
+    <script>
+        window.addEventListener('alter-type', event => {
+
+            Swal.fire({
+                title: 'Tem certeza que deseja mudar o tipo de Ato Normativo?',
+                text: "Isso poderá afetar todas os atos normativos alterados e revogados.",
+                icon: false,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Confirmar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (!result.isConfirmed) {
+                    Livewire.emit('unsetTypeAlter');
+                }
+            });
+        });
+    </script>
 @endpush

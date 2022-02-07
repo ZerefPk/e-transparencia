@@ -99,4 +99,37 @@ class NormativeAct extends Model
     {
         return Storage::url('normativeact/'.$this->path_pdf.$this->extencion_pdf);
     }
+    /**
+     *
+     * @return AlterNormativeAct
+     */
+    public function alter()
+    {
+        return $this->hasMany(AlterNormativeAct::class, 'normative_act_id')->where('type', 1);
+    }
+    /**
+     *
+     * @return AlterNormativeAct
+     */
+    public function revoke()
+    {
+        return $this->hasOne(AlterNormativeAct::class, 'normative_act_id')->where('type', 0);
+    }
+    /**
+     *
+     * @return AlterNormativeAct
+     */
+    public function alters()
+    {
+        return $this->hasMany(AlterNormativeAct::class, 'parent_id')->where('type', 1);
+    }
+    /**
+     *
+     * @return AlterNormativeAct
+     */
+    public function revokes()
+    {
+        return $this->hasMany(AlterNormativeAct::class, 'parent_id')->where('type', 0);
+    }
+
 }

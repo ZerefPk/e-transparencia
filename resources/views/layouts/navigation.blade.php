@@ -46,7 +46,7 @@
                 </li>
                 @endif
 
-                @if ($publicationsMenu->count() > 0)
+                @if ($publicationsMenu->count()>0)
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-dark" href="#" id="publication" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -59,7 +59,7 @@
                   </div>
                 </li>
                 @endif
-                @if ($publicationsMenu->count() > 0)
+                @if ($typesNormativesActsMenu->count()>0)
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-dark" href="#" id="normativesActs" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">

@@ -1,5 +1,5 @@
 @section('title')
-    | Atos Normativos - {{$normativeAct->type->type}} - {{ $normativeAct->getRealNumber() }}
+    | Atos Normativos - {{ $normativeAct->type->type }} - {{ $normativeAct->getRealNumber() }}
 @stop
 @section('meta-description')
 
@@ -9,7 +9,7 @@
 
 <div>
     <div class="container">
-        <h3 class="text-uppercase">{{$normativeAct->type->type}}: {{ $normativeAct->getRealNumber() }} </h3>
+        <h3 class="text-uppercase">{{ $normativeAct->type->type }}: {{ $normativeAct->getRealNumber() }} </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -17,7 +17,8 @@
                 </li>
 
                 <li class="breadcrumb-item">
-                    <a href="{{ route('site.normativeact.index', $normativeAct->type) }}"> {{$normativeAct->type->plural}} </a>
+                    <a href="{{ route('site.normativeact.index', $normativeAct->type) }}">
+                        {{ $normativeAct->type->plural }} </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">{{ $normativeAct->getRealNumber() }}
                 </li>
@@ -25,163 +26,178 @@
         </nav>
         <div class="border-top  border-primary my-4"></div>
     </div>
-    <div class="content">
-        <div class="container">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title m-0 text-uppercase">{{$normativeAct->type->type}} nº {{ $normativeAct->number }},
-                        de {{date( 'd' ,strtotime($normativeAct->publication_date))}}
-                        de {{$mes_extenso[date( 'M' ,strtotime($normativeAct->publication_date))]}}
-                        de {{date( 'Y' ,strtotime($normativeAct->publication_date))}}
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title m-0 text-uppercase">{{ $normativeAct->type->type }} nº
+                    {{ $normativeAct->number }},
+                    de {{ date('d', strtotime($normativeAct->publication_date)) }}
+                    de {{ $mes_extenso[date('M', strtotime($normativeAct->publication_date))] }}
+                    de {{ date('Y', strtotime($normativeAct->publication_date)) }}
 
-                    </h5>
-                </div>
-                <div class="card-body p-0">
-                    <table class="table table-bordered table-striped">
-                        <tbody>
-                            <tr>
-                                <th class="table-primary">Numero da {{$normativeAct->type->type}}:</th>
-                                <td>{{ $normativeAct->number }}</td>
-                            </tr>
-                            <tr>
-                                <th class="table-primary">Ementa:</th>
-                                <td>{{ $normativeAct->ementa }}</td>
-                            </tr>
-                            <tr>
-                                <th class="table-primary">Descrição:</th>
-                                <td>{{ $normativeAct->description }}</td>
-                            </tr>
-                            @if ($normativeAct->type->journaling)
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="active tab-pane" id="basicInformation">
 
-                                <tr>
-                                    <th class="table-primary">Data da Publicação em Diário Oficial</th>
-                                    <td>{{ ($normativeAct->date_journal_publication) ? date('d/m/Y', strtotime($normativeAct->date_journal_publication)) : '-' }}</td>
-                                </tr>
-                            @endif
+                        <div class="col">
+                            <strong class="text-uppercase"> Ementa:</strong>
+                            <p class="text-break text-justify">
+                                {{ $normativeAct->ementa }}
+                            </p>
+                        </div>
 
-                            <tr>
-                                <th class="table-primary">Resolução em vigor:</th>
-                                <td>{{ $normativeAct->status == 1 ? 'SIM' : 'NÃO' }}</td>
-                            </tr>
-                            <tr>
-                                <th class="table-primary">Resolução foi alterada:</th>
-                                <td>{{ $normativeAct->altered == 1 ? 'SIM' : 'NÃO' }}</td>
-                            </tr>
-                            <tr>
-                                <th class="table-primary">Resolução foi revogada:</th>
-                                <td>{{ $normativeAct->revoked == 1 ? 'SIM' : 'NÃO' }}</td>
-                            </tr>
 
-                        </tbody>
-                    </table>
-                </div>
-                <div class="card-footer">
-                    @if (isset($normativeAct->doc))
-                        <p>Para obter o arquivo completo da resolução em formato DOC, clique no link a seguir:
-                            <a href="{{ route('download', ['doc', 'normativeAct' => $normativeAct]) }}" target="_blank"
-                                class="btn btn-primary btn-xs">
-                                Download&nbsp;<i class="fa fa-file-word"></i>
-                            </a>
-                        </p>
-                    @endif
-                    @if (isset($normativeAct->pdf))
-                        <p>Para obter o arquivo completo da resolução em formato PDF, clique no link a seguir:
-                            <a href="{{ route('download', ['pdf', 'normativeAct' => $normativeAct]) }}" target="_blank"
-                                class="btn btn-primary btn-xs">
-                                Download&nbsp;<i class="fa fa-file-pdf"></i>
-                            </a>
-                        </p>
-                    @endif
+                        <div class="d-flex d-row">
+                            <div class="col-sm-4">
+                                <strong class="text-uppercase">Em Vigor: </strong>
+                                <p>
+                                    {{ $normativeAct->active == 1 ? 'SIM' : 'NÃO' }}
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <strong class="text-uppercase">Alterada:
+                                </strong>
+                                <p>
+                                    {{ $normativeAct->altered == 1 ? 'SIM' : 'NÃO' }}
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <strong class="text-uppercase">Revogada
+                                </strong>
+                                <p>
+                                    {{ $normativeAct->revoked == 1 ? 'SIM' : 'NÃO' }}
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Essa resolução revogou a(s) seguinte(s) resolução(ões):</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                       {{-- @foreach ($normativeAct->revokes as $p)
-                            @foreach ($p->legislations as $c)
-                                <tr>
-                                    <td>
-                                        <a href="{{ route('details', $c->id) }}">
-                                            {{ $c->year }}/{{ $c->resolution }} - {{ $c->ementa }}
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endforeach--}}
-                    </tbody>
-                </table>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Essa resolução foi revogada pela seguinte(s) resolução(ões):</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        {{--@if ($normativeAct->revoke)
-                            <tr>
-                                <td>
-                                    <a href="{{ route('details', $normativeAct->revoke->revoked->id) }}">
-                                        {{ $normativeAct->revoke->revoked->year }}/{{ $data->revoke->revoked->resolution }} -
-                                        {{ $data->revoke->revoked->ementa }}
-                                    </a>
-                                </td>
-                            </tr>
-                        @endif--}}
-
-                    </tbody>
-                </table>
-
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Essa resolução alterou a(s) seguinte(s) resolução(ões):</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{--
-                        @foreach ($data->alters as $p)
-                            @foreach ($p->legislations as $c)
-                                <tr>
-                                    <td>
-                                        <a href="{{ route('details', $c->id) }}">
-                                            {{ $c->year }}/{{ $c->resolution }} - {{ $c->ementa }}
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endforeach
-                        --}}
-                    </tbody>
-                </table>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Essa resolução foi alterada pela seguinte(s) resolução(ões):</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{--
-                        @foreach ($data->alter as $p)
-                            @foreach ($p->parents as $c)
-                                <tr>
-                                    <td>
-                                        <a href="{{ route('details', $c->id) }}">
-                                            {{ $c->year }}/{{ $c->resolution }} - {{ $c->ementa }}
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endforeach
-                        --}}
-                    </tbody>
-                </table>
+            <div class="card-footer">
+                @if (isset($normativeAct->doc))
+                    <p>Para obter o arquivo completo em formato DOC, clique no link a seguir:
+                        <a href="{{ route('download', ['doc', 'normativeAct' => $normativeAct]) }}" target="_blank"
+                            class="btn btn-primary btn-xs">
+                            Download&nbsp;<i class="fa fa-file-word"></i>
+                        </a>
+                    </p>
+                @endif
+                @if (isset($normativeAct->pdf))
+                    <p>Para obter o arquivo completo em formato PDF, clique no link a seguir:
+                        <a href="{{ route('download', ['pdf', 'normativeAct' => $normativeAct]) }}" target="_blank"
+                            class="btn btn-primary btn-xs">
+                            Download&nbsp;<i class="fa fa-file-pdf"></i>
+                        </a>
+                    </p>
+                @endif
             </div>
         </div>
+        @if (count($normativeAct->alter))
+
+            <div class="card my-3">
+                <div class="card-header">
+                    <h5 class="card-title text-uppercase">Esta {{ $normativeAct->type->type }} foi alterada pelo(s)
+                        seguinte(s) Atos:</h5>
+                </div>
+                <div class="card-body">
+                    @foreach ($normativeAct->alter as $p)
+                        <li class="list-group-item">
+
+                            <a class="text-uppercase"
+                                href="{{ route('site.normativeact.details', $p->parent) }}">
+                                {{ $p->parent->type->type }} {{ $p->parent->number }},
+                                de {{ date('d', strtotime($p->parent->publication_date)) }}
+                                de {{ $mes_extenso[date('M', strtotime($p->parent->publication_date))] }}
+                                de {{ date('Y', strtotime($p->parent->publication_date)) }}
+                            </a>
+
+                        </li>
+
+                    @endforeach
+                </div>
+            </div>
+        @endif
+        @if ($normativeAct->revoke)
+            <div class="card my-3">
+                <div class="card-header">
+                    <h5 class="card-title text-uppercase">Esta {{ $normativeAct->type->type }} foi revogada pela
+                        seguinte ato:</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+
+                        <li class="list-group-item">
+
+                            <a class="text-uppercase"
+                                href="{{ route('site.normativeact.details', $normativeAct->revoke->parent) }}">
+                                {{ $normativeAct->revoke->parent->type->type }} {{ $normativeAct->revoke->parent->number }},
+                                de {{ date('d', strtotime($normativeAct->revoke->parent->publication_date)) }}
+                                de {{ $mes_extenso[date('M', strtotime($normativeAct->revoke->parent->publication_date))] }}
+                                de {{ date('Y', strtotime($normativeAct->revoke->parent->publication_date)) }}
+                            </a>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        @endif
+        @if (count($normativeAct->alters))
+            <div class="card my-3">
+                <div class="card-header">
+                    <h5 class="card-title text-uppercase">Esta {{ $normativeAct->type->type }} alterou a(s)
+                        seguinte(s)
+                        atos:</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+
+
+                        @foreach ($normativeAct->alters as $p)
+                            <li class="list-group-item">
+
+                                <a class="text-uppercase"
+                                    href="{{ route('site.normativeact.details', $p->normativeAct) }}">
+                                    {{ $p->normativeAct->type->type }} {{ $p->normativeAct->number }},
+                                    de {{ date('d', strtotime($p->normativeAct->publication_date)) }}
+                                    de {{ $mes_extenso[date('M', strtotime($p->normativeAct->publication_date))] }}
+                                    de {{ date('Y', strtotime($p->normativeAct->publication_date)) }}
+                                </a>
+
+                            </li>
+
+
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        @endif
+        @if (count($normativeAct->revokes))
+            <div class="card my-3">
+                <div class="card-header">
+                    <h5 class="card-title text-uppercase">Esta {{ $normativeAct->type->type }} revogou a(s)
+                        seguinte(s) Atos:</h5>
+                </div>
+                <div class="card-body">
+                    @foreach ($normativeAct->revokes as $p)
+                        <li class="list-group-item">
+
+                            <a class="text-uppercase"
+                                href="{{ route('site.normativeact.details', $p->normativeAct) }}">
+                                {{ $p->normativeAct->type->type }} {{ $p->normativeAct->number }},
+                                de {{ date('d', strtotime($p->normativeAct->publication_date)) }}
+                                de {{ $mes_extenso[date('M', strtotime($p->normativeAct->publication_date))] }}
+                                de {{ date('Y', strtotime($p->normativeAct->publication_date)) }}
+                            </a>
+
+                        </li>
+
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
     </div>
 </div>

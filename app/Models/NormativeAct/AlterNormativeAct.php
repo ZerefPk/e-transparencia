@@ -16,7 +16,10 @@ class AlterNormativeAct extends Model
         'type'
     ];
 
-    public function normativesActs(){
+    public function parent(){
+        return $this->hasOne(NormativeAct::class, 'id','parent_id');
+    }
+    public function normativeAct(){
         return $this->hasOne(NormativeAct::class, 'id','normative_act_id');
     }
 }

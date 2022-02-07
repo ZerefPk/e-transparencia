@@ -16,6 +16,7 @@ class Edit extends Component
 
     public NormativeAct $normativeAct;
 
+    protected $listeners = ['unsetTypeAlter' => 'unsetTypeAlter'];
     public $year;
     public $type_id;
     public $number;
@@ -34,7 +35,7 @@ class Edit extends Component
         'year' => 'required',
         'type_id' => 'required',
         'number' => 'required',
-        'description' => 'required|min:2|max:255',
+        'description' => 'required|min:2',
         'ementa' => 'required|min:2|max:1500',
         'active' => 'required',
         'publication_date' => 'required',
@@ -72,6 +73,11 @@ class Edit extends Component
         $this->active = $this->normativeAct->active;
         $this->status = $this->normativeAct->status;
 
+    }
+
+    public function unsetTypeAlter()
+    {
+        $this->type_id = $this->normativeAct->type_id;
     }
     public function update()
     {
@@ -134,9 +140,15 @@ class Edit extends Component
     {
         $years = Year::where('status', true)->orderBy('year', 'DESC')->pluck('year','year');
         $types = TypeNormativeAct::where('status', true)->orderBy('type', 'DESC')->pluck('type', 'id');
-        if(isset($this->type_id)){
+        if(isset($this->type_id) && $this->type_id != ''){
             $typeNormativeAct = TypeNormativeAct::find($this->type_id);
             $this->journaling = $typeNormativeAct->journaling;
+        }
+        else{
+            $this->journaling = 0;
+        }
+        if($this->normativeAct->type_id != $this->type_id){
+            $this->dispatchBrowserEvent('alter-type');
         }
         return view('livewire.dashboard.normative-act.edit', [
             'years' => $years,

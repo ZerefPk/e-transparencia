@@ -71,7 +71,7 @@ class TypeNormativeAct extends Model
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('type')
+            ->generateSlugsFrom('plural')
             ->saveSlugsTo('slug')
             ->slugsShouldBeNoLongerThan(70);
     }

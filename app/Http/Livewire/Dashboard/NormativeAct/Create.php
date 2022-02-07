@@ -31,7 +31,7 @@ class Create extends Component
         'year' => 'required',
         'type_id' => 'required',
         'number' => 'required',
-        'description' => 'required|min:2|max:255',
+        'description' => 'required|min:2',
         'ementa' => 'required|min:2|max:1500',
         'active' => 'required',
         'publication_date' => 'required',
@@ -105,9 +105,12 @@ class Create extends Component
     {
         $years = Year::where('status', true)->orderBy('year', 'DESC')->pluck('year','year');
         $types = TypeNormativeAct::where('status', true)->orderBy('type', 'DESC')->pluck('type', 'id');
-        if(isset($this->type_id)){
+        if(isset($this->type_id) && $this->type_id != ''){
             $typeNormativeAct = TypeNormativeAct::find($this->type_id);
             $this->journaling = $typeNormativeAct->journaling;
+        }
+        else{
+            $this->journaling = 0;
         }
         return view('livewire.dashboard.normative-act.create', [
             'years' => $years,

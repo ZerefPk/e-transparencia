@@ -91,13 +91,13 @@ class Details extends Component
         $validateRevoker = AlterNormativeAct::where('normative_act_id', $data['revoked_id'])->where('type',)->first();
         if($validate)
         {
-            $name = $validate->normativesActs->type->type.$validate->normativesActs->getRealNumber();
+            $name = $validate->normativeAct->type->type.$validate->normativeAct->getRealNumber();
             $this->alert('error', 'A '.$name.' já foi alterar por esse ATO');
             return;
         }
         if($validateRevoker)
         {
-            $name = $validate->normativesActs->type->type.$validate->normativesActs->getRealNumber();
+            $name = $validate->normativeAct->type->type.$validate->normativeAct->getRealNumber();
             $this->alert('error', 'A '.$name.' já foi revogada');
             return;
         }
@@ -111,6 +111,7 @@ class Details extends Component
         if($save)
         {
             $normative = NormativeAct::find($data['revoked_id']);
+            $normative->active = 0;
             $normative->revoked = 1;
             $normative->save();
             $this->resetPage('revoked_id');
@@ -133,7 +134,8 @@ class Details extends Component
         if(count($consult) == 0)
         {
             $normative = NormativeAct::find($normative_act_id );
-            $normative->revoked = 1;
+            $normative->active = 1;
+            $normative->revoked = 0;
             $normative->save();
             $this->alert('success', 'Removida com sucesso');
         }

@@ -19,7 +19,7 @@ class NormativeActs extends Migration
             $table->string('year', 4);
             $table->unsignedBigInteger('type_id');
             $table->string('number');
-            $table->string('description');
+            $table->text('description');
             $table->text('ementa');
             $table->date('publication_date');
             $table->date('date_journal_publication')->nullable();
