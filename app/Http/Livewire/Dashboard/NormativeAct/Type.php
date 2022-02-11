@@ -16,7 +16,9 @@ class Type extends Component
     public $method;
 
     public $type;
+    public $singular;
     public $plural;
+    public $parent_id;
     public $status;
     public $journaling;
     public $can_altered;
@@ -29,19 +31,28 @@ class Type extends Component
 
     public function rules() {
         $id = ($this->typeNomativeAct) ? $this->typeNomativeAct->id : 0;
+
         return [
-            'type' => 'required|min:2|max:255|unique:types_normatives_acts,type,'.$id,
-            'plural' => 'required|min:2|max:255|unique:types_normatives_acts,type,'.$id,
+            'singular' => 'required|min:2|max:255|unique:types_normatives_acts,singular,'.$id,
+            'plural' => 'required|min:2|max:255|unique:types_normatives_acts,plural,'.$id,
+            'type' => 'required',
+            'parent_id' => 'required_if:type,1',
             'status' => 'required',
-            'journaling' => 'required',
+            'journaling' => 'required_if:type,0',
             'can_altered' => 'nullable',
             'can_revoked' => 'nullable',
 
         ];
     }
+    protected $messages = [
+        'parent_id.required_if' => "O campo [Raiz] é obrigatório quando [Tipo] for Subtipo",
+        'journaling.required_if' => "O campo [Publicado em Diário] é obrigatório",
+    ];
     protected $validationAttributes = [
+        'singular' => '[Nome (Singular)]',
+        'plural' => '[Nome (Plural)]',
         'type' => '[Tipo]',
-        'plural' => '[Plural]',
+        'parent_id' => '[Raiz]',
         'status' => '[Status]',
         'journaling' => '[Publicado em Diário]',
         'can_altered' => '[Pode Alterar]',
@@ -51,6 +62,7 @@ class Type extends Component
     public function unSetAttr(Type $var = null)
     {
         $this->reset([
+            'singular',
             'type',
             'plural',
             'status',
@@ -88,10 +100,12 @@ class Type extends Component
     }
     public function store()
     {
+        //dd($this->singular);
         $data = $this->validate();
         //dd($data['can_altered']);
         $data['can_altered'] = ($data['can_altered']) ? implode('|',$data['can_altered']) : null;
         $data['can_revoked'] = ($data['can_revoked']) ? implode('|',$data['can_revoked']) : null;
+        $data['journaling'] = (isset($data['journaling'])) ? $data['journaling'] : 1;
         $save = TypeNormativeAct::create($data);
         if ($save) {
             $this->unSetAttr();
@@ -114,6 +128,7 @@ class Type extends Component
         $this->method = 1;
         $this->typeNomativeAct = TypeNormativeAct::find($id);
         //dd($this->typeNomativeAct->isCanRevoked(1));
+        $this->singular = $this->typeNomativeAct->singular;
         $this->type = $this->typeNomativeAct->type;
         $this->plural = $this->typeNomativeAct->plural;
         $this->status = $this->typeNomativeAct->status;
@@ -144,10 +159,15 @@ class Type extends Component
 
         }
     }
+
     public function render()
     {
+
         $typesNomativeActs = $this->query()->paginate(10);
-        $types = TypeNormativeAct::where('status', true)->get();
+        $types = TypeNormativeAct::where('status', true)->where('type', false)->get();
+
+
+
         return view('livewire.dashboard.normative-act.type', [
             'typesNomativeActs' => $typesNomativeActs,
             'types' => $types

@@ -18,6 +18,7 @@ class NormativeActs extends Migration
             $table->id();
             $table->string('year', 4);
             $table->unsignedBigInteger('type_id');
+            $table->unsignedBigInteger('subtype_id')->nullable();
             $table->string('number');
             $table->text('description');
             $table->text('ementa');
@@ -42,6 +43,11 @@ class NormativeActs extends Migration
                 ->onUpdate('CASCADE');
 
             $table->foreign('type_id')
+                ->references('id')
+                ->on('types_normatives_acts')
+                ->onDelete('RESTRICT')
+                ->onUpdate('CASCADE');
+            $table->foreign('subtype_id')
                 ->references('id')
                 ->on('types_normatives_acts')
                 ->onDelete('RESTRICT')

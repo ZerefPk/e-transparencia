@@ -16,10 +16,12 @@ class TypeNormativeAct extends Model
     protected $fillable = [
 
         'slug',
-        'type',
+        'singular',
         'plural',
         'status',
+        'parent_id',
         'journaling',
+        'type',
         'can_altered',
         'can_revoked',
 
@@ -64,6 +66,20 @@ class TypeNormativeAct extends Model
      */
     public function noramtivesActs(){
         return $this->hasMany(NormativeAct::class, 'type_id', 'id');
+    }
+    /**
+     * @return TypeNormativeAct
+     */
+
+    public function subtypes(){
+        return $this->hasMany(TypeNormativeAct::class, 'parent_id', 'id');
+    }
+    /**
+     * @return TypeNormativeAct
+     */
+
+    public function parent(){
+        return $this->belongsTo(TypeNormativeAct::class, 'parent_id', 'id');
     }
     /**
      * Get the options for generating the slug.

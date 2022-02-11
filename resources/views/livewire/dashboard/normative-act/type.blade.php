@@ -30,6 +30,7 @@
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
+                            <th>Nome</th>
                             <th>Tipo</th>
                             <th>Status</th>
                             <th>Ação</th>
@@ -37,7 +38,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="2">
+                            <td colspan="3">
                                 <input type="text" class="form-control" wire:model="t" placeholder="Tipo">
                             </td>
 
@@ -59,10 +60,18 @@
                                 <td>
                                     {{ $typeNomativeAct->id }}
                                 </td>
-                                <td>
-                                    {{ $typeNomativeAct->type }}
-                                </td>
 
+                                <td>
+                                    {{ $typeNomativeAct->singular }}
+                                </td>
+                                <td>
+                                    @if ($typeNomativeAct->type)
+                                        Subtipo: {{$typeNomativeAct->parent->singular}}
+                                    @else
+                                        Raiz
+                                    @endif
+
+                                </td>
                                 <td>
                                     {{ $typeNomativeAct->status ? 'Habilitado' : 'Desabilitado' }}
                                 </td>
@@ -117,13 +126,26 @@
                     {!! Form::open(['wire:submit.prevent' => 'store']) !!}
                 @endif
                 <div class="modal-body">
-                    <div class="form-group">
-                        {{ Form::label('type', 'Tipo:') }}
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                {{ Form::label('singular', 'Nome (Singular):') }}
 
-                        {{ Form::text('type', null, ['class' => 'form-control', 'placeholder' => 'Tipo', 'wire:model' => 'type']) }}
-                        @error('type')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
+                                {{ Form::text('singular', null, ['class' => 'form-control', 'placeholder' => 'Nome (Singular)', 'wire:model' => 'singular']) }}
+                                @error('singular')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            {{ Form::label('tipo', 'Tipo ') }}
+
+                            {{ Form::select('tipo', ['0' => 'Raiz', '1' => 'Subtipo'], null, ['placeholder' => 'selecione',
+                            'class' => 'form-control', 'wire:model' => 'type']) }}
+                            @error('tipo')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
                     <div class="form-group">
                         {{ Form::label('plural', 'Plural:') }}
@@ -133,13 +155,41 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
+                    @if ($type)
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                {{ Form::label('raiz', 'Raiz:') }}
+                                <select class="form-control" wire:model='parent_id'>
+                                    <option value="">Selecione</option>
+                                    @foreach ($typesNomativeActs as $typeNomativeAct)
+                                        <option value="{{$typeNomativeAct->id}}">{{$typeNomativeAct->singular}}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('parent_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            {{ Form::label('status', 'Status: ') }}
+
+                            {{ Form::select('status', ['1' => 'Habilitado', '0' => 'Desativado'], null, ['placeholder' => 'selecione',
+                            'class' => 'form-control', 'wire:model' => 'status']) }}
+                            @error('status')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    @else
                     <div class="row">
 
                         <div class="col-sm-6">
                             {{ Form::label('journaling', 'Publicado em Diário: ') }}
 
                             {{ Form::select('journaling', ['1' => 'Sim', '0' => 'Não'], null, ['placeholder' => 'selecione',
-                            'class' => 'form-control', 'wire:model' => 'journaling', 'row' => '8']) }}
+                            'class' => 'form-control', 'wire:model' => 'journaling']) }}
                             @error('journaling')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -149,7 +199,7 @@
                             {{ Form::label('status', 'Status: ') }}
 
                             {{ Form::select('status', ['1' => 'Habilitado', '0' => 'Desativado'], null, ['placeholder' => 'selecione',
-                            'class' => 'form-control', 'wire:model' => 'status', 'row' => '8']) }}
+                            'class' => 'form-control', 'wire:model' => 'status']) }}
                             @error('status')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -188,6 +238,8 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
+                    @endif
+
 
 
                 </div>

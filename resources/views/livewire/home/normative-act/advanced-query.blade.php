@@ -21,7 +21,7 @@
         <div class="d-flex justify-content-between">
             <div class="p-2">
                 <h5 class="text-primary text-uppercase">
-                    Consultas de Atos Normativos
+                    Consulta Avançada
                 </h5>
             </div>
             <div class="p-2 text-uppercase ">
@@ -35,7 +35,7 @@
                             @foreach ($types as $type)
 
                                 <a class="dropdown-item"
-                                    href="{{ route('site.normativeact.index', $type) }}">{{ $type->type }}</a>
+                                    href="{{ route('site.normativeact.index', $type) }}">{{ $type->plural }}</a>
 
                             @endforeach
                         </div>
@@ -50,11 +50,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title text-uppercase">
-                        Para consultar uma
-                        @foreach ($types as $type)
-                            {{ $type->type }},
-                        @endforeach
-                        o preencha qualquer um dos campos abaixo e clique em consultar.
+                        preencha qualquer um dos campos abaixo e clique em consultar.
                     </h5>
                 </div>
                 <div class="card-body">
@@ -102,7 +98,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-10 offset-sm-3">
-                                <button type="button" class="btn btn-primary" wire.click="refreshQuery">
+                                <button type="button" class="btn btn-primary" wire.click="refreshQuery()">
                                     <i class="fa fa-broom"></i>
                                     Limpar
                                 </button>
@@ -138,7 +134,7 @@
                                     <tr>
 
                                         <td class="text-center align-middle text-uppercase">
-                                            <strong>{{ $normativeAct->type->type}}</strong>
+                                            <strong>{{ $normativeAct->type->singular}}</strong>
                                         </td>
                                         <td class="text-center align-middle">
                                             <strong>{{ $normativeAct->getRealNumber() }}</strong>
@@ -197,7 +193,7 @@
                         <div class="card my-5">
                             <div class="card-body">
                                 <h5 class="text-uppercase">
-                                    Não há registros de {{ $typeNormativeAct->type }}
+                                    Não há registros de {{ $typeNormativeAct->plural }}
                                 </h5>
                             </div>
                         </div>

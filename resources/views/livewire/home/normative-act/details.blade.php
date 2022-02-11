@@ -1,5 +1,5 @@
 @section('title')
-    | Atos Normativos - {{ $normativeAct->type->type }} - {{ $normativeAct->getRealNumber() }}
+    | Atos Normativos - {{ $normativeAct->type->singular }} - {{ $normativeAct->getRealNumber() }}
 @stop
 @section('meta-description')
 
@@ -9,7 +9,7 @@
 
 <div>
     <div class="container">
-        <h3 class="text-uppercase">{{ $normativeAct->type->type }}: {{ $normativeAct->getRealNumber() }} </h3>
+        <h3 class="text-uppercase">{{ $normativeAct->type->singular }}: {{ $normativeAct->getRealNumber() }} </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -29,7 +29,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title m-0 text-uppercase">{{ $normativeAct->type->type }} nº
+                <h5 class="card-title m-0 text-uppercase">{{ $normativeAct->type->singular }} nº
                     {{ $normativeAct->number }},
                     de {{ date('d', strtotime($normativeAct->publication_date)) }}
                     de {{ $mes_extenso[date('M', strtotime($normativeAct->publication_date))] }}
@@ -99,7 +99,7 @@
 
             <div class="card my-3">
                 <div class="card-header">
-                    <h5 class="card-title text-uppercase">Esta {{ $normativeAct->type->type }} foi alterada pelo(s)
+                    <h5 class="card-title text-uppercase">Esta {{ $normativeAct->type->singular }} foi alterada pelo(s)
                         seguinte(s) Atos:</h5>
                 </div>
                 <div class="card-body">
@@ -108,7 +108,7 @@
 
                             <a class="text-uppercase"
                                 href="{{ route('site.normativeact.details', $p->parent) }}">
-                                {{ $p->parent->type->type }} {{ $p->parent->number }},
+                                {{ $p->parent->type->singular }} {{ $p->parent->number }},
                                 de {{ date('d', strtotime($p->parent->publication_date)) }}
                                 de {{ $mes_extenso[date('M', strtotime($p->parent->publication_date))] }}
                                 de {{ date('Y', strtotime($p->parent->publication_date)) }}
@@ -123,7 +123,7 @@
         @if ($normativeAct->revoke)
             <div class="card my-3">
                 <div class="card-header">
-                    <h5 class="card-title text-uppercase">Esta {{ $normativeAct->type->type }} foi revogada pela
+                    <h5 class="card-title text-uppercase">Esta {{ $normativeAct->type->singular }} foi revogada pela
                         seguinte ato:</h5>
                 </div>
                 <div class="card-body">
@@ -133,7 +133,7 @@
 
                             <a class="text-uppercase"
                                 href="{{ route('site.normativeact.details', $normativeAct->revoke->parent) }}">
-                                {{ $normativeAct->revoke->parent->type->type }} {{ $normativeAct->revoke->parent->number }},
+                                {{ $normativeAct->revoke->parent->type->singular }} {{ $normativeAct->revoke->parent->number }},
                                 de {{ date('d', strtotime($normativeAct->revoke->parent->publication_date)) }}
                                 de {{ $mes_extenso[date('M', strtotime($normativeAct->revoke->parent->publication_date))] }}
                                 de {{ date('Y', strtotime($normativeAct->revoke->parent->publication_date)) }}
@@ -147,7 +147,7 @@
         @if (count($normativeAct->alters))
             <div class="card my-3">
                 <div class="card-header">
-                    <h5 class="card-title text-uppercase">Esta {{ $normativeAct->type->type }} alterou a(s)
+                    <h5 class="card-title text-uppercase">Esta {{ $normativeAct->type->singular }} alterou a(s)
                         seguinte(s)
                         atos:</h5>
                 </div>
@@ -160,7 +160,7 @@
 
                                 <a class="text-uppercase"
                                     href="{{ route('site.normativeact.details', $p->normativeAct) }}">
-                                    {{ $p->normativeAct->type->type }} {{ $p->normativeAct->number }},
+                                    {{ $p->normativeAct->type->singular }} {{ $p->normativeAct->number }},
                                     de {{ date('d', strtotime($p->normativeAct->publication_date)) }}
                                     de {{ $mes_extenso[date('M', strtotime($p->normativeAct->publication_date))] }}
                                     de {{ date('Y', strtotime($p->normativeAct->publication_date)) }}
@@ -177,7 +177,7 @@
         @if (count($normativeAct->revokes))
             <div class="card my-3">
                 <div class="card-header">
-                    <h5 class="card-title text-uppercase">Esta {{ $normativeAct->type->type }} revogou a(s)
+                    <h5 class="card-title text-uppercase">Esta {{ $normativeAct->type->singular }} revogou a(s)
                         seguinte(s) Atos:</h5>
                 </div>
                 <div class="card-body">
@@ -186,7 +186,7 @@
 
                             <a class="text-uppercase"
                                 href="{{ route('site.normativeact.details', $p->normativeAct) }}">
-                                {{ $p->normativeAct->type->type }} {{ $p->normativeAct->number }},
+                                {{ $p->normativeAct->type->singular }} {{ $p->normativeAct->number }},
                                 de {{ date('d', strtotime($p->normativeAct->publication_date)) }}
                                 de {{ $mes_extenso[date('M', strtotime($p->normativeAct->publication_date))] }}
                                 de {{ date('Y', strtotime($p->normativeAct->publication_date)) }}
