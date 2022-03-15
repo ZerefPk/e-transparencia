@@ -13,6 +13,8 @@ class Index extends Component
 
     use WithPagination;
 
+    protected $paginationTheme = 'bootstrap';
+
     public $a;
     public $q;
     public $f;
