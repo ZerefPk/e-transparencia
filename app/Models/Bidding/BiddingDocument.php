@@ -18,18 +18,18 @@ class BiddingDocument extends Model
         'name',
         'slug',
         'extension',
-        'description',	
+        'description',
         'path',
-        'bidding_id',	
-        
+        'bidding_id',
+
     ];
 
     protected $foreingkey = 'biddind_id';
-    
+
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom(['name', 'description', 'path'])
+            ->generateSlugsFrom(['name', 'description'])
             ->saveSlugsTo('slug')
             ->slugsShouldBeNoLongerThan(50)
             ->usingSeparator('-');
@@ -44,7 +44,7 @@ class BiddingDocument extends Model
     {
         return 'slug';
     }
-    
+
     public function bidding()
     {
         return $this->belongsTo(Bidding::class, 'id', 'bidding_id');

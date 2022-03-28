@@ -53,18 +53,18 @@ class Documents extends Component
         $path = "{$this->bidding->year}/{$this->bidding->number}/";
 
 
-        $document = BiddingDocument::create([
+        $data = BiddingDocument::create([
             'name' => $this->name,
             'path' => $path,
             'description' => $this->description,
             'bidding_id' => $this->bidding->id,
         ]);
 
-        if ($document) {
+        if ($data) {
             $extension = $this->document->extension();
-            $document->extension = '.'.$extension;
-            $document->save();
-            $path = $this->document->storeAs('bidding/'.$path, $document->slug.'.'.$extension, env('FILESYSTEM_DRIVER'));
+            $data->extension = '.'.$extension;
+            $data->save();
+            $path = $this->document->storeAs('bidding/'.$path, $data->slug.'.'.$extension, env('FILESYSTEM_DRIVER'));
 
             if ($path) {
                 $this->resetAttributes();
@@ -75,7 +75,7 @@ class Documents extends Component
                 $this->resetAttributes();
 
                 $this->alert('success', 'Houve um erro ao incluir documento na Licitação!');
-                $document->delete();
+                $data->delete();
             }
 
         }
