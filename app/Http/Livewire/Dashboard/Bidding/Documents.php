@@ -65,7 +65,7 @@ class Documents extends Component
             $data->extension = '.'.$extension;
             $data->save();
 
-            $dpath = $this->document->storeAs('bidding/'.$path, $data->slug.'.'.$extension, env('FILESYSTEM_DRIVER'));
+            $dpath = $this->document->storeAs('bidding/'.$path, $data->slug.'.'.$extension, 'public');
 
             if ($dpath) {
                 $this->resetAttributes();
