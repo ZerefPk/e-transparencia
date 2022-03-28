@@ -64,7 +64,7 @@ class Documents extends Component
             $extension = $this->document->extension();
             $data->extension = '.'.$extension;
             $data->save();
-            dd($extension);
+            dd(env('FILESYSTEM_DRIVER'));
             $dpath = $this->document->storeAs('bidding/'.$path, $data->slug.'.'.$extension, env('FILESYSTEM_DRIVER'));
 
             if ($dpath) {
