@@ -65,9 +65,9 @@ class Documents extends Component
             $data->extension = '.'.$extension;
             $data->save();
             dd($data->slug);
-            $path = $this->document->storeAs('bidding/'.$path, $data->slug.'.'.$extension, env('FILESYSTEM_DRIVER'));
+            $dpath = $this->document->storeAs('bidding/'.$path, $data->slug.'.'.$extension, env('FILESYSTEM_DRIVER'));
 
-            if ($path) {
+            if ($dpath) {
                 $this->resetAttributes();
                 $this->alert('success', 'Documento incluido com sucesso');
                 $this->biddingDocuments = BiddingDocument::where('bidding_id', $this->bidding->id)->get();
