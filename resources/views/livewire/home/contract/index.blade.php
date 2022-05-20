@@ -127,10 +127,18 @@
 
                                     </td>
                                     <td class="text-center align-middle">
+                                        @if (count($listSearch) > 0)
+                                        <a class="btn btn-primary"
+                                            href="{{route('site.contract.details', $contract['contract.slug'])}}">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        @else
                                         <a class="btn btn-primary"
                                             href="{{route('site.contract.details', $contract->slug)}}">
                                             <i class="fa fa-eye"></i>
                                         </a>
+                                        @endif
+
                                     </td>
 
                                 </tr>
