@@ -136,19 +136,19 @@
                             <div class="form-group">
                                 @if ($type_modification == 1)
                                     {{ Form::label('addition_value', 'Valor do acréscimo:') }}
-                                    {{ Form::number('addition_value', null, ['class' => 'form-control', 'wire:model' => 'addition_value', 'step'=> '0.010']) }}
+                                    {{ Form::number('addition_value', null, ['class' => 'form-control', 'wire:model' => 'addition_value', 'step'=> '0.01']) }}
                                     @error('addition_value')
                                         <p class="text-danger"> {{ $message }} </p>
                                     @enderror
                                 @elseif($type_modification == 2 )
                                     {{ Form::label('decrease_value', 'Valor descrécimo:') }}
-                                    {{ Form::number('decrease_value', null, ['class' => 'form-control', 'wire:model' => 'decrease_value',  'step'=> '0.010']) }}
+                                    {{ Form::number('decrease_value', null, ['class' => 'form-control', 'wire:model' => 'decrease_value',  'step'=> '0.01']) }}
                                     @error('decrease_value')
                                         <p class="text-danger"> {{ $message }} </p>
                                     @enderror
                                 @elseif($type_modification == 3)
                                     {{ Form::label('termination_value', 'Valor da recisão:') }}
-                                    {{ Form::number('termination_value', null, ['class' => 'form-control', 'wire:model' => 'termination_value', 'step'=> '0.010']) }}
+                                    {{ Form::number('termination_value', null, ['class' => 'form-control', 'wire:model' => 'termination_value', 'step'=> '0.01']) }}
                                     @error('termination_value')
                                         <p class="text-danger"> {{ $message }} </p>
                                     @enderror
@@ -163,7 +163,7 @@
                         <div class="col">
                             <div class="form-group">
                                 {{ Form::label('total_value', 'Valor total:') }}
-                                {{ Form::number('total_value', null, ['class' => 'form-control', 'wire:model' => 'total_value']) }}
+                                {{ Form::number('total_value', null, ['class' => 'form-control', 'wire:model' => 'total_value','step'=> '0.01']) }}
                                 @error('total_value')
                                     <p class="text-danger"> {{ $message }} </p>
                                 @enderror
