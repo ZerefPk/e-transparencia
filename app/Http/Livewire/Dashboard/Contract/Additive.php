@@ -72,6 +72,7 @@ class Additive extends Component
         $this->method = 0;
         $this->resetAttributes();
         $sequence = ContractAmendment::where('contract_id', $this->contract->id)->max('sequence');
+        $this->type_modification=1;
 
         if($sequence){
             #

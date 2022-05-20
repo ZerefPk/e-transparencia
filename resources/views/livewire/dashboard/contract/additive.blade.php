@@ -136,19 +136,19 @@
                             <div class="form-group">
                                 @if ($type_modification == 1)
                                     {{ Form::label('addition_value', 'Valor do acréscimo:') }}
-                                    {{ Form::number('addition_value', null, ['class' => 'form-control', 'wire:model' => 'addition_value']) }}
+                                    {{ Form::number('addition_value', null, ['class' => 'form-control', 'wire:model' => 'addition_value', 'step'=> '0.010']) }}
                                     @error('addition_value')
                                         <p class="text-danger"> {{ $message }} </p>
                                     @enderror
                                 @elseif($type_modification == 2 )
                                     {{ Form::label('decrease_value', 'Valor descrécimo:') }}
-                                    {{ Form::number('decrease_value', null, ['class' => 'form-control', 'wire:model' => 'decrease_value']) }}
+                                    {{ Form::number('decrease_value', null, ['class' => 'form-control', 'wire:model' => 'decrease_value',  'step'=> '0.010']) }}
                                     @error('decrease_value')
                                         <p class="text-danger"> {{ $message }} </p>
                                     @enderror
                                 @elseif($type_modification == 3)
                                     {{ Form::label('termination_value', 'Valor da recisão:') }}
-                                    {{ Form::number('termination_value', null, ['class' => 'form-control', 'wire:model' => 'termination_value']) }}
+                                    {{ Form::number('termination_value', null, ['class' => 'form-control', 'wire:model' => 'termination_value', 'step'=> '0.010']) }}
                                     @error('termination_value')
                                         <p class="text-danger"> {{ $message }} </p>
                                     @enderror

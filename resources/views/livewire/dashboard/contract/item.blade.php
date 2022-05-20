@@ -121,7 +121,7 @@
                         <div class="col">
                             <div class="form-group">
                                 {{ Form::label('unity_value', 'Valor unitário:') }}
-                                {{ Form::number('unity_value', null, ['class' => 'form-control', 'wire:model' => 'unity_value']) }}
+                                {{ Form::number('unity_value', null, ['class' => 'form-control', 'wire:model' => 'unity_value', 'step'=> '0.010']) }}
                                 @error('unity_value')
                                     <p class="text-danger"> {{ $message }} </p>
                                 @enderror
@@ -130,7 +130,7 @@
                         <div class="col">
                             <div class="form-group">
                                 {{ Form::label('total_value', 'Valor total:') }}
-                                {{ Form::number('total_value', null, ['class' => 'form-control', 'wire:model' => 'total_value']) }}
+                                {{ Form::number('total_value', null, ['class' => 'form-control', 'wire:model' => 'total_value', 'step'=> '0.010' ]) }}
                                 @error('total_value')
                                     <p class="text-danger"> {{ $message }} </p>
                                 @enderror

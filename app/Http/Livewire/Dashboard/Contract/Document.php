@@ -64,7 +64,7 @@ class Document extends Component
             $extension = $this->document->extension();
             $document->extension = '.'.$extension;
             $document->save();
-            $path = $this->document->storeAs('contract/'.$path, $document->slug.'.'.$extension, env('FILESYSTEM_DRIVER'));
+            $path = $this->document->storeAs('contract/'.$path, $document->slug.'.'.$extension, 'public');
 
             if ($path) {
                 $this->resetAttributes();
