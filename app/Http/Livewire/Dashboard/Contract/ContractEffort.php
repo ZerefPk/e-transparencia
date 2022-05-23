@@ -99,7 +99,7 @@ class ContractEffort extends Component
             $document->extension = '.'.$extension;
 
             $document->save();
-            $path = $this->document->storeAs('contract/'.$path, $document->slug_file.'.'.$extension, env('FILESYSTEM_DRIVER'));
+            $path = $this->document->storeAs('contract/'.$path, $document->slug_file.'.'.$extension, 'public');
 
             if ($path) {
                 $this->resetAttributes();
