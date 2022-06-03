@@ -65,7 +65,7 @@ return [
         'cookies' => 'https://www.crcro.org.br/pravoce/politica-de-cookies/',
     ],
 
-    'analitic' => false,
+    'analitic' => true,
     /**
      *
      * [
