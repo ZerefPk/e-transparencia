@@ -14,8 +14,8 @@ return [
     |
     */
 
-    'title' => 'Transparência',
-    'title_prefix' => '',
+    'title' => '',
+    'title_prefix' => 'E-transparência',
     'title_postfix' => '',
 
     /*
@@ -35,7 +35,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Logo
+    | Google Fonts
+    |--------------------------------------------------------------------------
+    |
+    | Here you can allow or not the use of external google fonts. Disabling the
+    | google fonts may be useful if your admin panel internet access is
+    | restricted somehow.
+    |
+    | For detailed instructions you can look the google fonts section here:
+    | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
+    |
+    */
+
+    'google_fonts' => [
+        'allowed' => true,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Panel Logo
     |--------------------------------------------------------------------------
     |
     | Here you can change the logo of your admin panel.
@@ -45,12 +63,59 @@ return [
     |
     */
 
-    'logo' => '<b>Gerenciador </b>PTA',
-    'logo_img' => false,
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo' => '<b>E</b>Transparêcia',
+    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img_class' => 'brand-image img-circle',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => '',
+    'logo_img_alt' => 'e-Transparêcia',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Logo
+    |--------------------------------------------------------------------------
+    |
+    | Here you can setup an alternative logo to use on your login and register
+    | screens. When disabled, the admin panel logo will be used instead.
+    |
+    | For detailed instructions you can look the auth logo section here:
+    | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
+    |
+    */
+
+    'auth_logo' => [
+        'enabled' => false,
+        'img' => [
+            'path' => null,
+            'alt' => 'Auth Logo',
+            'class' => '',
+            'width' => 50,
+            'height' => 50,
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Preloader Animation
+    |--------------------------------------------------------------------------
+    |
+    | Here you can change the preloader animation configuration.
+    |
+    | For detailed instructions you can look the preloader section here:
+    | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
+    |
+    */
+
+    'preloader' => [
+        'enabled' => false,
+        'img' => [
+            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'alt' => 'AdminLTE Preloader Image',
+            'effect' => 'animation__shake',
+            'width' => 60,
+            'height' => 60,
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -83,10 +148,10 @@ return [
     |
     */
 
-    'layout_topnav' => null,
+    'layout_topnav' => false,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_sidebar' => true,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => true,
     'layout_dark_mode' => null,
 
@@ -122,14 +187,14 @@ return [
     */
 
     'classes_body' => '',
-    'classes_brand' => '',
-    'classes_brand_text' => '',
+    'classes_brand' => 'navbar-brand',
+    'classes_brand_text' => 'text-info',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar navbar-expand-lg navbar-dark bg-dark',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -146,10 +211,10 @@ return [
     */
 
     'sidebar_mini' => 'lg',
-    'sidebar_collapse' => true,
+    'sidebar_collapse' => false,
     'sidebar_collapse_auto_size' => false,
-    'sidebar_collapse_remember' => false,
-    'sidebar_collapse_remember_no_transition' => true,
+    'sidebar_collapse_remember' => true,
+    'sidebar_collapse_remember_no_transition' => false,
     'sidebar_scrollbar_theme' => 'os-theme-light',
     'sidebar_scrollbar_auto_hide' => 'l',
     'sidebar_nav_accordion' => true,
@@ -188,12 +253,12 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'dashboard',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
-    'register_url' => 'register',
+    'register_url' => false,
     'password_reset_url' => 'password/reset',
-    'password_email_url' => 'password/email',
+    'password_email_url' => false,
     'profile_url' => false,
 
     /*
@@ -481,5 +546,5 @@ return [
     |
     */
 
-    'livewire' => true,
+    'livewire' => false,
 ];

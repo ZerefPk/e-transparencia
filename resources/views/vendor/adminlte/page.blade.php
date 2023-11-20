@@ -3,12 +3,6 @@
 @inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
 
 @section('adminlte_css')
-    <style>
-        .tox-statusbar__branding {
-          display: none;
-        }
-
-      </style>
     @stack('css')
     @yield('css')
 @stop
@@ -18,8 +12,12 @@
 @section('body_data', $layoutHelper->makeBodyData())
 
 @section('body')
-
     <div class="wrapper">
+
+        {{-- Preloader Animation --}}
+        @if($layoutHelper->isPreloaderEnabled())
+            @include('adminlte::partials.common.preloader')
+        @endif
 
         {{-- Top Navbar --}}
         @if($layoutHelper->isLayoutTopnavEnabled())
@@ -54,10 +52,6 @@
 @stop
 
 @section('adminlte_js')
-    <script src="{{url('js/sweetalert.js')}}"></script>
-    <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
-    <x-livewire-alert::flash />
-    <script src="{{ url('js/tinymce/tinymce.min.js') }}"></script>
     @stack('js')
     @yield('js')
 @stop

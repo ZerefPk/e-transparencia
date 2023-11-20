@@ -36,5 +36,6 @@ class AppServiceProvider extends ServiceProvider
                 'publicationsMenu' => $publicationsMenu
             ]);
         });
+        \Livewire\Livewire::forceAssetInjection();
     }
 }
