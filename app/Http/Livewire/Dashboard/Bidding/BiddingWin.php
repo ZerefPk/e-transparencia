@@ -49,7 +49,7 @@ class BiddingWin extends Component
     }
     public function create()
     {
-        $this->dispatchBrowserEvent('open-form-win');
+        $this->dispatch('open-form-win');
     }
     public function store()
     {
@@ -57,7 +57,7 @@ class BiddingWin extends Component
         $data['bidding_id'] = $this->bidding->id;
         $save = BiddingBiddingWin::create($data);
         $this->resetAttributes();
-        $this->dispatchBrowserEvent('close-form-win');
+        $this->dispatch('close-form-win');
 
         if($save)
         {
@@ -70,7 +70,7 @@ class BiddingWin extends Component
     public function delete($id){
 
         $this->delete = $this->bidding->wins()->find($id);
-        $this->dispatchBrowserEvent('open-form-win-delete');
+        $this->dispatch('open-form-win-delete');
     }
     public function destroyWin()
     {

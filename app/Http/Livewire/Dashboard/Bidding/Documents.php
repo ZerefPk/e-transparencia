@@ -44,7 +44,7 @@ class Documents extends Component
     }
     public function resetAttributes(){
         $this->reset(['name', 'description', 'document']);
-        $this->dispatchBrowserEvent('clearInput');
+        $this->dispatch('clearInput');
     }
 
     public function save()
@@ -89,7 +89,7 @@ class Documents extends Component
         if($document)
         {
             $this->documetDestroy = BiddingDocument::find($id);
-            $this->dispatchBrowserEvent('delete-document', ['name' => $document['name']]);
+            $this->dispatch('delete-document', ['name' => $document['name']]);
         }
         else{
             $this->alert('error', "Houve um erro selecionar o documento!");

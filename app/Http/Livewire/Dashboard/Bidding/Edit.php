@@ -86,7 +86,7 @@ class Edit extends Component
         'finality_id' => '[Finalidade]',
     ];
     public function delete(){
-        $this->dispatchBrowserEvent('delete');
+        $this->dispatch('delete');
     }
     public function destroy(){
         $path = 'bidding/'.$this->bidding->year.'/'.$this->bidding->number;

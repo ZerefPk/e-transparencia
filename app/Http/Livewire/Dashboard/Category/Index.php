@@ -100,7 +100,7 @@ class Index extends Component
     {
         $this->resetAttr();
         $this->method = 0;
-        $this->dispatchBrowserEvent('open-form');
+        $this->dispatch('open-form');
     }
     public function store()
     {
@@ -124,7 +124,7 @@ class Index extends Component
             ]);
 
             if($save){
-                $this->dispatchBrowserEvent('close-form');
+                $this->dispatch('close-form');
                 $this->resetAttr();
                 $this->alert('success', 'Categoria cadastrada!', [
                     'toast' => false,
@@ -151,7 +151,7 @@ class Index extends Component
         $this->in_graficInput = $this->category->in_grafic;
         $this->colorInput = $this->category->color;
         $this->method = 1;
-        $this->dispatchBrowserEvent('open-form');
+        $this->dispatch('open-form');
     }
     public function update()
     {
@@ -177,7 +177,7 @@ class Index extends Component
             ]);
 
             if($save){
-                $this->dispatchBrowserEvent('close-form');
+                $this->dispatch('close-form');
                 $this->resetAttr();
                 $this->alert('success', 'Categoria atualizada!', [
                     'toast' => false,

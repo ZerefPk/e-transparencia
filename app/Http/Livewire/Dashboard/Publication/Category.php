@@ -39,7 +39,7 @@ class Category extends Component
     {
         $this->reset('type', 'method', 'status');
         $this->method=0;
-        $this->dispatchBrowserEvent('open-form-category');
+        $this->dispatch('open-form-category');
     }
     public function store()
     {
@@ -50,7 +50,7 @@ class Category extends Component
 
        if($save){
         $this->reset(['type', 'method', 'status']);
-        $this->dispatchBrowserEvent('close-form-category');
+        $this->dispatch('close-form-category');
 
         $this->alert('success', "Titulo criado com sucesso!");
        }
@@ -66,7 +66,7 @@ class Category extends Component
         $this->type = $this->category->type;
         $this->status = $this->category->status;
         $this->method=1;
-        $this->dispatchBrowserEvent('open-form-category');
+        $this->dispatch('open-form-category');
     }
     public function update()
     {
@@ -76,7 +76,7 @@ class Category extends Component
 
        if($save){
         $this->reset(['category','type', 'method', 'status','category']);
-        $this->dispatchBrowserEvent('close-form-category');
+        $this->dispatch('close-form-category');
 
         $this->alert('success', "Titulo atualizado com sucesso!");
        }

@@ -44,14 +44,14 @@ class Additional extends Component
 
         $this->biddingAdditional =  BiddingAdditional::create($dataForm);
         if($this->biddingAdditional){
-            $this->dispatchBrowserEvent('close-form-additonal');
+            $this->dispatch('close-form-additonal');
             $this->alert('success','Informação do certame Adicionado com sucesso!');
 
             $this->setAttributes();
 
         }
         else{
-            $this->dispatchBrowserEvent('close-form-additonal');
+            $this->dispatch('close-form-additonal');
             $this->reset([
                 'notice_number',
                 'bid_opening_date',
@@ -87,10 +87,10 @@ class Additional extends Component
             $this->setAttributes();
             $this->alert('error','Erro ao atualizar informação do certame!');
         }
-        $this->dispatchBrowserEvent('close-form-additonal');
+        $this->dispatch('close-form-additonal');
     }
     public function deleteAdditional(){
-        $this->dispatchBrowserEvent('delete-additonal');
+        $this->dispatch('delete-additonal');
     }
     public function destroyAdditional()
     {

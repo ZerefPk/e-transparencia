@@ -99,7 +99,7 @@ class Index extends Component
     {
         $this->resetAttr();
         $this->method = 0;
-        $this->dispatchBrowserEvent('open-form');
+        $this->dispatch('open-form');
     }
     public function store()
     {
@@ -123,7 +123,7 @@ class Index extends Component
                     ]);
 
                     $this->resetAttr();
-                    $this->dispatchBrowserEvent('close-form');
+                    $this->dispatch('close-form');
                 }
                 else{
                     $this->alert('error', 'Ocorreu um erro ao cadastar o Desdobramento...');
@@ -143,7 +143,7 @@ class Index extends Component
         $this->type = $this->ramification->type;
         $this->status = $this->ramification->status;
         $this->project_id = $this->ramification->project_id;
-        $this->dispatchBrowserEvent('open-form');
+        $this->dispatch('open-form');
     }
     public function update()
     {
@@ -170,7 +170,7 @@ class Index extends Component
                     ]);
 
                     $this->resetAttr();
-                    $this->dispatchBrowserEvent('close-form');
+                    $this->dispatch('close-form');
                 }
                 else{
                     $this->alert('error', 'Ocorreu um erro ao atualizar o Desdobramento...');

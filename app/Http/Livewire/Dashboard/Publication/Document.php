@@ -50,7 +50,7 @@ class Document extends Component
     }
     public function create()
     {
-        $this->dispatchBrowserEvent('open-form-report');
+        $this->dispatch('open-form-report');
 
     }
     public function store()
@@ -79,7 +79,7 @@ class Document extends Component
             $path = $this->document->storeAs('publication/'.$path, $save->slug.'.'.$extension, env('FILESYSTEM_DRIVER'));
 
             if ($path) {
-                $this->dispatchBrowserEvent('close-form-report');
+                $this->dispatch('close-form-report');
                 $this->reset([ 'year','publication_date' ,'type_id','document', 'description']);
                 $this->alert('success', 'Publicação incluida com sucesso');
             }
@@ -99,7 +99,7 @@ class Document extends Component
         if($document)
         {
             $this->documetDestroy = PublicationDocument::find($id);
-            $this->dispatchBrowserEvent('delete-document');
+            $this->dispatch('delete-document');
         }
         else{
             $this->alert('error', "Houve um erro selecionar a Publicação!");

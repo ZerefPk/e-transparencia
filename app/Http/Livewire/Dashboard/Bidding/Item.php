@@ -69,7 +69,7 @@ class Item extends Component
         else{
             $this->sequence = 1;
         }
-        $this->dispatchBrowserEvent('open-form-item');
+        $this->dispatch('open-form-item');
     }
     public function store()
     {
@@ -82,7 +82,7 @@ class Item extends Component
         $dataForm['estimated_total_value'] = ($dataForm['estimated_total_value']!=null) ? $dataForm['estimated_total_value'] : 0;
 
         $this->resetAttributes();
-        $this->dispatchBrowserEvent('close-form-item');
+        $this->dispatch('close-form-item');
 
         if($save)
         {
@@ -106,7 +106,7 @@ class Item extends Component
         $this->quantity = $this->itemEdit->quantity;
         $this->estimated_total_value = $this->itemEdit->estimated_total_value;
 
-        $this->dispatchBrowserEvent('open-form-item');
+        $this->dispatch('open-form-item');
 
     }
     public function update()
@@ -115,7 +115,7 @@ class Item extends Component
         $dataForm['estimated_total_value'] = ($dataForm['estimated_total_value']!=null) ? $dataForm['estimated_total_value'] : 0;
         $update = $this->itemEdit->update($dataForm);
         $this->resetAttributes();
-        $this->dispatchBrowserEvent('close-form-item');
+        $this->dispatch('close-form-item');
         if($update)
         {
 
@@ -127,7 +127,7 @@ class Item extends Component
     }
     public function delete($id){
         $this->itemEdit = $this->bidding->biddingItens()->find($id);
-        $this->dispatchBrowserEvent('open-form-item-delete');
+        $this->dispatch('open-form-item-delete');
     }
     public function destroyItem()
     {

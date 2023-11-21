@@ -98,7 +98,7 @@ class Index extends Component
     function updatingType(){
         if(!$this->type)
         {
-            $this->dispatchBrowserEvent('load-mask');
+            $this->dispatch('load-mask');
         }
 
     }
@@ -116,7 +116,7 @@ class Index extends Component
                     'first_digit',
                     'verify_digit',
         ]);
-        $this->dispatchBrowserEvent('open-form');
+        $this->dispatch('open-form');
     }
 
     public function store()
@@ -139,7 +139,7 @@ class Index extends Component
                     'first_digit',
                     'verify_digit',
             ]);
-            $this->dispatchBrowserEvent('close-form');
+            $this->dispatch('close-form');
 
             $this->alert('success', "Fornecedor criado com sucesso!", [
                 'toast' => false,
@@ -182,11 +182,11 @@ class Index extends Component
             $this->verify_digit = $temp[3];
         }
         else{
-            $this->dispatchBrowserEvent('load-mask');
+            $this->dispatch('load-mask');
         }
         $this->method = 1;
 
-        $this->dispatchBrowserEvent('open-form');
+        $this->dispatch('open-form');
 
     }
     public function update()
@@ -220,7 +220,7 @@ class Index extends Component
                     'first_digit',
                     'verify_digit',
             ]);
-            $this->dispatchBrowserEvent('close-form');
+            $this->dispatch('close-form');
 
             $this->alert('success', "Fornecedor atualizado com sucesso!", [
                 'toast' => false,
