@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Home\Bidding\{
+use App\Livewire\Home\Bidding\{
     Statistic,
     Index,
     Others

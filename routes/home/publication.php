@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Home\Publication\{
+use App\Livewire\Home\Publication\{
 
     Index,
 

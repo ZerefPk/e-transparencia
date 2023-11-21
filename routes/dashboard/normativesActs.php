@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Livewire\Dashboard\NormativeAct\{
+use App\Livewire\Dashboard\NormativeAct\{
     Create,
     Details,
     Edit,

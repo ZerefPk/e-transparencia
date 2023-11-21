@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Home\Contract\{
+use App\Livewire\Home\Contract\{
 
     Index,
     Details,

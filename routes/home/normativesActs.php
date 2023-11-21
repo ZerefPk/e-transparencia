@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Home\NormativeAct\{
+use App\Livewire\Home\NormativeAct\{
 
     Index,
     AdvancedQuery,

@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Livewire\Dashboard\HomeDashboard;
-use App\Http\Livewire\Home\Index;
+use App\Livewire\Dashboard\HomeDashboard;
+use App\Livewire\Home\Index;
 use Illuminate\Support\Facades\Route;
 
 /*

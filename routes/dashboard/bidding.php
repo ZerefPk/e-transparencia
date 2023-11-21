@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Dashboard\Bidding\{
+use App\Livewire\Dashboard\Bidding\{
     Index,
     Create,
     Details,

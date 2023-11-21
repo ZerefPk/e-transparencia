@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Livewire\Dashboard\Budget\Ramification\{
+use App\Livewire\Dashboard\Budget\Ramification\{
     Index as BudgetRamification
 
 };
-use App\Http\Livewire\Dashboard\Budget\Account\{
+use App\Livewire\Dashboard\Budget\Account\{
     Index as BudgetAccount
 
 };

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Livewire\Dashboard\Contract\{
+use App\Livewire\Dashboard\Contract\{
     Create,
     Edit,
     Index,

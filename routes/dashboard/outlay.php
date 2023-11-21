@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Livewire\Dashboard\Outlay\Effort\{
+use App\Livewire\Dashboard\Outlay\Effort\{
     Index as Effort,
     Create as EffortCreate,
     Edit as EffortEdit,

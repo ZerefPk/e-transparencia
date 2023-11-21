@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Livewire\Dashboard\Provider\{
+use App\Livewire\Dashboard\Provider\{
     Index
 };
 
