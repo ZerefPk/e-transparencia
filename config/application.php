@@ -2,15 +2,15 @@
 
 return [
 
-    'organization_name' => 'Conselho Regional de Contabilidade de Rondônia',
-    'copyright' => 'CRCRO',
+    'organization_name' => 'E-transparência',
+    'copyright' => 'E-transparência',
 
     'favico' => 'img/ico.ico',
 
-    'logo_header_img' => 'img/crcro.h.svg',
-    'logo__header_img_alt' => 'logo-crcro',
-    'logo_footer_img' => 'img/crcro.v.b.svg',
-    'logo__footer_img_alt' => 'logo-crcro',
+    'logo_header_img' => 'img/h/blue.png',
+    'logo__header_img_alt' => 'logo',
+    'logo_footer_img' => 'img/l/white.png',
+    'logo__footer_img_alt' => 'logo',
 
     'meta-keywords' => '',
 
@@ -23,16 +23,13 @@ return [
             'submenu' => [
                 [
                     'text' => 'Sobre',
-                    'url'  => 'https://www.crcro.org.br/pravoce/estrutura-crc-ro/',
+                    'url'  => '',
                 ],
                 [
-                    'text' => 'Sede e Escritorios',
-                    'url'  => 'https://www.crcro.org.br/pravoce/escritorios-regionais-do-crc-ro/',
+                    'text' => 'Sede',
+                    'url'  => '',
                 ],
-                [
-                    'text' => 'Delegacias',
-                    'url'  => 'https://www.crcro.org.br/pravoce/delegacias/',
-                ],
+
             ]
         ],
         [
@@ -40,32 +37,32 @@ return [
             'submenu' => [
                 [
                     'text' => 'Sobre',
-                    'url'  => 'https://www.crcro.org.br/pravoce/governanca/',
+                    'url'  => '#',
                 ],
                 [
                     'text' => 'Carta de Serviço',
-                    'url'  => 'https://www.crcro.org.br/pravoce/carta-de-servico/',
+                    'url'  => '#',
                 ],
                 [
                     'text' => 'Ouvidoria',
-                    'url'  => 'https://www.crcro.org.br/pravoce/ouvidoria/',
+                    'url'  => '#',
                 ],
             ]
         ]
     ],
     'contact' => [
-        'address' => 'Av. Presidente Dutra, 2374 - Centro - Porto Velho/RO',
-        'mail' => 'crcro@crcro.org.br',
-        'telephone' => '(69) 3229-8870',
+        'address' => '#',
+        'mail' => 'mail@inti.org.br',
+        'telephone' => '#',
     ],
 
     'police' => [
         'terms' => '',
-        'privacy' => 'https://www.crcro.org.br/pravoce/politica-de-privacidade/',
-        'cookies' => 'https://www.crcro.org.br/pravoce/politica-de-cookies/',
+        'privacy' => '#',
+        'cookies' => '#',
     ],
 
-    'analitic' => true,
+    'analitic' => false,
     /**
      *
      * [
