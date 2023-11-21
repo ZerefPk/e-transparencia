@@ -95,7 +95,7 @@ class Index extends Component
     {
         $this->resetAttr();
         $this->method = 0;
-        $this->dispatch('open-form');
+        $this->dispatchBrowserEvent('open-form');
     }
     public function store()
     {
@@ -121,7 +121,7 @@ class Index extends Component
                         ]);
 
                         $this->resetAttr();
-                        $this->dispatch('close-form');
+                        $this->dispatchBrowserEvent('close-form');
                     } else {
                         $this->alert('error', 'Ocorreu um erro ao cadastar a Conta...');
                     }
@@ -138,7 +138,7 @@ class Index extends Component
         $this->ledger_account = $this->account->ledger_account;
         $this->description = $this->account->description;
         $this->status = $this->account->status;
-        $this->dispatch('open-form');
+        $this->dispatchBrowserEvent('open-form');
     }
     public function update()
     {
@@ -163,7 +163,7 @@ class Index extends Component
                         ]);
 
                         $this->resetAttr();
-                        $this->dispatch('close-form');
+                        $this->dispatchBrowserEvent('close-form');
                     } else {
                         $this->alert('error', 'Ocorreu um erro ao atualizar a Conta...');
                     }

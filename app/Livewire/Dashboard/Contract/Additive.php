@@ -81,7 +81,7 @@ class Additive extends Component
         else{
             $this->sequence = 1;
         }
-        $this->dispatch('open-form-additive');
+        $this->dispatchBrowserEvent('open-form-additive');
     }
     public function store()
     {
@@ -92,7 +92,7 @@ class Additive extends Component
         $save = ContractAmendment::create($data);
 
         $this->resetAttributes();
-        $this->dispatch('close-form-additive');
+        $this->dispatchBrowserEvent('close-form-additive');
 
         if($save)
         {
@@ -121,7 +121,7 @@ class Additive extends Component
         $this->start_validity = $this->additiveEdit->start_validity;
         $this->end_term = $this->additiveEdit->end_term;
 
-        $this->dispatch('open-form-additive');
+        $this->dispatchBrowserEvent('open-form-additive');
 
     }
     function update()
@@ -130,7 +130,7 @@ class Additive extends Component
 
         $update = $this->additiveEdit->update($data);
         $this->resetAttributes();
-        $this->dispatch('close-form-additive');
+        $this->dispatchBrowserEvent('close-form-additive');
         if($update)
         {
 
@@ -142,7 +142,7 @@ class Additive extends Component
     }
     public function delete($id){
         $this->additiveEdit = $this->contract->additives()->find($id);
-        $this->dispatch('open-form-additive-delete');
+        $this->dispatchBrowserEvent('open-form-additive-delete');
     }
     public function destroyadditive()
     {

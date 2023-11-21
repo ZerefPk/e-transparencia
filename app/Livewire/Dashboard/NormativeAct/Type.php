@@ -95,7 +95,7 @@ class Type extends Component
     {
         $this->unSetAttr();
         $this->method = 0;
-        $this->dispatch('open-form');
+        $this->dispatchBrowserEvent('open-form');
 
     }
     public function store()
@@ -109,7 +109,7 @@ class Type extends Component
         $save = TypeNormativeAct::create($data);
         if ($save) {
             $this->unSetAttr();
-            $this->dispatch('close-form');
+            $this->dispatchBrowserEvent('close-form');
             $this->alert('success', 'Tipo de ato normativo criado com sucesso', [
                 'toast' => false,
                 'position' => 'center'
@@ -135,7 +135,7 @@ class Type extends Component
         $this->journaling = $this->typeNomativeAct->journaling;
         $this->can_altered = ($this->typeNomativeAct->can_altered) ? explode('|',$this->typeNomativeAct->can_altered) : null;
         $this->can_revoked = ($this->typeNomativeAct->can_revoked) ? explode('|',$this->typeNomativeAct->can_revoked) : null;
-        $this->dispatch('open-form');
+        $this->dispatchBrowserEvent('open-form');
     }
     public function update()
     {
@@ -146,7 +146,7 @@ class Type extends Component
         $save = $this->typeNomativeAct->update($data);
         if ($save) {
             $this->unSetAttr();
-            $this->dispatch('close-form');
+            $this->dispatchBrowserEvent('close-form');
             $this->alert('success', 'Tipo de ato normativo atualizado com sucesso', [
                 'toast' => false,
                 'position' => 'center'

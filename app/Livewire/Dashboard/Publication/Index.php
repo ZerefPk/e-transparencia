@@ -63,7 +63,7 @@ class Index extends Component
     {
        $this->reset(['title', 'status', 'description', 'method']);
        $this->method = 0;
-       $this->dispatch('open-form');
+       $this->dispatchBrowserEvent('open-form');
     }
     public function store()
     {
@@ -78,7 +78,7 @@ class Index extends Component
             $save = PublicationTemplate::create($data);
             if($save){
                 $this->reset();
-                $this->dispatch('close-form');
+                $this->dispatchBrowserEvent('close-form');
                 $this->alert('success', 'Publicação Cadastrada', [
                     'toast' => false,
                     'position' =>  'center'
@@ -100,7 +100,7 @@ class Index extends Component
         $this->status = $this->publication->status;
         $this->description = $this->publication->description;
         $this->method=1;
-        $this->dispatch('open-form');
+        $this->dispatchBrowserEvent('open-form');
     }
     public function update()
     {
@@ -115,7 +115,7 @@ class Index extends Component
             $save = $this->publication->update($data);
             if($save){
                 $this->reset();
-                $this->dispatch('close-form');
+                $this->dispatchBrowserEvent('close-form');
                 $this->alert('success', 'Publicação atualizado', [
                     'toast' => false,
                     'position' =>  'center'

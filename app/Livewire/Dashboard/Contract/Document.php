@@ -44,7 +44,7 @@ class Document extends Component
     }
     public function resetAttributes(){
         $this->reset(['name', 'description', 'document']);
-        $this->dispatch('clearInput');
+        $this->dispatchBrowserEvent('clearInput');
     }
 
     public function store()
@@ -88,7 +88,7 @@ class Document extends Component
         if($document)
         {
             $this->documetDestroy = ContractDocument::find($id);
-            $this->dispatch('delete-document', ['name' => $document['name']]);
+            $this->dispatchBrowserEvent('delete-document', ['name' => $document['name']]);
         }
         else{
             $this->alert('error', "Houve um erro selecionar o documento!");

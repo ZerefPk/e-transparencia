@@ -68,13 +68,13 @@ class ContractEffort extends Component
     }
     public function resetAttributes(){
         $this->reset(['number_effort','type_effort' , 'total_value' ,'effort_id','date_effort', 'document']);
-        $this->dispatch('clearInput');
+        $this->dispatchBrowserEvent('clearInput');
     }
     public function create()
     {
         $this->resetAttributes();
 
-        $this->dispatch('open-form-effort');
+        $this->dispatchBrowserEvent('open-form-effort');
 
     }
 
@@ -103,7 +103,7 @@ class ContractEffort extends Component
 
             if ($path) {
                 $this->resetAttributes();
-                $this->dispatch('close-form-effort');
+                $this->dispatchBrowserEvent('close-form-effort');
                 $this->alert('success', 'Empenho incluido com sucesso');
 
             }
@@ -126,7 +126,7 @@ class ContractEffort extends Component
         if($document)
         {
             $this->contractEffortSelect = $document;
-            $this->dispatch('delete-effort', ['number_effort' => $document['number_effort']]);
+            $this->dispatchBrowserEvent('delete-effort', ['number_effort' => $document['number_effort']]);
         }
         else{
             $this->alert('error', "Houve um erro selecionar o Empenho!");

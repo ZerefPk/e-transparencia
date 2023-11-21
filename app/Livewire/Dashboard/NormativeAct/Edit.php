@@ -148,7 +148,7 @@ class Edit extends Component
             $this->journaling = 0;
         }
         if($this->normativeAct->type_id != $this->type_id){
-            $this->dispatch('alter-type');
+            $this->dispatchBrowserEvent('alter-type');
         }
         return view('livewire.dashboard.normative-act.edit', [
             'years' => $years,

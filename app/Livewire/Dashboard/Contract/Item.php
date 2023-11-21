@@ -68,7 +68,7 @@ class Item extends Component
         else{
             $this->sequence = 1;
         }
-        $this->dispatch('open-form-item');
+        $this->dispatchBrowserEvent('open-form-item');
     }
     public function store()
     {
@@ -79,7 +79,7 @@ class Item extends Component
         $save = ContractItem::create($dataForm);
 
         $this->resetAttributes();
-        $this->dispatch('close-form-item');
+        $this->dispatchBrowserEvent('close-form-item');
 
         if($save)
         {
@@ -102,7 +102,7 @@ class Item extends Component
         $this->unity_value = $this->itemEdit->unity_value;
         $this->total_value = $this->itemEdit->total_value;
 
-        $this->dispatch('open-form-item');
+        $this->dispatchBrowserEvent('open-form-item');
 
     }
     public function update()
@@ -111,7 +111,7 @@ class Item extends Component
 
         $update = $this->itemEdit->update($dataForm);
         $this->resetAttributes();
-        $this->dispatch('close-form-item');
+        $this->dispatchBrowserEvent('close-form-item');
         if($update)
         {
 
@@ -123,7 +123,7 @@ class Item extends Component
     }
     public function delete($id){
         $this->itemEdit = $this->contract->contractItens()->find($id);
-        $this->dispatch('open-form-item-delete');
+        $this->dispatchBrowserEvent('open-form-item-delete');
     }
     public function destroyItem()
     {
